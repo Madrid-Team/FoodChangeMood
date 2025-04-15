@@ -4,7 +4,6 @@ import data.models.Ingredients
 import data.models.Meal
 import data.models.Nutrition
 import data.models.Steps
-import kotlin.math.min
 
 
 class MealsCsvParser() {
@@ -13,7 +12,8 @@ class MealsCsvParser() {
         val mealInfo = line.removeSurrounding("\"").split(",(?![^\\[]*\\])".toRegex())
         return Meal(
             name = mealInfo[ColumnIndex.NAME],
-            id = mealInfo[ColumnIndex.ID].toLong(),
+            contributorId = mealInfo[ColumnIndex.CONTRIBUToR_ID].toInt(),
+            id = mealInfo[ColumnIndex.ID].toInt(),
             minutes = mealInfo[ColumnIndex.MINUTES].toInt(),
             description = mealInfo[ColumnIndex.DESCRIPTION],
             ingredients = Ingredients(
@@ -23,10 +23,10 @@ class MealsCsvParser() {
             tags = mealInfo[ColumnIndex.TAGS].toListOfStrings(),
             nutrition = getNutrition(mealInfo[ColumnIndex.NUTRITION]),
             steps = Steps(
-                steps = mealInfo[ColumnIndex.STEPS].toListOfStrings() ,
+                steps = mealInfo[ColumnIndex.STEPS].toListOfStrings(),
                 stepsCount = mealInfo[ColumnIndex.N_STEPS].toInt()
             ),
-            submitted = mealInfo[ColumnIndex.STEPS],
+            submitted = mealInfo[ColumnIndex.SUBMITTED],
         )
     }
 
