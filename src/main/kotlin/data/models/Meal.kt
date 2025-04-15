@@ -8,5 +8,6 @@ data class Meal (
     val description:String?,
     val nutrition:Nutrition,
     val steps:Steps,
-    val ingredients:Ingredients
+    val ingredients:Ingredients,
+    val submitted:String
 )
