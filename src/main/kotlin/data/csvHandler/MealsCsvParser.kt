@@ -1,6 +1,7 @@
 package data.csvHandler
 
 import data.models.Meal
+import java.io.File
 
 
 class MealsCsvParser() {
@@ -10,10 +11,12 @@ class MealsCsvParser() {
         return line.removeSurrounding("\"").split(",(?![^\\[]*\\])".toRegex())
     }
 
-    fun getMeals(): List<Meal> {
-        //@TODO
-        return emptyList()
-    }
+//    fun getMeals(): List<Meal> {
+//       mealsCsvReader.readCsvFile().map {
+//           parseOnLineString(it)
+//       }
+//        return emptyList()
+//    }
 
     fun String.toListOfStrings(): List<String> {
         return this.trim() // Remove outer spaces
