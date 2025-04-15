@@ -1,4 +1,8 @@
-package org.example.dependencies
+package dependencies
 
-class UseCasesModule {
+import org.koin.dsl.module
+
+
+val useCaseModule = module {
+
 }

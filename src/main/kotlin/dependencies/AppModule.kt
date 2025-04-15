@@ -1,2 +1,7 @@
-package org.example.dependencies
+package dependencies
 
+import org.koin.dsl.module
+
+val appModule = module {
+
+}
