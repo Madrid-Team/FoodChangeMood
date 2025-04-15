@@ -30,12 +30,8 @@ class MealsCsvParser() {
         )
     }
 
-    fun getMeals(): List<Meal> {
-        //@TODO
-        return emptyList()
-    }
 
-    fun String.toListOfStrings(): List<String> {
+    private fun String.toListOfStrings(): List<String> {
         return this.trim() // Remove outer spaces
             .removeSurrounding("\"")
             .removePrefix("[")
@@ -45,11 +41,11 @@ class MealsCsvParser() {
             .filter { it.isNotEmpty() }
     }
 
-    fun List<String>.toListOfDoubles(): List<Double> {
+    private fun List<String>.toListOfDoubles(): List<Double> {
         return this.map {number-> number.toDouble() }
     }
 
-    fun getNutrition(nutritionText:String):Nutrition{
+    private fun getNutrition(nutritionText:String):Nutrition{
         val nutritionList = nutritionText.split(",").toListOfDoubles()
         return Nutrition(
             calories = nutritionList[0],
