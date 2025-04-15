@@ -3,6 +3,7 @@ package data.csvHandler
 object ColumnIndex {
     const val ID = 1
     const val NAME = 0
+    const val CONTRIBUTOR_ID = 0
     const val MINUTES = 2
     const val SUBMITTED = 4
     const val TAGS = 5

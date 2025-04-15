@@ -12,7 +12,7 @@ class MealsCsvParser() {
         val mealInfo = line.removeSurrounding("\"").split(",(?![^\\[]*\\])".toRegex())
         return Meal(
             name = mealInfo[ColumnIndex.NAME],
-            contributorId = mealInfo[ColumnIndex.CONTRIBUToR_ID].toInt(),
+            contributorId = mealInfo[ColumnIndex.CONTRIBUTOR_ID].toInt(),
             id = mealInfo[ColumnIndex.ID].toInt(),
             minutes = mealInfo[ColumnIndex.MINUTES].toInt(),
             description = mealInfo[ColumnIndex.DESCRIPTION],
