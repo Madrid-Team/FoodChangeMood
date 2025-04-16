@@ -11,4 +11,9 @@ data class Meal (
     val ingredients:Ingredients,
     val submitted:String,
     val contributorId:Int,
-)
+){
+    fun toSeafoodMeal() = SeafoodMeal(
+        name = this.name,
+        protein = this.nutrition.protein
+    )
+}
