@@ -4,4 +4,8 @@ import data.models.Meal
 
 interface MealsRepository {
     fun getAllMeals(): List<Meal>
+
+    fun addCorrectGuessedMealName(mealName: String) : String
+
+    fun getCorrectGuessedMealsNames(): List<String>
 }
