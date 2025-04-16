@@ -16,27 +16,29 @@ class MealSearchingUseCase(
         val realMealNameLowerCase = realMealName.lowercase()
         val mealNameByUserLowerCase = mealNameByUser.lowercase()
 
-        if (mealNameByUser.isEmpty()) return true
-
         val lps = buildLPS(mealNameByUserLowerCase)
         var i = 0
         var j = 0
 
-        while (i < realMealNameLowerCase.length) {
-            if (mealNameByUserLowerCase[j] == realMealNameLowerCase[i]) {
-                i++
-                j++
-            }
-
-            if (j == mealNameByUserLowerCase.length) {
-                return true
-            } else if (i < realMealNameLowerCase.length && mealNameByUserLowerCase[j] != realMealNameLowerCase[i]) {
-                if (j != 0) {
-                    j = lps[j - 1]
-                } else {
+        try {
+            while (i < realMealNameLowerCase.length) {
+                if (mealNameByUserLowerCase[j] == realMealNameLowerCase[i]) {
                     i++
+                    j++
+                }
+
+                if (j == mealNameByUserLowerCase.length) {
+                    return true
+                } else if (i < realMealNameLowerCase.length && mealNameByUserLowerCase[j] != realMealNameLowerCase[i]) {
+                    if (j != 0) {
+                        j = lps[j - 1]
+                    } else {
+                        i++
+                    }
                 }
             }
+        } catch (exception: Exception) {
+            throw Exception("Add valid meal name please")
         }
         return false
     }
