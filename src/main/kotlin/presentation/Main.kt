@@ -2,14 +2,14 @@ package presentation
 
 import dependencies.appModule
 import dependencies.useCaseModule
-import logic.usecase.GetAllMealsUseCase
 import org.koin.core.context.startKoin
+import org.koin.mp.KoinPlatform.getKoin
 
 fun main() {
     startKoin {
         modules(appModule, useCaseModule)
     }
 
-    val consoleUI = FoodChangeMoodConsoleUI(getAllMealsUseCase = GetAllMealsUseCase())
+    val consoleUI: FoodChangeMoodConsoleUI = getKoin().get()
     consoleUI.start()
 }
