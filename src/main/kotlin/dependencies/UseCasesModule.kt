@@ -9,8 +9,6 @@ val useCaseModule = module {
 
     single {
         GetAllMealsUseCase(get())
-    }
-    single {
         GetAllSeafoodMealsUseCase(get())
     }
 
