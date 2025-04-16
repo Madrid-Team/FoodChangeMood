@@ -13,7 +13,7 @@ class MealsCsvReader(
             val rows = mutableListOf<String>()
             var currentRow = ""
 
-            for (line in file.readLines()) {
+            for (line in file.readLines().drop(1)) {
                 currentRow = if (currentRow.isEmpty()) line else currentRow + line
 
                 val quoteCount = currentRow.count { it == '"' }
