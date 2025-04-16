@@ -18,23 +18,28 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserInput()
         when (input) {
-            1 -> TODO()
-            2 -> TODO()
-            3 -> TODO()
-            4 -> TODO()
-            5 -> TODO()
-            6 -> TODO()
-            7 -> TODO()
-            8 -> TODO()
-            9 -> TODO()
-            10 -> TODO()
-            11 -> TODO()
-            12 -> TODO()
-            13 -> TODO()
-            14 -> TODO()
+            1 -> testFunction()
+            2 -> testFunction()
+            3 -> testFunction()
+            4 -> testFunction()
+            5 -> testFunction()
+            6 -> testFunction()
+            7 -> testFunction()
+            8 -> testFunction()
+            9 -> testFunction()
+            10 -> testFunction()
+            11 -> testFunction()
+            12 -> testFunction()
+            13 -> testFunction()
+            14 -> testFunction()
             else -> println("Invalid Input .. add another input between 1 to 14 please")
         }
         presentFeatures()
+    }
+
+    //only for testing
+    private fun testFunction() {
+        println("Add you logic in function and add the function")
     }
 
     private fun showOptions() {
