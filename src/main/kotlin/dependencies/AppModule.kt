@@ -25,12 +25,12 @@ val appModule = module {
         MealsRepositoryImpl(get(), get())
     }
     single {
-        FoodChangeMoodConsoleUI(get(), get())
+        FoodChangeMoodConsoleUI(get(), get(), get())
     }
     single {
         HealthyFastFoodFilter()
     }
-    single <MealsFilter> {
+    single<MealsFilter> {
         HealthyFastFoodFilter()
     }
 }

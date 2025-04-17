@@ -8,7 +8,6 @@ import org.koin.dsl.module
 
 
 val useCaseModule = module {
-
     single {
         GetAllMealsUseCase(get())
     }
