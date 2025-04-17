@@ -2,14 +2,14 @@ package logic.usecase
 
 import data.models.Meal
 import logic.Repository.MealsRepository
-import logic.Repository.MealsSearch
+import logic.Repository.MealsFilter
 
-class HealthyFastFoodManager(
+class GetTopHealthyFastFoodUseCase(
     private val repository: MealsRepository,
-    private val mealsSearch: MealsSearch
+    private val mealsFilter: MealsFilter
 ) {
     fun getTopHealthyFastFood(): List<Meal> {
         val allMeals = repository.getAllMeals()
-        return mealsSearch.getSearchMeals(allMeals)
+        return mealsFilter.getFilterMeals(allMeals)
     }
 }
