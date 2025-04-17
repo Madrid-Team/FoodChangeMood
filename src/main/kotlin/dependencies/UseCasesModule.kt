@@ -2,6 +2,7 @@ package dependencies
 
 import logic.usecase.ExploreOtherCountriesFoodUseCase
 import logic.usecase.GetAllMealsUseCase
+import logic.usecase.GetMealsSuitableForGymUseCase
 import logic.usecase.GetKetoMealSuggestUseCase
 import logic.usecase.GetTenEasyFoodSuggestionUseCase
 import logic.usecase.GetTopHealthyFastFoodUseCase
@@ -22,6 +23,10 @@ val useCaseModule = module {
         GetTopHealthyFastFoodUseCase(get(), get())
     }
     single { GetTenEasyFoodSuggestionUseCase(get(), get()) }
+
+    single {
+        GetMealsSuitableForGymUseCase(get())
+    }
 
     single {
         MealSearchingUseCase(get())
