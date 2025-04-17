@@ -1,6 +1,7 @@
 package dependencies
 
 import logic.usecase.GetAllMealsUseCase
+import logic.usecase.GetTenEasyFoodSuggestionUseCase
 import logic.usecase.GetTopHealthyFastFoodUseCase
 import org.koin.dsl.module
 
@@ -13,5 +14,6 @@ val useCaseModule = module {
     single {
         GetTopHealthyFastFoodUseCase(get(),get())
     }
+    single { GetTenEasyFoodSuggestionUseCase(get(),get()) }
 
 }

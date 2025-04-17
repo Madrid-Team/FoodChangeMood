@@ -1,16 +1,11 @@
 package logic.usecase
 
 import data.models.Meal
-import logic.Repository.MealsSearch
+import logic.Repository.MealsFilter
 
-class EasyFoodSearch: MealsSearch {
-    override fun getSearchMeals(meal: List<Meal>): List<Meal> {
-        val mealFiltered = meal.filter(::onlyEasyFoodMeal)
-
-        if (mealFiltered.isNotEmpty()) {
-            throw NotFoundEasyFoodException("Not Found Meals Easy Food")
-        }
-        return mealFiltered
+class EasyFoodSuggestionFilter: MealsFilter {
+    override fun getFilterMeals(meal: List<Meal>): List<Meal> {
+        return meal.filter(::onlyEasyFoodMeal)
             .take(TOP_TEN_SUGGEST)
     }
 
@@ -27,5 +22,3 @@ class EasyFoodSearch: MealsSearch {
         const val MAX_INGREDIENTS_COUNT = 5
     }
 }
-
-class NotFoundEasyFoodException(message: String) : Exception(message)
