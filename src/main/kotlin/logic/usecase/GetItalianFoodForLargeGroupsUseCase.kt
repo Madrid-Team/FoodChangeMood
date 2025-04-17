@@ -6,7 +6,6 @@ import logic.Repository.MealsRepository
 class GetItalianFoodForLargeGroupsUseCase(mealsRepository: MealsRepository) {
 
     fun getItalianFoodForLargeGroups(mealsRepository: MealsRepository) : List<Meal> {
-        val italianMealsForLargeGroups : List<Meal>
         return mealsRepository.getAllMeals().filter{meal -> isItalian(meal) && isForLargeGroups(meal)}
 
 
