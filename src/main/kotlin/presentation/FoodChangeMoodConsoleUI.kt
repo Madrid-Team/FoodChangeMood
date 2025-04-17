@@ -126,8 +126,8 @@ class FoodChangeMoodConsoleUI(
         )
         println(
             "5- Get one sweet that not contains no eggs .. \n" +
-                    "- Press 1 if you like it and want more details about this meal.\n" +
-                    "- Press 2 if you dislike it and want another sweet."
+                    "- Write yes if you like it and want more details about this meal.\n" +
+                    "- Write no if you dislike it and want another sweet."
         )
         println(
             "6- Get one keto-friendly meal .. \n" +
