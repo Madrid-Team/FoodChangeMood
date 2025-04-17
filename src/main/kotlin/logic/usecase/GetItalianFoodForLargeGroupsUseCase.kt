@@ -3,7 +3,7 @@ package logic.usecase
 import data.models.Meal
 import logic.Repository.MealsRepository
 
-class GetItalianFoodForLargeGroupsUseCase() {
+class GetItalianFoodForLargeGroupsUseCase(mealsRepository: MealsRepository) {
 
     fun getItalianFoodForLargeGroups(mealsRepository: MealsRepository) : List<Meal> {
         val italianMealsForLargeGroups : List<Meal>
