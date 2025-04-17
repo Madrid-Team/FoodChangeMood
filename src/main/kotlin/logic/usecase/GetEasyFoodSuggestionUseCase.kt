@@ -1,17 +1,23 @@
 package logic.usecase
 
 import data.models.Meal
-import logic.Repository.MealsFilter
+import logic.MealsFilter
+import logic.Repository.MealsRepository
 
-class EasyFoodSuggestionFilter: MealsFilter {
-    override fun getFilterMeals(meal: List<Meal>): List<Meal> {
-        return meal.filter(::onlyEasyFoodMeal)
+class GetEasyFoodSuggestionUseCase(
+    repository: MealsRepository,
+) : MealsFilter {
+
+    private val allMeals = repository.getAllMeals()
+
+    override fun getFilterMeals(): List<Meal> {
+        return allMeals.filter(::onlyEasyFoodMeal)
             .takeIf { it.isNotEmpty() }
             ?.take(TOP_TEN_SUGGEST)
-        ?: throw NoSuchElementException("There is no easy food suggestion")
+            ?: throw NoSuchElementException("There is no easy food suggestion")
     }
 
-    private fun onlyEasyFoodMeal(meal: Meal): Boolean{
+    private fun onlyEasyFoodMeal(meal: Meal): Boolean {
         return meal.minutes <= MAX_PREPARED_TIME &&
                 meal.steps.stepsCount <= MAX_STEPS_COUNT &&
                 meal.ingredients.ingredientsCount <= MAX_INGREDIENTS_COUNT
@@ -23,4 +29,5 @@ class EasyFoodSuggestionFilter: MealsFilter {
         const val MAX_STEPS_COUNT = 6
         const val MAX_INGREDIENTS_COUNT = 5
     }
+
 }
