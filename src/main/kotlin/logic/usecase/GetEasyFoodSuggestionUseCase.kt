@@ -11,13 +11,13 @@ class GetEasyFoodSuggestionUseCase(
     private val allMeals = repository.getAllMeals()
 
     override fun getFilterMeals(): List<Meal> {
-        return allMeals.filter(::onlyEasyFoodMeal)
+        return allMeals.filter(::isEasyFood)
             .takeIf { it.isNotEmpty() }
             ?.take(TOP_TEN_SUGGEST)
             ?: throw NoSuchElementException("There is no easy food suggestion")
     }
 
-    private fun onlyEasyFoodMeal(meal: Meal): Boolean {
+    private fun isEasyFood(meal: Meal): Boolean {
         return meal.minutes <= MAX_PREPARED_TIME &&
                 meal.steps.stepsCount <= MAX_STEPS_COUNT &&
                 meal.ingredients.ingredientsCount <= MAX_INGREDIENTS_COUNT
