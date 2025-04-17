@@ -1,9 +1,9 @@
 package presentation
 
-import logic.usecase.GetAllMealsUseCase
+import logic.usecase.ExploreOtherCountriesFoodUseCase
 
 class FoodChangeMoodConsoleUI(
-    private val getAllMealsUseCase: GetAllMealsUseCase
+    private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase
 ) {
     fun start() {
         showWelcome()
@@ -26,7 +26,7 @@ class FoodChangeMoodConsoleUI(
             6 -> testFunction()
             7 -> testFunction()
             8 -> testFunction()
-            9 -> testFunction()
+            9 -> exploreOtherCountriesFoodCulture()
             10 -> testFunction()
             11 -> testFunction()
             12 -> testFunction()
@@ -40,6 +40,20 @@ class FoodChangeMoodConsoleUI(
     //only for testing
     private fun testFunction() {
         println("Add you logic in function and add the function")
+    }
+
+    private fun exploreOtherCountriesFoodCulture() {
+        println("Enter country name you want to search about")
+        readlnOrNull()?.let { countryName ->
+            try {
+                exploreOtherCountriesFoodUseCase.getRandomMeals(countryName).forEach {
+                    println(it)
+                }
+
+            } catch (exception: Exception) {
+                println("$countryName not found")
+            }
+        }
     }
 
     private fun showOptions() {
