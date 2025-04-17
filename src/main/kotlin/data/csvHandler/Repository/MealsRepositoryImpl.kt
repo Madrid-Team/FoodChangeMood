@@ -4,18 +4,25 @@ import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
 import data.models.Meal
 import logic.Repository.MealsRepository
-import java.io.File
 
 class MealsRepositoryImpl(
     private val csvReader: MealsCsvReader,
     private val mealsCsvParser: MealsCsvParser
 ):MealsRepository {
-    override fun getAllMeals(): List<Meal> {
-        val allMeals: MutableList<Meal> = mutableListOf()
+
+    private val allMeals: MutableList<Meal> = mutableListOf()
+
+    init {
+        readMealsFromCsvFile()
+    }
+    override fun getAllMeals(): List<Meal>  = allMeals
+
+    private fun readMealsFromCsvFile(): List<Meal> {
+
             csvReader.readCsvFile().forEach { lineOfCsv->
-            val newMeal = mealsCsvParser.parseOnLine(lineOfCsv)
-            allMeals.add(newMeal)
-        }
+                val newMeal = mealsCsvParser.parseOnLine(lineOfCsv)
+                allMeals.add(newMeal)
+            }
         return allMeals
     }
 }
