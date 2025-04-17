@@ -1,0 +1,32 @@
+package presentation
+
+import logic.usecase.StartGuessGameUseCase
+
+class GuessGameConsoleUi(private val startGuessGameUseCase: StartGuessGameUseCase) {
+
+    fun startGame() {
+        val (mealName, correctTime) = startGuessGameUseCase.getRandomMeal()
+        println("Guess the preparation time for: $mealName")
+        println("You have 3 attempts.")
+
+        (1..3).forEach { attempt ->
+            print("Attempt ${attempt}: Enter your guess in minutes: ")
+            val guess = readlnOrNull()?.toIntOrNull() ?: 0
+
+            when (val result = startGuessGameUseCase.startGuessGame(guess, correctTime)) {
+                "Correct" -> {
+                    println("Correct! The preparation time is $correctTime minutes.")
+                    return
+                }
+
+                else -> {
+                    val hint = if (result == "Too low") "higher" else "lower"
+                    println("$result! Try a $hint number.")
+                }
+            }
+        }
+
+        println("Sorry, you've used all your attempts.")
+        println("The correct preparation time for $mealName is $correctTime minutes.")
+    }
+}
