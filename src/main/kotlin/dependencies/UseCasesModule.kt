@@ -9,6 +9,9 @@ val useCaseModule = module {
 
     single {
         GetAllMealsUseCase(get())
+    }
+    single {
+
         GetAllIraqiMealsUseCase(get())
     }
 
