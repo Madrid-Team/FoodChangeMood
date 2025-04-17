@@ -8,8 +8,12 @@ class SuggestMealWithHighCalorieUseCase(private val mealsRepository: MealsReposi
     fun suggestRandomHighCalorieMeal(): Meal? {
         return mealsRepository.getAllMeals()
             .asSequence()
-            .filter{it.nutrition.calories > 700}
+            .filter(::isHighCalorie)
             .shuffled()
             .firstOrNull()
+    }
+
+    private fun isHighCalorie(meal: Meal): Boolean {
+        return meal.nutrition.calories > 700
     }
 }
