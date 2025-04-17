@@ -8,7 +8,7 @@ import org.koin.dsl.module
 val useCaseModule = module {
 
     single {
-        GetAllMealsUseCase()
+        GetAllMealsUseCase(get())
     }
     single { StartGuessGameUseCase(get()) }
 
