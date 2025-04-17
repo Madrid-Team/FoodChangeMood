@@ -7,8 +7,10 @@ class HealthyFastFoodFilter : MealsFilter {
 
     override fun getFilterMeals(meal: List<Meal>): List<Meal> {
         return meal.filter(::onlyHealthyMeal)
-            .sortedBy(::getAverageNutrientsForMeal)
-            .take(TOP_HEALTHY_MEAL)
+            .takeIf { it.isNotEmpty() }
+            ?.sortedBy(::getAverageNutrientsForMeal)
+            ?.take(TOP_HEALTHY_MEAL)
+            ?: throw NoSuchElementException("There is no healthy fast food")
     }
 
 
