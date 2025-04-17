@@ -6,7 +6,9 @@ import logic.Repository.MealsFilter
 class EasyFoodSuggestionFilter: MealsFilter {
     override fun getFilterMeals(meal: List<Meal>): List<Meal> {
         return meal.filter(::onlyEasyFoodMeal)
-            .take(TOP_TEN_SUGGEST)
+            .takeIf { it.isNotEmpty() }
+            ?.take(TOP_TEN_SUGGEST)
+        ?: throw NoSuchElementException("There is no easy food suggestion")
     }
 
     private fun onlyEasyFoodMeal(meal: Meal): Boolean{
