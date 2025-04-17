@@ -23,6 +23,6 @@ val appModule = module {
         MealsRepositoryImpl(get(), get())
     }
     single {
-        FoodChangeMoodConsoleUI(get())
+        FoodChangeMoodConsoleUI(get(), get())
     }
 }

@@ -1,9 +1,11 @@
 package presentation
 
 import logic.usecase.ExploreOtherCountriesFoodUseCase
+import logic.usecase.MealSearchingUseCase
 
 class FoodChangeMoodConsoleUI(
-    private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase
+    private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
+    private val mealSearchingUseCase: MealSearchingUseCase
 ) {
     fun start() {
         showWelcome()
@@ -19,7 +21,7 @@ class FoodChangeMoodConsoleUI(
         val input = getUserInput()
         when (input) {
             1 -> testFunction()
-            2 -> testFunction()
+            2 -> searchMealByName()
             3 -> testFunction()
             4 -> testFunction()
             5 -> testFunction()
@@ -32,14 +34,46 @@ class FoodChangeMoodConsoleUI(
             12 -> testFunction()
             13 -> testFunction()
             14 -> testFunction()
-            else -> println("Invalid Input .. add another input between 1 to 14 please")
+            else -> println("Invalid Input")
         }
-        presentFeatures()
+        letUserTryAgain()
+    }
+
+    private fun letUserTryAgain() {
+        println("If you want to continue press 1 if you want to end the program press 0")
+        getUserInput().let {
+            when (it) {
+                1 -> {
+                    presentFeatures()
+                }
+
+                0 -> {
+                    return
+                }
+                else -> {
+                    println("Invalid Input")
+                    letUserTryAgain()
+                }
+            }
+        }
     }
 
     //only for testing
     private fun testFunction() {
         println("Add you logic in function and add the function")
+    }
+
+    private fun searchMealByName() {
+        println("Enter meal name")
+        readlnOrNull()?.let { mealName ->
+            try {
+                mealSearchingUseCase.mealSearchingByName(mealName).forEach {
+                    println(it)
+                }
+            } catch (exception: Exception) {
+                println("$mealName not found")
+            }
+        }
     }
 
     private fun exploreOtherCountriesFoodCulture() {
@@ -109,6 +143,7 @@ class FoodChangeMoodConsoleUI(
                     "from highest to lowest."
         )
         println("14- You will get Italian meals suitable for large groups.")
+        println("----------------------------------------------------------------------------")
     }
 
     private fun getUserInput(): Int? {
