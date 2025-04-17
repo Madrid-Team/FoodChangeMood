@@ -9,6 +9,7 @@ import logic.usecase.EasyFoodSuggestionFilter
 import logic.usecase.HealthyFastFoodFilter
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
+import presentation.GuessGameConsoleUi
 import java.io.File
 
 val appModule = module {
@@ -26,12 +27,16 @@ val appModule = module {
         MealsRepositoryImpl(get(), get())
     }
     single {
-        FoodChangeMoodConsoleUI(get(), get(), get())
+        FoodChangeMoodConsoleUI(get(), get(), get(), get(), get())
+    }
+    single {
+        GuessGameConsoleUi(get())
     }
     single {
         HealthyFastFoodFilter()
     }
     single { EasyFoodSuggestionFilter() }
+
     single<MealsFilter> {
         HealthyFastFoodFilter()
     }

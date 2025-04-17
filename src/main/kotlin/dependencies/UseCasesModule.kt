@@ -17,14 +17,13 @@ val useCaseModule = module {
     single { StartGuessGameUseCase(get()) }
     single { GuessGameConsoleUi(get()) }
     single {
-        GetTopHealthyFastFoodUseCase(get(),get())
+        GetTopHealthyFastFoodUseCase(get(), get())
     }
-    single { GetTenEasyFoodSuggestionUseCase(get(),get()) }
+    single { GetTenEasyFoodSuggestionUseCase(get(), get()) }
 
     single {
         MealSearchingUseCase(get())
     }
-
     single {
         ExploreOtherCountriesFoodUseCase(get())
     }

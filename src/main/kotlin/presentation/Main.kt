@@ -1,17 +1,21 @@
 package presentation
 
-import data.csvHandler.ColumnIndex
-import data.csvHandler.MealsCsvParser
 import dependencies.appModule
 import dependencies.useCaseModule
-import org.apache.commons.csv.CSVParser
 import org.koin.core.context.startKoin
 import org.koin.mp.KoinPlatform.getKoin
 
+
 fun main() {
+    println("Main function started")
     startKoin {
+        println("Starting app...")
+
         modules(appModule, useCaseModule)
     }
-    val consoleUI: FoodChangeMoodConsoleUI = getKoin().get()
-    consoleUI.start()
+    println("Starting app...")
+    val consoleUi: FoodChangeMoodConsoleUI = getKoin().get()
+    println("Got consoleUI")
+    consoleUi.start()
+
 }

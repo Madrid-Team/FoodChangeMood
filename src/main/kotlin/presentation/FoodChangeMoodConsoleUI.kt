@@ -9,7 +9,8 @@ class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val mealSearchingUseCase: MealSearchingUseCase,
     private val getTopHealthyFastFoodUseCase: GetTopHealthyFastFoodUseCase,
-    private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase
+    private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase,
+    private val guessGameConsoleUi: GuessGameConsoleUi
 ) {
     fun start() {
         showWelcome()
@@ -27,7 +28,7 @@ class FoodChangeMoodConsoleUI(
             1 -> getHealthyFastFoodMeals()
             2 -> searchMealByName()
             3 -> getEasySuggestedMeals()
-            4 -> testFunction()
+            4 -> showGuessGame()
             5 -> testFunction()
             6 -> testFunction()
             7 -> testFunction()
@@ -61,6 +62,10 @@ class FoodChangeMoodConsoleUI(
                 }
             }
         }
+    }
+
+    private fun showGuessGame() {
+        guessGameConsoleUi.startGuessGame()
     }
 
     private fun getEasySuggestedMeals() {

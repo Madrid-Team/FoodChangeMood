@@ -4,7 +4,7 @@ import logic.usecase.StartGuessGameUseCase
 
 class GuessGameConsoleUi(private val startGuessGameUseCase: StartGuessGameUseCase) {
 
-    fun startGame() {
+    fun startGuessGame() {
         val (mealName, correctTime) = startGuessGameUseCase.getRandomMeal()
         println("Guess the preparation time for: $mealName")
         println("You have 3 attempts.")
