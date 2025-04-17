@@ -1,13 +1,15 @@
 package presentation
 
 import logic.usecase.ExploreOtherCountriesFoodUseCase
+import logic.usecase.GetTenEasyFoodSuggestionUseCase
 import logic.usecase.GetTopHealthyFastFoodUseCase
 import logic.usecase.MealSearchingUseCase
 
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val mealSearchingUseCase: MealSearchingUseCase,
-    private val getTopHealthyFastFoodUseCase: GetTopHealthyFastFoodUseCase
+    private val getTopHealthyFastFoodUseCase: GetTopHealthyFastFoodUseCase,
+    private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase
 ) {
     fun start() {
         showWelcome()
@@ -24,7 +26,7 @@ class FoodChangeMoodConsoleUI(
         when (input) {
             1 -> getHealthyFastFoodMeals()
             2 -> searchMealByName()
-            3 -> testFunction()
+            3 -> getEasySuggestedMeals()
             4 -> testFunction()
             5 -> testFunction()
             6 -> testFunction()
@@ -61,9 +63,10 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
-    //only for testing
-    private fun testFunction() {
-        println("Add you logic in function and add the function")
+    private fun getEasySuggestedMeals() {
+        easyFoodSuggestionUseCase.getTenEasyFoodSuggestion().forEach {
+            println(it)
+        }
     }
 
     private fun getHealthyFastFoodMeals() {
@@ -157,5 +160,10 @@ class FoodChangeMoodConsoleUI(
 
     private fun getUserInput(): Int? {
         return readlnOrNull()?.toIntOrNull()
+    }
+
+    //only for testing
+    private fun testFunction() {
+        println("Add you logic in function and add the function")
     }
 }
