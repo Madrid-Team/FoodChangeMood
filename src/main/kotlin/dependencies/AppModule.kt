@@ -5,6 +5,7 @@ import data.csvHandler.MealsCsvReader
 import data.csvHandler.Repository.MealsRepositoryImpl
 import logic.Repository.MealsFilter
 import logic.Repository.MealsRepository
+import logic.usecase.EasyFoodSuggestionFilter
 import logic.usecase.HealthyFastFoodFilter
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
@@ -30,6 +31,7 @@ val appModule = module {
     single {
         HealthyFastFoodFilter()
     }
+    single { EasyFoodSuggestionFilter() }
     single<MealsFilter> {
         HealthyFastFoodFilter()
     }
