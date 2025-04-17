@@ -3,21 +3,21 @@ package logic.usecase
 import data.models.Meal
 import logic.Repository.MealsRepository
 
-class GetKetoMealSuggestUseCase(private val mealsRepository: MealsRepository) {
+class GetKetoMealSuggestUseCase(mealsRepository: MealsRepository) {
 
     private val mealsFilter = mealsRepository.getAllMeals()
         .filter(::isKetoFriendly)
         .toMutableList()
 
 
-    fun getKetoMeal(): Meal? {
-        val meal = mealsFilter
-            .shuffled()
-            .randomOrNull()
-        if(meal != null) {
-            mealsFilter.remove(meal)
+    fun getKetoMeal(): Meal {
+        if (mealsFilter.isEmpty()) {
+            throw NoSuchElementException("There is no Meal Suggest!")
         }
-        return meal
+
+        return mealsFilter
+            .random()
+            .also { mealsFilter.remove(it) }
     }
 
 
@@ -30,9 +30,10 @@ class GetKetoMealSuggestUseCase(private val mealsRepository: MealsRepository) {
      * - fat content 30g+ per meal
      */
     private fun isKetoFriendly(meal: Meal): Boolean {
-        return meal.nutrition.carbohydrates < MAX_NUTRITION_CARBOHYDRATE &&
-                meal.nutrition.protein in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN &&
-                meal.nutrition.totalFat >= MIN_TOTAL_FAT
+        val mealNutrition = meal.nutrition
+        return mealNutrition.carbohydrates < MAX_NUTRITION_CARBOHYDRATE &&
+                mealNutrition.protein in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN &&
+                mealNutrition.totalFat >= MIN_TOTAL_FAT
     }
 
     companion object {
