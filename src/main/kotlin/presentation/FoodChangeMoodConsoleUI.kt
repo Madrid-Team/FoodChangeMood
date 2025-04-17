@@ -1,16 +1,14 @@
 package presentation
 
-import logic.usecase.ExploreOtherCountriesFoodUseCase
-import logic.usecase.GetTenEasyFoodSuggestionUseCase
-import logic.usecase.GetTopHealthyFastFoodUseCase
-import logic.usecase.MealSearchingUseCase
+import logic.usecase.*
 
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val mealSearchingUseCase: MealSearchingUseCase,
     private val getTopHealthyFastFoodUseCase: GetTopHealthyFastFoodUseCase,
     private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase,
-    private val guessGameConsoleUi: GuessGameConsoleUi
+    private val guessGameConsoleUi: GuessGameConsoleUi,
+    private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase
 ) {
     fun start() {
         showWelcome()
@@ -29,7 +27,7 @@ class FoodChangeMoodConsoleUI(
             2 -> searchMealByName()
             3 -> getEasySuggestedMeals()
             4 -> showGuessGame()
-            5 -> testFunction()
+            5 -> getSweetWithNoEggs()
             6 -> testFunction()
             7 -> testFunction()
             8 -> testFunction()
@@ -105,6 +103,34 @@ class FoodChangeMoodConsoleUI(
                 println("$countryName not found")
             }
         }
+    }
+
+    private fun getSweetWithNoEggs(){
+        while (true) {
+            val sweet = getSweetsWithNoEggsUseCase.getfSweetFreeEggs()
+            if (sweet == null) {
+                println("No more sweets free eggs")
+                break
+            }
+
+            println("name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
+
+            println(" Enter yes if you like sweet to view it's details \n and no if you don't like it to suggest another sweet with no eggs ")
+            when (getLikeOrDislikeInput()) {
+                "yes" -> {
+                    println(sweet)
+                    break
+                }
+
+                "no" -> {
+                    println("lets try another one")
+                }
+            }
+        }
+    }
+
+    private fun getLikeOrDislikeInput(): String?{
+        return readlnOrNull()?.trim()?.lowercase()
     }
 
     private fun showOptions() {
