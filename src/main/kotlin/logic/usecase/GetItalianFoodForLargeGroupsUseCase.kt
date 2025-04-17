@@ -3,9 +3,9 @@ package logic.usecase
 import data.models.Meal
 import logic.Repository.MealsRepository
 
-class GetItalianFoodForLargeGroupsUseCase(mealsRepository: MealsRepository) {
+class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepository) {
 
-    fun getItalianFoodForLargeGroups(mealsRepository: MealsRepository) : List<Meal> {
+    fun getItalianFoodForLargeGroups() : List<Meal> {
         return mealsRepository.getAllMeals().filter{meal -> isItalian(meal) && isForLargeGroups(meal)}
 
 
