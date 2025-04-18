@@ -27,7 +27,7 @@ val appModule = module {
         MealsRepositoryImpl(get(), get())
     }
     single {
-        FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get())
+        FoodChangeMoodConsoleUI(get(), get(), get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
     single {
         GuessGameConsoleUi(get())

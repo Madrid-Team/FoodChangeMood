@@ -1,7 +1,7 @@
 package logic.usecase
 
 import data.models.SeafoodMeal
-import logic.repository.MealsRepository
+import logic.Repository.MealsRepository
 
 class GetAllSeafoodMealsUseCase(
     private val repository: MealsRepository

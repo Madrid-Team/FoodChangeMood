@@ -7,11 +7,13 @@ class FoodChangeMoodConsoleUI(
     private val mealSearchingUseCase: MealSearchingUseCase,
     private val getTopHealthyFastFoodUseCase: GetTopHealthyFastFoodUseCase,
     private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase,
-    private val guessGameConsoleUi: GuessGameConsoleUi,
-    private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase
+    private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
     private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
-    private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase
+    private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
+    private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
+    private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
+    private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase
 ) {
     fun start() {
         showWelcome()
@@ -31,17 +33,15 @@ class FoodChangeMoodConsoleUI(
             3 -> getEasySuggestedMeals()
             4 -> showGuessGame()
             5 -> getSweetWithNoEggs()
-            6 -> testFunction()
-            5 -> testFunction()
             6 -> getOneRandomKetoMeal()
             7 -> testFunction()
             8 -> getSuitableGymMeals()
             9 -> exploreOtherCountriesFoodCulture()
             10 -> testFunction()
             11 -> testFunction()
-            12 -> testFunction()
-            13 -> testFunction()
-            14 -> testFunction()
+            12 -> suggestMealWithHighCalories()
+            13 -> getAllSeafoodMeals()
+            14 -> getItalianFoodForLargeGroup()
             else -> println("Invalid Input")
         }
         letUserTryAgain()
@@ -89,6 +89,22 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
+    private fun getItalianFoodForLargeGroup() {
+        getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups().forEach {
+            println(it)
+        }
+    }
+
+    private fun getAllSeafoodMeals() {
+        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEach {
+            println(it)
+        }
+    }
+
+    private fun suggestMealWithHighCalories() {
+        println(suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal())
+    }
+
     private fun getOneRandomKetoMeal() = getKetoMealSuggestUseCase.getKetoMeal()
 
     private fun showGuessGame() {
@@ -134,15 +150,11 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
-    private fun getSweetWithNoEggs(){
+    private fun getSweetWithNoEggs() {
         while (true) {
             val sweet = getSweetsWithNoEggsUseCase.getfSweetFreeEggs()
-            if (sweet == null) {
-                println("No more sweets free eggs")
-                break
-            }
 
-            println("name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
+            println("Name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
 
             println(" Enter yes if you like sweet to view it's details \n and no if you don't like it to suggest another sweet with no eggs ")
             when (getLikeOrDislikeInput()) {
@@ -158,7 +170,7 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
-    private fun getLikeOrDislikeInput(): String?{
+    private fun getLikeOrDislikeInput(): String? {
         return readlnOrNull()?.trim()?.lowercase()
     }
 
