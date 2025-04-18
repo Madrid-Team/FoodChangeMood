@@ -10,6 +10,8 @@ import logic.usecase.HealthyFastFoodFilter
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
 import presentation.GuessGameConsoleUi
+import presentation.MealIngredientsGameUI
+import presentation.SearchMealsByDateUI
 import java.io.File
 
 val appModule = module {
@@ -56,5 +58,7 @@ val appModule = module {
     single<MealsFilter> {
         HealthyFastFoodFilter()
     }
+    single { MealIngredientsGameUI() }
+    single { SearchMealsByDateUI() }
 
 }
