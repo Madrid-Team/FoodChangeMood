@@ -9,6 +9,7 @@ import logic.usecase.GetTenEasyFoodSuggestionUseCase
 import logic.usecase.GetTopHealthyFastFoodUseCase
 import logic.usecase.MealSearchingUseCase
 import logic.usecase.StartGuessGameUseCase
+import logic.usecase.GetAllSeafoodMealsUseCase
 import org.koin.dsl.module
 import presentation.GuessGameConsoleUi
 
@@ -16,6 +17,7 @@ import presentation.GuessGameConsoleUi
 val useCaseModule = module {
     single {
         GetAllMealsUseCase(get())
+        GetAllSeafoodMealsUseCase(get())
     }
     single { GetKetoMealSuggestUseCase(get()) }
     single { StartGuessGameUseCase(get()) }
