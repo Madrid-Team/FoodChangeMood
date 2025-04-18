@@ -1,5 +1,7 @@
 package data.models
 
+import java.util.Date
+
 data class Meal (
     val name:String,
     val id:Int,
@@ -9,7 +11,7 @@ data class Meal (
     val nutrition:Nutrition,
     val steps:Steps,
     val ingredients:Ingredients,
-    val submitted:String,
+    val submitted:Date,
     val contributorId:Int,
 ){
     fun toSeafoodMeal() = SeafoodMeal(

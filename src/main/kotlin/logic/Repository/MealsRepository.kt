@@ -1,6 +1,7 @@
 package logic.Repository
 
 import data.models.Meal
+import java.util.Date
 
 interface MealsRepository {
     fun getAllMeals(): List<Meal>
@@ -9,4 +10,6 @@ interface MealsRepository {
 
     fun getCorrectGuessedMealsNames(): List<String>
     fun clearCorrectGuessedMealsNames()
+    fun getMealsByDate(date: Date): List<Meal>
+    fun getMealByIdFromSelectedDate(id: Int): Meal?
 }
