@@ -225,9 +225,7 @@ class FoodChangeMoodConsoleUI(
                     "- Write no if you dislike it and want another sweet."
         )
         println(
-            "7- Get one keto-friendly meal .. \n" +
-                    "- Press 1 if you like it and want more details about this keto meal.\n" +
-                    "- Press 2 if you dislike and want another keto meal."
+            "7- Get one keto-friendly meal .. \n"
         )
         println(
             "8- Add a date and get list of meals added on this date.\n" +
@@ -246,9 +244,7 @@ class FoodChangeMoodConsoleUI(
         )
         println("12- You will get random list of 10 meals that include potatoes in their ingredients.")
         println(
-            "13- You will get a random meal more than 700 calories\n" +
-                    "- Press 1 if you like it and want more details about this meal.\n" +
-                    "- Press 2 if you dislike it and want another sweet."
+            "13- You will get a random meal more than 700 calories\n"
         )
         println(
             "14- You will get a list of all seafood meals sorted by protein content," +

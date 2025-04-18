@@ -12,13 +12,6 @@ fun main() {
     }
     val consoleUi: FoodChangeMoodConsoleUI = getKoin().get()
     consoleUi.start()
-
-
-
-
-
-
-
 }
 
 
