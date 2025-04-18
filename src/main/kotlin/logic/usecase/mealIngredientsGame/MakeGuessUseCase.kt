@@ -1,11 +1,10 @@
 package logic.usecase.mealIngredientsGame
 
-import MealsExceptions.GuessMealGameNotPassed
-import MealsExceptions.GuessMealGamePassed
+import data.utilities.MealsExceptions.GuessMealGameNotPassed
+import data.utilities.MealsExceptions.GuessMealGamePassed
 import logic.Repository.MealsRepository
 
 class MakeGuessUseCase(private val repository: MealsRepository) {
-
 
     operator fun invoke(guess: String, correctGuess: String): String {
         return if (guess == correctGuess) {
@@ -15,7 +14,7 @@ class MakeGuessUseCase(private val repository: MealsRepository) {
                 repository.clearCorrectGuessedMealsNames()
                 "that's correct! You have guessed ${correctGuessedMeals.size} meals correctly!"
             } else {
-                throw (GuessMealGamePassed("You have guessed all the meals correctly!"))
+                throw GuessMealGamePassed("You have guessed all the meals correctly!")
             }
         } else
             throw GuessMealGameNotPassed("ooh, you didn't guess the meal name")
