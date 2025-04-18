@@ -5,24 +5,23 @@ import logic.Repository.MealsRepository
 
 class GetSweetsWithNoEggsUseCase(private val mealsRepository: MealsRepository) {
 
-    fun getfSweetFreeEggs(): Meal {
-        val sweetFreeEggsId = mutableListOf<Int>()
-        var sweetFreeEggsCash = emptyList<Meal>()
-        var isFirstCall = true
+    fun getOneSweetWithNoEggs(): Meal {
+        val sweetsWithNoeEggsIds = mutableListOf<Int>()
 
-        if (isFirstCall) {
-            sweetFreeEggsCash = mealsRepository.getAllMeals().filter { meal ->
-                meal.tags.contains("sweet") && !meal.ingredients.ingredients.contains("egg")
-            }
-            isFirstCall = false
-        }
+        val oneSweetWithNoEggs = mealsRepository.getAllMeals().filter { meal ->
+            isSweetWithoutEggs(meal, sweetsWithNoeEggsIds)
+        }.random()
+        oneSweetWithNoEggs.let { sweet -> sweetsWithNoeEggsIds.add(sweet.id) }
 
-        val remainningSweets = sweetFreeEggsCash.filter { it.id !in sweetFreeEggsId }
-
-        val nextMeal = remainningSweets.random()
-        nextMeal.let { sweetFreeEggsId.add(nextMeal.id) }
-
-        return nextMeal
+        return oneSweetWithNoEggs
     }
+
+    private fun isSweetWithoutEggs(meal : Meal, sweetsWithoutEggsIds: List<Int> ): Boolean{
+        return meal.tags.contains("sweet") && !meal.ingredients.ingredients.contains("egg") && meal.id !in sweetsWithoutEggsIds
+    }
+
+
+
+
 
 }
