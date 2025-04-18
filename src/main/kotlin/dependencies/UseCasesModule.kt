@@ -1,5 +1,6 @@
 package dependencies
 
+import logic.usecase.GetAllIraqiMealsUseCase
 import logic.usecase.GetAllMealsUseCase
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import logic.usecase.*
@@ -25,6 +26,10 @@ val useCaseModule = module {
     }
     single {
         ShowRandomMealsIncludePotatoesUseCase(get())
+    }
+    single {
+
+        GetAllIraqiMealsUseCase(get())
     }
 
     single {
