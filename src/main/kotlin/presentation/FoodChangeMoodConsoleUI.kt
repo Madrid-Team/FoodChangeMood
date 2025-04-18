@@ -15,7 +15,8 @@ class FoodChangeMoodConsoleUI(
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
     private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase,
     private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
-    private val getAllIraqiMealsUseCase: GetAllIraqiMealsUseCase
+    private val getAllIraqiMealsUseCase: GetAllIraqiMealsUseCase,
+    private val mealIngredientsGameUI: MealIngredientsGameUI
 ) {
     fun start() {
         showWelcome()
@@ -40,7 +41,7 @@ class FoodChangeMoodConsoleUI(
             8 -> testFunction()
             9 -> getSuitableGymMeals()
             10 -> exploreOtherCountriesFoodCulture()
-            11 -> testFunction()
+            11 -> getMealIngredients()
             12 -> getTenRandomMealsContainsPotatoes()
             13 -> suggestMealWithHighCalories()
             14 -> getAllSeafoodMeals()
@@ -68,6 +69,10 @@ class FoodChangeMoodConsoleUI(
                 }
             }
         }
+    }
+
+    private fun getMealIngredients() {
+        mealIngredientsGameUI.start()
     }
 
     private fun getSuitableGymMeals() {

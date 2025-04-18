@@ -1,6 +1,5 @@
 package presentation
 
-import data.utilities.MealsExceptions
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
