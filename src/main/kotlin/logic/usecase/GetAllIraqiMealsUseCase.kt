@@ -16,6 +16,7 @@ class GetAllIraqiMealsUseCase(private val repository: MealsRepository) {
         const val IRAQI = "iraqi"
         const val IRAQ = "iraq"
 
+
     }
 }
 
