@@ -14,7 +14,8 @@ class FoodChangeMoodConsoleUI(
     private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
     private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase,
-    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase
+    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
+    private val getAllIraqiMealsUseCase: GetAllIraqiMealsUseCase
 ) {
     fun start() {
         showWelcome()
@@ -31,18 +32,19 @@ class FoodChangeMoodConsoleUI(
         when (input) {
             1 -> getHealthyFastFoodMeals()
             2 -> searchMealByName()
-            3 -> getEasySuggestedMeals()
-            4 -> showGuessGame()
-            5 -> getSweetWithNoEggs()
-            6 -> getOneRandomKetoMeal()
-            7 -> testFunction()
-            8 -> getSuitableGymMeals()
-            9 -> exploreOtherCountriesFoodCulture()
-            10 -> testFunction()
-            11 -> getTenRandomMealsContainsPotatoes()
-            12 -> suggestMealWithHighCalories()
-            13 -> getAllSeafoodMeals()
-            14 -> getItalianFoodForLargeGroup()
+            3 -> getAllIraqiMeals()
+            4 -> getEasySuggestedMeals()
+            5 -> showGuessGame()
+            6 -> getSweetWithNoEggs()
+            7 -> getOneRandomKetoMeal()
+            8 -> testFunction()
+            9 -> getSuitableGymMeals()
+            10 -> exploreOtherCountriesFoodCulture()
+            11 -> testFunction()
+            12 -> getTenRandomMealsContainsPotatoes()
+            13 -> suggestMealWithHighCalories()
+            14 -> getAllSeafoodMeals()
+            15 -> getItalianFoodForLargeGroup()
             else -> println("Invalid Input")
         }
         letUserTryAgain()
@@ -89,6 +91,12 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
+    private fun getAllIraqiMeals() {
+        getAllIraqiMealsUseCase.getAllIraqiMeals().forEach {
+            println(it)
+        }
+    }
+
     private fun getTenRandomMealsContainsPotatoes() {
         showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
             println(it)
@@ -111,7 +119,9 @@ class FoodChangeMoodConsoleUI(
         println(suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal())
     }
 
-    private fun getOneRandomKetoMeal() = getKetoMealSuggestUseCase.getKetoMeal()
+    private fun getOneRandomKetoMeal() {
+        println(getKetoMealSuggestUseCase.getKetoMeal())
+    }
 
     private fun showGuessGame() {
         guessGameConsoleUi.startGuessGame()
@@ -187,52 +197,54 @@ class FoodChangeMoodConsoleUI(
                     " with very low total fat, saturated fat, and carbohydrate."
         )
         println("2- Enter any meal's name to search about it")
+        println("3- Get All Iraq meals ")
+
         println(
-            "3- Play a fun game ..\n" +
+            "4- Play a fun game ..\n" +
                     "- Get 10 get a list of healthy fast food meals that can be prepared in 15 minutes or less, " +
                     "with very low total fat, saturated fat, and carbohydrate."
         )
         println(
-            "4- Guess game .. you will show the random meal name and you will guess it's preparation time.\n" +
+            "5- Guess game .. you will show the random meal name and you will guess it's preparation time.\n" +
                     "- you have 3 attempts .. After each attempt, The guessed time is correct, too low, or too high.\n" +
                     "- If all attempts are incorrect, you will see the correct time."
         )
         println(
-            "5- Get one sweet that not contains no eggs .. \n" +
+            "6- Get one sweet that not contains no eggs .. \n" +
                     "- Write yes if you like it and want more details about this meal.\n" +
                     "- Write no if you dislike it and want another sweet."
         )
         println(
-            "6- Get one keto-friendly meal .. \n" +
+            "7- Get one keto-friendly meal .. \n" +
                     "- Press 1 if you like it and want more details about this keto meal.\n" +
                     "- Press 2 if you dislike and want another keto meal."
         )
         println(
-            "7- Add a date and get list of meals added on this date.\n" +
+            "8- Add a date and get list of meals added on this date.\n" +
                     "- Enter the Id of any meal and you will get more details about it."
         )
         println(
-            "8- Enter a desired amount of calories and protein," +
+            "9- Enter a desired amount of calories and protein," +
                     "and return a list of meals that match or approximate those values."
         )
-        println("9- Enter a country name and you will get up to 20 meals related to this country.")
+        println("10- Enter a country name and you will get up to 20 meals related to this country.")
         println(
-            "10- Ingredient Game ..\n" +
+            "11- Ingredient Game ..\n" +
                     "- you will get a meal name and three ingredient options.\n" +
                     "- you can guess once .. A correct guess earns 1000 points , an incorrect guess ends the game.\n" +
                     "- The game also ends after 15 correct answers."
         )
-        println("11- You will get random list of 10 meals that include potatoes in their ingredients.")
+        println("12- You will get random list of 10 meals that include potatoes in their ingredients.")
         println(
-            "12- You will get a random meal more than 700 calories\n" +
+            "13- You will get a random meal more than 700 calories\n" +
                     "- Press 1 if you like it and want more details about this meal.\n" +
                     "- Press 2 if you dislike it and want another sweet."
         )
         println(
-            "13- You will get a list of all seafood meals sorted by protein content," +
+            "14- You will get a list of all seafood meals sorted by protein content," +
                     "from highest to lowest."
         )
-        println("14- You will get Italian meals suitable for large groups.")
+        println("15- You will get Italian meals suitable for large groups.")
         println("----------------------------------------------------------------------------")
     }
 
