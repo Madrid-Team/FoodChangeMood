@@ -40,4 +40,5 @@ val appModule = module {
     single<MealsFilter> {
         HealthyFastFoodFilter()
     }
+
 }
