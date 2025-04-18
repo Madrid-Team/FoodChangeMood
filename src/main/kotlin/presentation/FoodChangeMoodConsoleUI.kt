@@ -13,7 +13,8 @@ class FoodChangeMoodConsoleUI(
     private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
     private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
-    private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase
+    private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase,
+    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase
 ) {
     fun start() {
         showWelcome()
@@ -38,7 +39,7 @@ class FoodChangeMoodConsoleUI(
             8 -> getSuitableGymMeals()
             9 -> exploreOtherCountriesFoodCulture()
             10 -> testFunction()
-            11 -> testFunction()
+            11 -> getTenRandomMealsContainsPotatoes()
             12 -> suggestMealWithHighCalories()
             13 -> getAllSeafoodMeals()
             14 -> getItalianFoodForLargeGroup()
@@ -67,7 +68,6 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
-    // handle invalid inputs
     private fun getSuitableGymMeals() {
         try {
             println("Input the amount of calories you want")
@@ -86,6 +86,12 @@ class FoodChangeMoodConsoleUI(
             }
         } catch (exception: Exception) {
             println(exception.message)
+        }
+    }
+
+    private fun getTenRandomMealsContainsPotatoes() {
+        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
+            println(it)
         }
     }
 
