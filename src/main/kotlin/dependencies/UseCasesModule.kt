@@ -4,6 +4,10 @@ import logic.usecase.GetAllIraqiMealsUseCase
 import logic.usecase.GetAllMealsUseCase
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import logic.usecase.*
+import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
+import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
+import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
+import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import org.koin.dsl.module
 import presentation.GuessGameConsoleUi
 
@@ -43,4 +47,16 @@ val useCaseModule = module {
     }
     single { GetItalianFoodForLargeGroupsUseCase(get()) }
     single { SuggestMealWithHighCalorieUseCase(get()) }
+    single {
+        GetIngredientGameRandomMealUseCase(get())
+    }
+    single {
+        GetNIncorrectIngredientsUseCase()
+    }
+    single {
+        MakeGuessUseCase(get())
+    }
+    single {
+        GetGameScoreUseCase(get())
+    }
 }
