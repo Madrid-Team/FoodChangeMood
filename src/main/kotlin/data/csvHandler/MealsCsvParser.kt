@@ -4,9 +4,8 @@ import data.models.Ingredients
 import data.models.Meal
 import data.models.Nutrition
 import data.models.Steps
+import data.utilities.parseDateString
 import data.utilities.splitIgnoringQuotedCommas
-import java.io.File
-
 
 class MealsCsvParser() {
 
@@ -29,7 +28,7 @@ class MealsCsvParser() {
                 steps = mealInfo[ColumnIndex.STEPS].toListOfStrings(),
                 stepsCount = mealInfo[ColumnIndex.N_STEPS].toInt()
             ),
-            submitted = mealInfo[ColumnIndex.SUBMITTED],
+            submitted = parseDateString(mealInfo[ColumnIndex.SUBMITTED]),
         )
     }
 
