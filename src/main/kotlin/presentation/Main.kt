@@ -15,13 +15,6 @@ fun main() {
     val endTime = System.currentTimeMillis()
     println("Time to read meals from csv file: ${(endTime - startTime) / 1000} second")
     consoleUi.start()
-
-
-
-
-
-
-
 }
 
 
