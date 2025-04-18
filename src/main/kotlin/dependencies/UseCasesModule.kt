@@ -1,5 +1,7 @@
 package dependencies
 
+import logic.usecase.GetAllMealsUseCase
+import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import logic.usecase.*
 import org.koin.dsl.module
 import presentation.GuessGameConsoleUi
@@ -20,6 +22,9 @@ val useCaseModule = module {
 
     single {
         GetSweetsWithNoEggsUseCase(get())
+    }
+    single {
+        ShowRandomMealsIncludePotatoesUseCase(get())
     }
 
     single {
