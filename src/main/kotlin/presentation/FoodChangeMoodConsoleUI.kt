@@ -9,6 +9,9 @@ class FoodChangeMoodConsoleUI(
     private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase
+    private val guessGameConsoleUi: GuessGameConsoleUi,
+    private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
+    private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase
 ) {
     fun start() {
         showWelcome()
@@ -21,7 +24,7 @@ class FoodChangeMoodConsoleUI(
 
     private fun presentFeatures() {
         showOptions()
-        val input = getUserInput()
+        val input = getUserIntInput()
         when (input) {
             1 -> getHealthyFastFoodMeals()
             2 -> searchMealByName()
@@ -29,8 +32,10 @@ class FoodChangeMoodConsoleUI(
             4 -> showGuessGame()
             5 -> getSweetWithNoEggs()
             6 -> testFunction()
+            5 -> testFunction()
+            6 -> getOneRandomKetoMeal()
             7 -> testFunction()
-            8 -> testFunction()
+            8 -> getSuitableGymMeals()
             9 -> exploreOtherCountriesFoodCulture()
             10 -> testFunction()
             11 -> testFunction()
@@ -44,7 +49,7 @@ class FoodChangeMoodConsoleUI(
 
     private fun letUserTryAgain() {
         println("If you want to continue press 1 if you want to end the program press 0")
-        getUserInput().let {
+        getUserIntInput().let {
             when (it) {
                 1 -> {
                     presentFeatures()
@@ -61,6 +66,30 @@ class FoodChangeMoodConsoleUI(
             }
         }
     }
+
+    // handle invalid inputs
+    private fun getSuitableGymMeals() {
+        try {
+            println("Input the amount of calories you want")
+            val calories = getUserDoubleInput()
+            println("Input the amount of protein you want")
+            val protein = getUserDoubleInput()
+            if (calories != null && protein != null) {
+                val meals = getMealsSuitableForGymUseCase.getNameofGymMeals(calories, protein)
+                if (meals.isEmpty()) {
+                    println("No meals found matching the specified values.")
+                    return
+                }
+                meals.forEach {
+                    println(it)
+                }
+            }
+        } catch (exception: Exception) {
+            println(exception.message)
+        }
+    }
+
+    private fun getOneRandomKetoMeal() = getKetoMealSuggestUseCase.getKetoMeal()
 
     private fun showGuessGame() {
         guessGameConsoleUi.startGuessGame()
@@ -152,8 +181,8 @@ class FoodChangeMoodConsoleUI(
         )
         println(
             "5- Get one sweet that not contains no eggs .. \n" +
-                    "- Press 1 if you like it and want more details about this meal.\n" +
-                    "- Press 2 if you dislike it and want another sweet."
+                    "- Write yes if you like it and want more details about this meal.\n" +
+                    "- Write no if you dislike it and want another sweet."
         )
         println(
             "6- Get one keto-friendly meal .. \n" +
@@ -189,8 +218,12 @@ class FoodChangeMoodConsoleUI(
         println("----------------------------------------------------------------------------")
     }
 
-    private fun getUserInput(): Int? {
+    private fun getUserIntInput(): Int? {
         return readlnOrNull()?.toIntOrNull()
+    }
+
+    private fun getUserDoubleInput(): Double? {
+        return readlnOrNull()?.toDoubleOrNull()
     }
 
     //only for testing
