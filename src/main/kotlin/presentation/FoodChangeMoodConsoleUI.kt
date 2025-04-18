@@ -16,7 +16,8 @@ class FoodChangeMoodConsoleUI(
     private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase,
     private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
     private val getAllIraqiMealsUseCase: GetAllIraqiMealsUseCase,
-    private val mealIngredientsGameUI: MealIngredientsGameUI
+    private val mealIngredientsGameUI: MealIngredientsGameUI,
+    private val searchMealsByDateUI: SearchMealsByDateUI
 ) {
     fun start() {
         showWelcome()
@@ -38,7 +39,7 @@ class FoodChangeMoodConsoleUI(
             5 -> showGuessGame()
             6 -> getSweetWithNoEggs()
             7 -> getOneRandomKetoMeal()
-            8 -> testFunction()
+            8 -> searchMealByDate()
             9 -> getSuitableGymMeals()
             10 -> exploreOtherCountriesFoodCulture()
             11 -> getMealIngredients()
@@ -69,6 +70,10 @@ class FoodChangeMoodConsoleUI(
                 }
             }
         }
+    }
+
+    private fun searchMealByDate() {
+        searchMealsByDateUI.start()
     }
 
     private fun getMealIngredients() {
@@ -259,10 +264,5 @@ class FoodChangeMoodConsoleUI(
 
     private fun getUserDoubleInput(): Double? {
         return readlnOrNull()?.toDoubleOrNull()
-    }
-
-    //only for testing
-    private fun testFunction() {
-        println("Add you logic in function and add the function")
     }
 }
