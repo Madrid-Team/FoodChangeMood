@@ -3,13 +3,22 @@ package logic.usecase
 import data.models.Meal
 import logic.Repository.MealsRepository
 
-class GetKetoMealSuggestUseCase(private val mealsRepository: MealsRepository) {
+class GetKetoMealSuggestUseCase(mealsRepository: MealsRepository) {
 
-    fun getKetoMeal(): Meal? {
-        return mealsRepository.getAllMeals()
-            .filter(::isKetoFriendly)
-            .randomOrNull()
+    private val mealsFilter = mealsRepository.getAllMeals()
+        .filter(::isKetoFriendly)
+        .toMutableList()
+
+    fun getKetoMeal(): Meal {
+        if (mealsFilter.isEmpty()) {
+            throw NoSuchElementException("There is no Meal Suggest!")
+        }
+
+        return mealsFilter
+            .random()
+            .also { mealsFilter.remove(it) }
     }
+
 
     /**
      * keto meal diet requirements
