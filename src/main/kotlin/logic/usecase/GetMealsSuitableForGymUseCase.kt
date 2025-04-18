@@ -5,12 +5,17 @@ import logic.Repository.MealsRepository
 
 class GetMealsSuitableForGymUseCase(private val mealsRepository: MealsRepository) {
 
-    fun getNameofGymMeals(calories: Double, protein: Double): List<String> {
+    fun getMealsWithinCalorieAndProteinRange(calories: Double, protein: Double): List<Meal> {
         return mealsRepository.getAllMeals().filter { meal ->
-            meal.nutrition.calories in (calories - 10)..(calories + 10) && meal.nutrition.protein in (protein - 10)..(protein + 10)
-        }.map { meal ->
-            meal.name
+            isMealWithinCaloriesAndProteinRange(meal, calories, protein)
         }
+    }
+
+    private fun isMealWithinCaloriesAndProteinRange(meal: Meal, calories: Double, protein: Double): Boolean {
+        val calorieRange = (calories - 10)..(calories + 10)
+        val proteinRange = (protein - 10)..(protein + 10)
+
+        return meal.nutrition.calories in calorieRange && meal.nutrition.protein in proteinRange
     }
 
 }
