@@ -1,6 +1,5 @@
 package data.csvHandler.Repository
 
-import MealsExceptions.GuessMealGamePassed
 import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
 import data.models.Meal
@@ -21,17 +20,15 @@ class MealsRepositoryImpl(
         return allMeals
     }
 
-    override fun addCorrectGuessedMealName(mealName: String): String {
+    override fun addCorrectGuessedMealName(mealName: String) {
         correctGuessedMeals.add(mealName)
-        return if (correctGuessedMeals.size == 15) {
-            correctGuessedMeals.clear()
-            throw (GuessMealGamePassed("You have guessed all the meals correctly!"))
-        } else {
-            "that's correct! You have guessed ${correctGuessedMeals.size} meals correctly!"
-        }
     }
 
     override fun getCorrectGuessedMealsNames(): List<String> {
         return correctGuessedMeals
+    }
+
+    override fun clearCorrectGuessedMealsNames() {
+        correctGuessedMeals.clear()
     }
 }
