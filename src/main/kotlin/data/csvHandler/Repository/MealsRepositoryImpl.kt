@@ -8,15 +8,22 @@ import logic.Repository.MealsRepository
 class MealsRepositoryImpl(
     private val csvReader: MealsCsvReader,
     private val mealsCsvParser: MealsCsvParser
-) : MealsRepository {
+):MealsRepository {
     private val correctGuessedMeals: MutableList<String> = mutableListOf()
 
-    override fun getAllMeals(): List<Meal> {
-        val allMeals: MutableList<Meal> = mutableListOf()
-        csvReader.readCsvFile().forEach { lineOfCsv ->
-            val newMeal = mealsCsvParser.parseOnLine(lineOfCsv)
-            allMeals.add(newMeal)
-        }
+    private val allMeals: MutableList<Meal> = mutableListOf()
+
+    init {
+        readMealsFromCsvFile()
+    }
+    override fun getAllMeals(): List<Meal>  = allMeals
+
+    private fun readMealsFromCsvFile(): List<Meal> {
+
+            csvReader.readCsvFile().forEach { lineOfCsv->
+                val newMeal = mealsCsvParser.parseOnLine(lineOfCsv)
+                allMeals.add(newMeal)
+            }
         return allMeals
     }
 

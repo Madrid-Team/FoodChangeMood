@@ -4,12 +4,15 @@ import data.models.Ingredients
 import data.models.Meal
 import data.models.Nutrition
 import data.models.Steps
+import data.utilities.splitIgnoringQuotedCommas
+import java.io.File
 
 
 class MealsCsvParser() {
 
     fun parseOnLine(line: String): Meal{
-        val mealInfo = line.removeSurrounding("\"").split(",(?![^\\[]*\\])".toRegex())
+        val mealInfo = splitIgnoringQuotedCommas(line)
+
         return Meal(
             name = mealInfo[ColumnIndex.NAME],
             contributorId = mealInfo[ColumnIndex.CONTRIBUTOR_ID].toInt(),
@@ -37,7 +40,7 @@ class MealsCsvParser() {
             .removePrefix("[")
             .removeSuffix("]")
             .split(",")
-            .map { it.trim().removeSurrounding("'") }
+            .map { it.trim().replace("'","") }
             .filter { it.isNotEmpty() }
     }
 
@@ -46,7 +49,7 @@ class MealsCsvParser() {
     }
 
     private fun getNutrition(nutritionText:String):Nutrition{
-        val nutritionList = nutritionText.split(",").toListOfDoubles()
+        val nutritionList = nutritionText.toListOfStrings().toListOfDoubles()
         return Nutrition(
             calories = nutritionList[0],
             totalFat = nutritionList[1],
@@ -57,5 +60,6 @@ class MealsCsvParser() {
             protein = nutritionList[6]
         )
     }
+
 
 }
