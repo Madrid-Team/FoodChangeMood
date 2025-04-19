@@ -4,7 +4,7 @@ import logic.usecase.*
 
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
-    private val mealSearchingUseCase: MealSearchingUseCase,
+    private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
     private val getHealthyFoodUseCase: GetHealthyFoodUseCase,
     private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
@@ -153,7 +153,7 @@ class FoodChangeMoodConsoleUI(
         println("Enter meal name")
         readlnOrNull()?.let { mealName ->
             try {
-                mealSearchingUseCase.mealSearchingByName(mealName).forEach {
+                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
                     println(it)
                 }
             } catch (exception: Exception) {
