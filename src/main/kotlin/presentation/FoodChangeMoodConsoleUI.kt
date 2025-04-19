@@ -178,7 +178,7 @@ class FoodChangeMoodConsoleUI(
 
     private fun getSweetWithNoEggs() {
         while (true) {
-            val sweet = getSweetsWithNoEggsUseCase.getfSweetFreeEggs()
+            val sweet = getSweetsWithNoEggsUseCase.getOneSweetWithNoEggs()
 
             println("Name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
 
@@ -244,7 +244,7 @@ class FoodChangeMoodConsoleUI(
         )
         println("12- You will get random list of 10 meals that include potatoes in their ingredients.")
         println(
-            "13- You will get a random meal more than 700 calories\n"
+            "13- You will get a random meal more than 700 calories"
         )
         println(
             "14- You will get a list of all seafood meals sorted by protein content," +
