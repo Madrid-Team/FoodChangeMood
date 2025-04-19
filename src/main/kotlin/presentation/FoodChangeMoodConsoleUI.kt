@@ -87,7 +87,7 @@ class FoodChangeMoodConsoleUI(
             println("Input the amount of protein you want")
             val protein = getUserDoubleInput()
             if (calories != null && protein != null) {
-                val meals = getMealsSuitableForGymUseCase.getNameofGymMeals(calories, protein)
+                val meals = getMealsSuitableForGymUseCase.getMealsWithinCalorieAndProteinRange(calories, protein)
                 if (meals.isEmpty()) {
                     println("No meals found matching the specified values.")
                     return
