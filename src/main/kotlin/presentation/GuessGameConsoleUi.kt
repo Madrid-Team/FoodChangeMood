@@ -4,8 +4,8 @@ import logic.usecase.StartGuessGameUseCase
 
 class GuessGameConsoleUi(private val startGuessGameUseCase: StartGuessGameUseCase) {
 
-    fun startGuessGame() {
-        val (mealName, correctTime) = startGuessGameUseCase.getRandomMeal()
+    fun startGame() {
+        val (mealName, correctTime) = startGuessGameUseCase.startGuessGame()
         println("Guess the preparation time for: $mealName")
         println("You have 3 attempts.")
 
@@ -13,16 +13,13 @@ class GuessGameConsoleUi(private val startGuessGameUseCase: StartGuessGameUseCas
             print("Attempt ${attempt}: Enter your guess in minutes: ")
             val guess = readlnOrNull()?.toIntOrNull() ?: 0
 
-            when (val result = startGuessGameUseCase.startGuessGame(guess, correctTime)) {
-                "Correct" -> {
+            when {
+                guess == correctTime -> {
                     println("Correct! The preparation time is $correctTime minutes.")
                     return
                 }
-
-                else -> {
-                    val hint = if (result == "Too low") "higher" else "lower"
-                    println("$result! Try a $hint number.")
-                }
+                guess < correctTime -> println("Too low! Try a higher number.")
+                else -> println("Too high! Try a lower number.")
             }
         }
 
