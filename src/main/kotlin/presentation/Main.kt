@@ -3,8 +3,6 @@ package presentation
 import dependencies.appModule
 import dependencies.useCaseModule
 import org.koin.core.context.startKoin
-import org.koin.mp.KoinPlatform.getKoin
-
 import org.koin.java.KoinJavaComponent.getKoin
 
 
@@ -25,7 +23,4 @@ fun main() {
     println("Time to read meals from csv file: ${(endTime - startTime) / 1000} second")
     consoleUi.start()
 }
-
-}
-
 
