@@ -29,7 +29,7 @@ class MealsCsvParser() {
                 steps = mealInfo[ColumnIndex.STEPS].toListOfStrings(),
                 stepsCount = mealInfo[ColumnIndex.N_STEPS].toInt()
             ),
-            submitted = mealInfo[ColumnIndex.SUBMITTED],
+            submitted = parseDateString(mealInfo[ColumnIndex.SUBMITTED]),
         )
     }
 
