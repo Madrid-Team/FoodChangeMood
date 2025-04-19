@@ -14,6 +14,10 @@ class SuggestMealWithHighCalorieUseCase(private val mealsRepository: MealsReposi
     }
 
     private fun isHighCalorie(meal: Meal): Boolean {
-        return meal.nutrition.calories > 700
+        return meal.nutrition.calories > HIGH_CALORIES
+    }
+
+    companion object{
+        const val HIGH_CALORIES = 700
     }
 }

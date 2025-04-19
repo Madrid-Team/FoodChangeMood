@@ -4,9 +4,9 @@ import logic.usecase.*
 
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
-    private val mealSearchingUseCase: MealSearchingUseCase,
-    private val getTopHealthyFastFoodUseCase: GetTopHealthyFastFoodUseCase,
-    private val easyFoodSuggestionUseCase: GetTenEasyFoodSuggestionUseCase,
+    private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
+    private val getHealthyFoodUseCase: GetHealthyFoodUseCase,
+    private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
     private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
@@ -87,7 +87,7 @@ class FoodChangeMoodConsoleUI(
             println("Input the amount of protein you want")
             val protein = getUserDoubleInput()
             if (calories != null && protein != null) {
-                val meals = getMealsSuitableForGymUseCase.getNameofGymMeals(calories, protein)
+                val meals = getMealsSuitableForGymUseCase.getMealsWithinCalorieAndProteinRange(calories, protein)
                 if (meals.isEmpty()) {
                     println("No meals found matching the specified values.")
                     return
@@ -134,17 +134,17 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun showGuessGame() {
-        guessGameConsoleUi.startGuessGame()
+        guessGameConsoleUi.startGame()
     }
 
     private fun getEasySuggestedMeals() {
-        easyFoodSuggestionUseCase.getTenEasyFoodSuggestion().forEach {
+        getEasyFoodSuggestionUseCase.getFilterMeals().forEach {
             println(it)
         }
     }
 
     private fun getHealthyFastFoodMeals() {
-        getTopHealthyFastFoodUseCase.getTopHealthyFastFood().forEach {
+        getHealthyFoodUseCase.getFilterMeals().forEach {
             println(it)
         }
     }
@@ -153,7 +153,7 @@ class FoodChangeMoodConsoleUI(
         println("Enter meal name")
         readlnOrNull()?.let { mealName ->
             try {
-                mealSearchingUseCase.mealSearchingByName(mealName).forEach {
+                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
                     println(it)
                 }
             } catch (exception: Exception) {
@@ -166,7 +166,7 @@ class FoodChangeMoodConsoleUI(
         println("Enter country name you want to search about")
         readlnOrNull()?.let { countryName ->
             try {
-                exploreOtherCountriesFoodUseCase.getRandomMeals(countryName).forEach {
+                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
                     println(it)
                 }
 
@@ -178,7 +178,7 @@ class FoodChangeMoodConsoleUI(
 
     private fun getSweetWithNoEggs() {
         while (true) {
-            val sweet = getSweetsWithNoEggsUseCase.getfSweetFreeEggs()
+            val sweet = getSweetsWithNoEggsUseCase.getOneSweetWithNoEggs()
 
             println("Name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
 
@@ -244,7 +244,7 @@ class FoodChangeMoodConsoleUI(
         )
         println("12- You will get random list of 10 meals that include potatoes in their ingredients.")
         println(
-            "13- You will get a random meal more than 700 calories\n"
+            "13- You will get a random meal more than 700 calories"
         )
         println(
             "14- You will get a list of all seafood meals sorted by protein content," +

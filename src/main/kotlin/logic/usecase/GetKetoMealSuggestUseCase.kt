@@ -9,7 +9,6 @@ class GetKetoMealSuggestUseCase(mealsRepository: MealsRepository) {
         .filter(::isKetoFriendly)
         .toMutableList()
 
-
     fun getKetoMeal(): Meal {
         if (mealsFilter.isEmpty()) {
             throw NoSuchElementException("There is no Meal Suggest!")
@@ -21,25 +20,45 @@ class GetKetoMealSuggestUseCase(mealsRepository: MealsRepository) {
     }
 
 
-
-
     /**
      * keto meal diet requirements
-     * - carb limitation < 10g per meal
+     * - carb < 10g per meal
      * - protein 20g-50g per meal
-     * - fat content 30g+ per meal
+     * - fat 30g+ per meal
      */
     private fun isKetoFriendly(meal: Meal): Boolean {
-        val mealNutrition = meal.nutrition
-        return mealNutrition.carbohydrates < MAX_NUTRITION_CARBOHYDRATE &&
-                mealNutrition.protein in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN &&
-                mealNutrition.totalFat >= MIN_TOTAL_FAT
+        val nutritionValue = meal.nutrition.carbohydrates < MAX_NUTRITION_CARBOHYDRATE &&
+                meal.nutrition.protein in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN &&
+                meal.nutrition.totalFat >= MIN_TOTAL_FAT
+
+        val calories = meal.nutrition.calories
+        val carbPercentage = (meal.nutrition.carbohydrates * CARBS_PROTEIN_PER_GRAM) / calories * PERCENTAGE
+        val proteinPercentage = (meal.nutrition.protein * CARBS_PROTEIN_PER_GRAM) / calories * PERCENTAGE
+        val fatPercentage = (meal.nutrition.totalFat * FAT_CALORIES_PER_GRAM) / calories * PERCENTAGE
+
+        val percentage = carbPercentage < MAX_CARB_PERCENTAGE &&
+                fatPercentage > MIN_FAT_PERCENTAGE &&
+                proteinPercentage in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN
+
+        return nutritionValue && percentage
+
     }
 
     companion object {
+        const val PERCENTAGE = 100
+
+        // nutrition value
         const val MAX_NUTRITION_CARBOHYDRATE = 10.0
         const val MIN_NUTRITION_PROTEIN = 20.0
         const val MAX_NUTRITION_PROTEIN = 50.0
         const val MIN_TOTAL_FAT = 30.0
+
+        // Keto Percentage
+        const val MAX_CARB_PERCENTAGE = 5
+        const val MIN_FAT_PERCENTAGE = 70
+
+        // calories per gram
+        const val CARBS_PROTEIN_PER_GRAM = 4
+        const val FAT_CALORIES_PER_GRAM = 9
     }
 }

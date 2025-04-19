@@ -1,16 +1,16 @@
 package dependencies
 
-import logic.usecase.GetAllIraqiMealsUseCase
 import logic.usecase.GetAllMealsUseCase
-import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
+import logic.usecase.MealSearchingByNameUseCase
 import logic.usecase.*
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
-import logic.usecase.GetFoodByAddDateUseCase
+import logic.usecase.SuggestMealWithHighCalorieUseCase
+import logic.usecase.GetSweetsWithNoEggsUseCase
+import logic.usecase.GetMealsSuitableForGymUseCase
 import org.koin.dsl.module
-import presentation.GuessGameConsoleUi
 
 val useCaseModule = module {
     single {
@@ -19,11 +19,6 @@ val useCaseModule = module {
     }
     single { GetKetoMealSuggestUseCase(get()) }
     single { StartGuessGameUseCase(get()) }
-    single { GuessGameConsoleUi(get()) }
-    single {
-        GetTopHealthyFastFoodUseCase(get(), get())
-    }
-    single { GetTenEasyFoodSuggestionUseCase(get(), get()) }
 
     single {
         GetSweetsWithNoEggsUseCase(get())
@@ -31,6 +26,7 @@ val useCaseModule = module {
     single {
         ShowRandomMealsIncludePotatoesUseCase(get())
     }
+    single { SuggestMealWithHighCalorieUseCase(get()) }
     single {
 
         GetAllIraqiMealsUseCase(get())
@@ -40,7 +36,7 @@ val useCaseModule = module {
         GetMealsSuitableForGymUseCase(get())
     }
     single {
-        MealSearchingUseCase(get())
+        MealSearchingByNameUseCase(get())
     }
     single {
         ExploreOtherCountriesFoodUseCase(get())
@@ -61,4 +57,18 @@ val useCaseModule = module {
     }
     single { GetAllMealsUseCase(get()) }
     single { GetFoodByAddDateUseCase(get()) }
+    single {
+        GetEasyFoodSuggestionUseCase(get())
+    }
+    single {
+        GetHealthyFoodUseCase(get())
+    }
+    single {
+        GetSweetsWithNoEggsUseCase(get())
+    }
+
+    single {
+        GetMealsSuitableForGymUseCase(get())
+    }
+
 }
