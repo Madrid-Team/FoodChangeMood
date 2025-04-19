@@ -71,6 +71,7 @@ val useCaseModule = module {
     }
     single { StartGuessGameUseCase(get()) }
     single { GuessGameConsoleUi(get()) }
+    single { SuggestMealWithHighCalorieUseCase(get()) }
 
     single {
         GetMealsSuitableForGymUseCase(get())
