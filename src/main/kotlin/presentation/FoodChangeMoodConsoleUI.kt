@@ -130,7 +130,28 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getOneRandomKetoMeal() {
-        println(getKetoMealSuggestUseCase.getKetoMeal())
+
+        while (true) {
+            try {
+                val ketoMeal = getKetoMealSuggestUseCase.getKetoMeal()
+                println("Name of keto meal : ${ketoMeal.name} \n and description of this keto : ${ketoMeal.description}")
+
+                println("Enter yes if you like Keto meal to view it's details \n and no if you don't like it to suggest another Keto meal ")
+                when (getLikeOrDislikeInput()) {
+                    "yes" -> {
+                        println(ketoMeal)
+                        break
+                    }
+
+                    "no" -> {
+                        println("lets try another one")
+                    }
+                }
+            } catch (exception: Exception) {
+                println(exception.message)
+                break
+            }
+        }
     }
 
     private fun showGuessGame() {
@@ -225,7 +246,9 @@ class FoodChangeMoodConsoleUI(
                     "- Write no if you dislike it and want another sweet."
         )
         println(
-            "7- Get one keto-friendly meal .. \n"
+            "7- Get one keto-friendly meal .. \n" +
+                    "- Write yes if you like it and want more details about this meal.\n" +
+                    "- Write no if you dislike it and want another sweet."
         )
         println(
             "8- Add a date and get list of meals added on this date.\n" +
