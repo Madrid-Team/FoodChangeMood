@@ -166,7 +166,7 @@ class FoodChangeMoodConsoleUI(
         println("Enter country name you want to search about")
         readlnOrNull()?.let { countryName ->
             try {
-                exploreOtherCountriesFoodUseCase.getRandomMeals(countryName).forEach {
+                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
                     println(it)
                 }
 
