@@ -1,5 +1,7 @@
 package dependencies
 
+import logic.usecase.GetAllMealsUseCase
+import logic.usecase.MealSearchingByNameUseCase
 import logic.usecase.*
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
@@ -30,7 +32,7 @@ val useCaseModule = module {
         GetMealsSuitableForGymUseCase(get())
     }
     single {
-        MealSearchingUseCase(get())
+        MealSearchingByNameUseCase(get())
     }
     single {
         ExploreOtherCountriesFoodUseCase(get())
