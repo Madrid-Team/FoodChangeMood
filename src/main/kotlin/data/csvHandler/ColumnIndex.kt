@@ -14,5 +14,13 @@ object ColumnIndex {
     const val INGREDIENTS = 10
     const val N_INGREDIENTS = 11
 
+    const val CALORIES = 0
+    const val TOTAL_FATS = 1
+    const val SUGAR = 2
+    const val SODIUM = 3
+    const val SATURATED_FATS = 4
+    const val CARBOHYDRATES = 5
+    const val PROTEIN = 6
+
 }
 
