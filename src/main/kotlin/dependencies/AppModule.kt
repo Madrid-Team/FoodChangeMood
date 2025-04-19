@@ -3,10 +3,10 @@ package dependencies
 import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
 import data.csvHandler.Repository.MealsRepositoryImpl
-import logic.Repository.MealsFilter
+import logic.MealsFilter
 import logic.Repository.MealsRepository
-import logic.usecase.EasyFoodSuggestionFilter
-import logic.usecase.HealthyFastFoodFilter
+import logic.usecase.GetEasyFoodSuggestionUseCase
+import logic.usecase.GetHealthyFoodUseCase
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
 import presentation.GuessGameConsoleUi
@@ -57,7 +57,7 @@ val appModule = module {
 
     single<MealsFilter> {
         HealthyFastFoodFilter()
-    }
+
     single { MealIngredientsGameUI() }
     single { SearchMealsByDateUI() }
 

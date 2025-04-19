@@ -1,14 +1,9 @@
 package dependencies
 
-import logic.usecase.GetAllIraqiMealsUseCase
+import logic.Repository.MealsFilter
 import logic.usecase.GetAllMealsUseCase
-import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
-import logic.usecase.*
-import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
-import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
-import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
-import logic.usecase.mealIngredientsGame.MakeGuessUseCase
-import logic.usecase.GetFoodByAddDateUseCase
+import logic.usecase.GetEasyFoodSuggestionUseCase
+import logic.usecase.GetHealthyFoodUseCase
 import org.koin.dsl.module
 import presentation.GuessGameConsoleUi
 
@@ -20,11 +15,16 @@ val useCaseModule = module {
     single { GetKetoMealSuggestUseCase(get()) }
     single { StartGuessGameUseCase(get()) }
     single { GuessGameConsoleUi(get()) }
-    single {
+
         GetTopHealthyFastFoodUseCase(get(), get())
+    single {
+        GetEasyFoodSuggestionUseCase(get())
     }
     single { GetTenEasyFoodSuggestionUseCase(get(), get()) }
-
+    single<MealsFilter> {
+        GetHealthyFoodUseCase(get())
+        GetEasyFoodSuggestionUseCase(get())
+    }
     single {
         GetSweetsWithNoEggsUseCase(get())
     }
