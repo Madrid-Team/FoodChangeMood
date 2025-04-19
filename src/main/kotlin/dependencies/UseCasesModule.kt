@@ -9,6 +9,7 @@ import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import logic.usecase.SuggestMealWithHighCalorieUseCase
 import logic.usecase.GetSweetsWithNoEggsUseCase
+import logic.usecase.GetMealsSuitableForGymUseCase
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -64,6 +65,10 @@ val useCaseModule = module {
     }
     single {
         GetSweetsWithNoEggsUseCase(get())
+    }
+
+    single {
+        GetMealsSuitableForGymUseCase(get())
     }
 
 }
