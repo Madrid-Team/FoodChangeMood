@@ -5,9 +5,6 @@ import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
-import logic.usecase.GetAllMealsUseCase
-import logic.usecase.GetKetoMealSuggestUseCase
-import logic.usecase.GetMealsSuitableForGymUseCase
 import org.koin.dsl.module
 import presentation.GuessGameConsoleUi
 
