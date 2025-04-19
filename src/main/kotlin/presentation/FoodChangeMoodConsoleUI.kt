@@ -134,7 +134,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun showGuessGame() {
-        guessGameConsoleUi.startGuessGame()
+        guessGameConsoleUi.startGame()
     }
 
     private fun getEasySuggestedMeals() {
