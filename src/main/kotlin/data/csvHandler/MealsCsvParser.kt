@@ -4,8 +4,9 @@ import data.models.Ingredients
 import data.models.Meal
 import data.models.Nutrition
 import data.models.Steps
-import data.utilities.parseDateString
-import data.utilities.splitIgnoringQuotedCommas
+import data.utilities.*
+import java.io.File
+
 
 class MealsCsvParser() {
 
@@ -35,12 +36,12 @@ class MealsCsvParser() {
 
     private fun String.toListOfStrings(): List<String> {
         return this.trim() // Remove outer spaces
-            .removeSurrounding("\"")
-            .removePrefix("[")
-            .removeSuffix("]")
-            .split(",")
-            .map { it.trim().replace("'","") }
-            .filter { it.isNotEmpty() }
+            .removeSurroundingQuotes()
+            .removeBrackets()
+            .splitByComma()
+            .trimElements()
+            .removeSingleQuotesFromElements()
+            .removeEmptyElements()
     }
 
     private fun List<String>.toListOfDoubles(): List<Double> {
@@ -50,13 +51,13 @@ class MealsCsvParser() {
     private fun getNutrition(nutritionText:String):Nutrition{
         val nutritionList = nutritionText.toListOfStrings().toListOfDoubles()
         return Nutrition(
-            calories = nutritionList[0],
-            totalFat = nutritionList[1],
-            sugar = nutritionList[2],
-            sodium = nutritionList[3],
-            saturatedFat = nutritionList[4],
-            carbohydrates = nutritionList[5],
-            protein = nutritionList[6]
+            calories = nutritionList[ColumnIndex.CALORIES],
+            totalFat = nutritionList[ColumnIndex.TOTAL_FATS],
+            sugar = nutritionList[ColumnIndex.SUGAR],
+            sodium = nutritionList[ColumnIndex.SODIUM],
+            saturatedFat = nutritionList[ColumnIndex.SATURATED_FATS],
+            carbohydrates = nutritionList[ColumnIndex.CARBOHYDRATES],
+            protein = nutritionList[ColumnIndex.PROTEIN]
         )
     }
 

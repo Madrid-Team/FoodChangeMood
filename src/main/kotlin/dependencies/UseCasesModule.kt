@@ -1,18 +1,16 @@
 package dependencies
 
-import logic.usecase.GetAllMealsUseCase
-import logic.usecase.MealSearchingByNameUseCase
 import logic.usecase.*
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
-import logic.usecase.SuggestMealWithHighCalorieUseCase
-import logic.usecase.GetSweetsWithNoEggsUseCase
-import logic.usecase.GetMealsSuitableForGymUseCase
 import org.koin.dsl.module
+import presentation.GuessGameConsoleUi
+
 
 val useCaseModule = module {
+
     single {
         GetAllMealsUseCase(get())
         GetAllSeafoodMealsUseCase(get())
@@ -66,6 +64,10 @@ val useCaseModule = module {
     single {
         GetSweetsWithNoEggsUseCase(get())
     }
+    single { StartGuessGameUseCase(get()) }
+    single { GuessGameConsoleUi(get()) }
+    single { SuggestMealWithHighCalorieUseCase(get()) }
+    single { GetKetoMealSuggestUseCase(get()) }
 
     single {
         GetMealsSuitableForGymUseCase(get())
