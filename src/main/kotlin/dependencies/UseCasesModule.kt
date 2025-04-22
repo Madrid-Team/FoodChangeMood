@@ -59,7 +59,7 @@ val useCaseModule = module {
         GetEasyFoodSuggestionUseCase(get())
     }
     single {
-        GetHealthyFoodUseCase(get())
+        GetHealthyMealsUseCase(get())
     }
     single {
         GetSweetsWithNoEggsUseCase(get())

@@ -1,28 +1,24 @@
 package logic.usecase
 
 import data.models.Meal
-import logic.MealsFilter
 import logic.Repository.MealsRepository
 
-class GetHealthyFoodUseCase(
-    repository: MealsRepository,
-) : MealsFilter {
+class GetHealthyMealsUseCase(private val mealsRepository: MealsRepository) {
 
-    private val allMeals = repository.getAllMeals()
-
-    override fun getFilterMeals(): List<Meal> {
-        return allMeals.filter(::isHealthyMeal)
+    fun execute(): List<Meal> {
+        if (mealsRepository.getAllMeals().isEmpty()) throw Exception("Meal list is empty")
+        return mealsRepository.getAllMeals()
+            .filter(::isHealthyMeal)
             .takeIf { it.isNotEmpty() }
             ?.sortedBy(::nutrientsSum)
-            ?.take(TOP_HEALTHY_MEAL) ?: throw NoSuchElementException("There is no healthy fast food")
+            ?.take(TOP_HEALTHY_MEAL) ?: throw NoSuchElementException("There is no healthy meals")
     }
 
     private fun isHealthyMeal(meal: Meal): Boolean {
-        val mealNutrition = meal.nutrition
         return meal.minutes <= MAX_PREPARED_TIME &&
-                mealNutrition.totalFat < MAX_TOTAL_FAT &&
-                mealNutrition.saturatedFat < MAX_SATURATED_FAT &&
-                mealNutrition.carbohydrates < MAX_CARBOHYDRATES
+                meal.nutrition.totalFat < MAX_TOTAL_FAT &&
+                meal.nutrition.saturatedFat < MAX_SATURATED_FAT &&
+                meal.nutrition.carbohydrates < MAX_CARBOHYDRATES
     }
 
 
