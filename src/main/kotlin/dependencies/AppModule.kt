@@ -6,9 +6,6 @@ import data.csvHandler.Repository.MealsRepositoryImpl
 import logic.Repository.MealsRepository
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
-import presentation.GuessGameConsoleUi
-import presentation.MealIngredientsGameUI
-import presentation.SearchMealsByDateUI
 import java.io.File
 
 val appModule = module {
@@ -45,11 +42,4 @@ val appModule = module {
             get()
         )
     }
-
-    single {
-        GuessGameConsoleUi(get())
-    }
-    single { MealIngredientsGameUI() }
-    single { SearchMealsByDateUI() }
-
 }
