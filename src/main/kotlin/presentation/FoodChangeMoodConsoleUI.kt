@@ -1,204 +1,194 @@
 package presentation
 
-import logic.usecase.*
-import presentation.features.GuessGameConsoleUi
-import presentation.features.MealIngredientsGameUI
-import presentation.features.SearchMealsByDateUI
-import presentation.features.SuggestMealWithHighCalorieUI
+import presentation.common.BaseUIController
+import presentation.common.Reader
 
 class FoodChangeMoodConsoleUI(
-    private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
-    private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
-    private val getHealthyFoodUseCase: GetHealthyFoodUseCase,
-    private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
-    private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
-    private val guessGameConsoleUi: GuessGameConsoleUi,
-    private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
-    private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
-    private val suggestMealWithHighCalorieUI: SuggestMealWithHighCalorieUI,
-    private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
-    private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase,
-    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
-    private val getAllIraqiMealsUseCase: GetAllIraqiMealsUseCase,
-    private val mealIngredientsGameUI: MealIngredientsGameUI,
-    private val searchMealsByDateUI: SearchMealsByDateUI
-) {
-    fun start() {
-        showWelcome()
-        presentFeatures()
+    private val controllers: List<BaseUIController>,
+    private val reader: Reader
+) : BaseUIController {
+    override val id: Int = 0
+    override val message: String = "Welcome to food change mood app"
+    override fun start() {
+        TODO("Not yet implemented")
     }
 
-    private fun showWelcome() {
-        println("Welcome to food change mood app")
-    }
+//    fun start() {
+//        showWelcome()
+//        presentFeatures()
+//    }
+//
+//    private fun showWelcome() {
+//        println("Welcome to food change mood app")
+//    }
+//
+//    private fun presentFeatures() {
+//        showOptions()
+//        val input = getUserIntInput()
+//        when (input) {
+//            1 -> getHealthyFastFoodMeals()
+//            2 -> searchMealByName()
+//            3 -> getAllIraqiMeals()
+//            4 -> getEasySuggestedMeals()
+//            5 -> showGuessGame()
+//            6 -> getSweetWithNoEggs()
+//            7 -> getOneRandomKetoMeal()
+//            8 -> searchMealByDate()
+//            9 -> getSuitableGymMeals()
+//            10 -> exploreOtherCountriesFoodCulture()
+//            11 -> getMealIngredients()
+//            12 -> getTenRandomMealsContainsPotatoes()
+//            13 -> suggestMealWithHighCalories()
+//            14 -> getAllSeafoodMeals()
+//            15 -> getItalianFoodForLargeGroup()
+//            else -> println("Invalid Input")
+//        }
+//        letUserTryAgain()
+//    }
+//
+//    private fun letUserTryAgain() {
+//        println("If you want to continue press 1 if you want to end the program press 0")
+//        getUserIntInput().let {
+//            when (it) {
+//                1 -> {
+//                    presentFeatures()
+//                }
+//
+//                0 -> {
+//                    return
+//                }
+//
+//                else -> {
+//                    println("Invalid Input")
+//                    letUserTryAgain()
+//                }
+//            }
+//        }
+//    }
 
-    private fun presentFeatures() {
-        showOptions()
-        val input = getUserIntInput()
-        when (input) {
-            1 -> getHealthyFastFoodMeals()
-            2 -> searchMealByName()
-            3 -> getAllIraqiMeals()
-            4 -> getEasySuggestedMeals()
-            5 -> showGuessGame()
-            6 -> getSweetWithNoEggs()
-            7 -> getOneRandomKetoMeal()
-            8 -> searchMealByDate()
-            9 -> getSuitableGymMeals()
-            10 -> exploreOtherCountriesFoodCulture()
-            11 -> getMealIngredients()
-            12 -> getTenRandomMealsContainsPotatoes()
-            13 -> suggestMealWithHighCalories()
-            14 -> getAllSeafoodMeals()
-            15 -> getItalianFoodForLargeGroup()
-            else -> println("Invalid Input")
-        }
-        letUserTryAgain()
-    }
+//    private fun searchMealByDate() {
+//        searchMealsByDateUI.start()
+//    }
+//
+//    private fun getMealIngredients() {
+//        mealIngredientsGameUI.start()
+//    }
 
-    private fun letUserTryAgain() {
-        println("If you want to continue press 1 if you want to end the program press 0")
-        getUserIntInput().let {
-            when (it) {
-                1 -> {
-                    presentFeatures()
-                }
+//    private fun getSuitableGymMeals() {
+//        try {
+//            println("Input the amount of calories you want")
+//            val calories = getUserDoubleInput()
+//            println("Input the amount of protein you want")
+//            val protein = getUserDoubleInput()
+//            if (calories != null && protein != null) {
+//                val meals = getMealsSuitableForGymUseCase.getMealsWithinCalorieAndProteinRange(calories, protein)
+//                if (meals.isEmpty()) {
+//                    println("No meals found matching the specified values.")
+//                    return
+//                }
+//                meals.forEach {
+//                    println(it)
+//                }
+//            }
+//        } catch (exception: Exception) {
+//            println(exception.message)
+//        }
+//    }
+//
+//    private fun getAllIraqiMeals() {
+//        getAllIraqiMealsUseCase.getAllIraqiMeals().forEach {
+//            println(it)
+//        }
+//    }
+//
+//    private fun getTenRandomMealsContainsPotatoes() {
+//        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
+//            println(it)
+//        }
+//    }
+//
+//    private fun getItalianFoodForLargeGroup() {
+//        getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups().forEach {
+//            println(it)
+//        }
+//    }
+//
+//    private fun getAllSeafoodMeals() {
+//        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEach {
+//            println(it)
+//        }
+//    }
+//
+//    private fun suggestMealWithHighCalories() {
+//        suggestMealWithHighCalorieUI.suggestHighCalorieMeal()
+//    }
+//
+//    private fun getOneRandomKetoMeal() {
+//        println(getKetoMealSuggestUseCase.getKetoMeal())
+//    }
+//
+//    private fun showGuessGame() {
+//        guessGameConsoleUi.startGame()
+//    }
+//
+//    private fun getEasySuggestedMeals() {
+//        getEasyFoodSuggestionUseCase.getFilterMeals().forEach {
+//            println(it)
+//        }
+//    }
+//
+//    private fun getHealthyFastFoodMeals() {
+//        getHealthyFoodUseCase.getFilterMeals().forEach {
+//            println(it)
+//        }
+//    }
+//
+//    private fun searchMealByName() {
+//        println("Enter meal name")
+//        readlnOrNull()?.let { mealName ->
+//            try {
+//                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
+//                    println(it)
+//                }
+//            } catch (exception: Exception) {
+//                println("$mealName not found")
+//            }
+//        }
+//    }
 
-                0 -> {
-                    return
-                }
+//    private fun exploreOtherCountriesFoodCulture() {
+//        println("Enter country name you want to search about")
+//        readlnOrNull()?.let { countryName ->
+//            try {
+//                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
+//                    println(it)
+//                }
+//
+//            } catch (exception: Exception) {
+//                println("$countryName not found")
+//            }
+//        }
+//    }
 
-                else -> {
-                    println("Invalid Input")
-                    letUserTryAgain()
-                }
-            }
-        }
-    }
-
-    private fun searchMealByDate() {
-        searchMealsByDateUI.start()
-    }
-
-    private fun getMealIngredients() {
-        mealIngredientsGameUI.start()
-    }
-
-    private fun getSuitableGymMeals() {
-        try {
-            println("Input the amount of calories you want")
-            val calories = getUserDoubleInput()
-            println("Input the amount of protein you want")
-            val protein = getUserDoubleInput()
-            if (calories != null && protein != null) {
-                val meals = getMealsSuitableForGymUseCase.getMealsWithinCalorieAndProteinRange(calories, protein)
-                if (meals.isEmpty()) {
-                    println("No meals found matching the specified values.")
-                    return
-                }
-                meals.forEach {
-                    println(it)
-                }
-            }
-        } catch (exception: Exception) {
-            println(exception.message)
-        }
-    }
-
-    private fun getAllIraqiMeals() {
-        getAllIraqiMealsUseCase.getAllIraqiMeals().forEach {
-            println(it)
-        }
-    }
-
-    private fun getTenRandomMealsContainsPotatoes() {
-        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
-            println(it)
-        }
-    }
-
-    private fun getItalianFoodForLargeGroup() {
-        getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups().forEach {
-            println(it)
-        }
-    }
-
-    private fun getAllSeafoodMeals() {
-        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEach {
-            println(it)
-        }
-    }
-
-    private fun suggestMealWithHighCalories() {
-        suggestMealWithHighCalorieUI.suggestHighCalorieMeal()
-    }
-
-    private fun getOneRandomKetoMeal() {
-        println(getKetoMealSuggestUseCase.getKetoMeal())
-    }
-
-    private fun showGuessGame() {
-        guessGameConsoleUi.startGame()
-    }
-
-    private fun getEasySuggestedMeals() {
-        getEasyFoodSuggestionUseCase.getFilterMeals().forEach {
-            println(it)
-        }
-    }
-
-    private fun getHealthyFastFoodMeals() {
-        getHealthyFoodUseCase.getFilterMeals().forEach {
-            println(it)
-        }
-    }
-
-    private fun searchMealByName() {
-        println("Enter meal name")
-        readlnOrNull()?.let { mealName ->
-            try {
-                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
-                    println(it)
-                }
-            } catch (exception: Exception) {
-                println("$mealName not found")
-            }
-        }
-    }
-
-    private fun exploreOtherCountriesFoodCulture() {
-        println("Enter country name you want to search about")
-        readlnOrNull()?.let { countryName ->
-            try {
-                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
-                    println(it)
-                }
-
-            } catch (exception: Exception) {
-                println("$countryName not found")
-            }
-        }
-    }
-
-    private fun getSweetWithNoEggs() {
-        while (true) {
-            val sweet = getSweetsWithNoEggsUseCase.getOneSweetWithNoEggs()
-
-            println("Name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
-
-            println(" Enter yes if you like sweet to view it's details \n and no if you don't like it to suggest another sweet with no eggs ")
-            when (getLikeOrDislikeInput()) {
-                "yes" -> {
-                    println(sweet)
-                    break
-                }
-
-                "no" -> {
-                    println("lets try another one")
-                }
-            }
-        }
-    }
+//    private fun getSweetWithNoEggs() {
+//        while (true) {
+//            val sweet = getSweetsWithNoEggsUseCase.getOneSweetWithNoEggs()
+//
+//            println("Name of sweet with no eggs : ${sweet.name} \n and description of this sweet : ${sweet.description}")
+//
+//            println(" Enter yes if you like sweet to view it's details \n and no if you don't like it to suggest another sweet with no eggs ")
+//            when (getLikeOrDislikeInput()) {
+//                "yes" -> {
+//                    println(sweet)
+//                    break
+//                }
+//
+//                "no" -> {
+//                    println("lets try another one")
+//                }
+//            }
+//        }
+//    }
 
     private fun getLikeOrDislikeInput(): String? {
         return readlnOrNull()?.trim()?.lowercase()
@@ -265,4 +255,6 @@ class FoodChangeMoodConsoleUI(
     private fun getUserDoubleInput(): Double? {
         return readlnOrNull()?.toDoubleOrNull()
     }
+
+
 }

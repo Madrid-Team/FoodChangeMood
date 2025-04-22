@@ -2,6 +2,6 @@ package presentation.common
 
 interface BaseUIController {
     val id: Int
-    val UIMessage: String
+    val message: String
     fun start()
 }

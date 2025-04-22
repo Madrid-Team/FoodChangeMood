@@ -3,14 +3,21 @@ package presentation.features
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
+import presentation.common.BaseUIController
 
 class MealIngredientsGameUI(
     private val getRandomMealUseCase: GetIngredientGameRandomMealUseCase,
     private val makeGuessUseCase: MakeGuessUseCase,
     private val getGameScoreUseCase: GetGameScoreUseCase
-) {
+) : BaseUIController {
+    override val id: Int = 11
+    override val message: String =
+        "11- Ingredient Game ..\n" +
+                "- you will get a meal name and three ingredient options.\n" +
+                "- you can guess once .. A correct guess earns 1000 points , an incorrect guess ends the game.\n" +
+                "- The game also ends after 15 correct answers.\n"
 
-    fun start() {
+    override fun start() {
         displayWelcomeMessage()
         playGame()
     }

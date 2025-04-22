@@ -3,12 +3,17 @@ package presentation.features
 import data.models.Meal
 import data.utilities.MealsExceptions
 import logic.usecase.GetFoodByAddDateUseCase
+import presentation.common.BaseUIController
 
 class SearchMealsByDateUI(
     private val getFoodByAddDateUseCase: GetFoodByAddDateUseCase
-) {
+) : BaseUIController {
+    override val id: Int = 8
+    override val message: String =
+        "8- Add a date and get list of meals added on this date.\n" +
+                "- Enter the Id of any meal and you will get more details about it."
 
-    fun start() {
+    override fun start() {
         println("===== Search Meals by Date =====")
 
         while (true) {
