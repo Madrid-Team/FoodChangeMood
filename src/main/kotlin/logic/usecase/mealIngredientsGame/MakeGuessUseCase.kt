@@ -9,12 +9,14 @@ class MakeGuessUseCase(private val repository: MealsRepository) {
             repository.addCorrectGuessedMealName(guess)
             val correctGuessedMeals = repository.getCorrectGuessedMealsNames()
             if (correctGuessedMeals.size < 15) {
-                repository.clearCorrectGuessedMealsNames()
                 "that's correct! You have guessed ${correctGuessedMeals.size} meals correctly!"
             } else {
+                repository.clearCorrectGuessedMealsNames()
                 throw MealsExceptions.GuessMealGamePassed("You have guessed all the meals correctly!")
             }
-        } else
+        } else {
+            repository.clearCorrectGuessedMealsNames()
             throw MealsExceptions.GuessMealGameNotPassed("ooh, you didn't guess the meal name")
+        }
     }
 }
