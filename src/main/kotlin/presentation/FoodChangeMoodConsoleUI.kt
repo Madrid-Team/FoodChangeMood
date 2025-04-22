@@ -1,6 +1,9 @@
 package presentation
 
 import logic.usecase.*
+import presentation.features.GuessGameConsoleUi
+import presentation.features.MealIngredientsGameUI
+import presentation.features.SearchMealsByDateUI
 
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,

@@ -1,4 +1,4 @@
-package presentation
+package presentation.features
 
 import logic.usecase.StartGuessGameUseCase
 
