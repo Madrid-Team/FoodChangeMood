@@ -8,9 +8,45 @@ class FoodChangeMoodConsoleUI(
     private val reader: Reader
 ) : BaseUIController {
     override val id: Int = 0
-    override val message: String = "Welcome to food change mood app"
+    override val message: String = "---Welcome to food change mood app---"
+
     override fun start() {
-        TODO("Not yet implemented")
+        presentFeatures()
+        println("Choose feature between 1 to 15")
+        val input = reader.getUserInput()?.trim()
+        input?.toIntOrNull()?.let { choice ->
+            controllers.find { it.id == choice }
+        }?.start() ?: letUserTryAgain()
+    }
+
+    private fun presentFeatures() {
+        println(message)
+        controllers.sortedBy { it.id }.forEach { controller ->
+            println(controller.message)
+        }
+    }
+
+    private fun letUserTryAgain() {
+        println(
+            "You have entered invalid input \n " +
+                    "If you want to continue press 1 if you want to end the program press 0"
+        )
+        getUserIntInput().let {
+            when (it) {
+                1 -> {
+                    presentFeatures()
+                }
+
+                0 -> {
+                    return
+                }
+
+                else -> {
+                    println("Invalid Input")
+                    letUserTryAgain()
+                }
+            }
+        }
     }
 
 //    fun start() {
@@ -46,25 +82,7 @@ class FoodChangeMoodConsoleUI(
 //        letUserTryAgain()
 //    }
 //
-//    private fun letUserTryAgain() {
-//        println("If you want to continue press 1 if you want to end the program press 0")
-//        getUserIntInput().let {
-//            when (it) {
-//                1 -> {
-//                    presentFeatures()
-//                }
-//
-//                0 -> {
-//                    return
-//                }
-//
-//                else -> {
-//                    println("Invalid Input")
-//                    letUserTryAgain()
-//                }
-//            }
-//        }
-//    }
+
 
 //    private fun searchMealByDate() {
 //        searchMealsByDateUI.start()
@@ -255,6 +273,5 @@ class FoodChangeMoodConsoleUI(
     private fun getUserDoubleInput(): Double? {
         return readlnOrNull()?.toDoubleOrNull()
     }
-
 
 }
