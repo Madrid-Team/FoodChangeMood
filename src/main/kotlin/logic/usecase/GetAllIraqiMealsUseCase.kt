@@ -15,8 +15,6 @@ class GetAllIraqiMealsUseCase(private val repository: MealsRepository) {
     companion object {
         const val IRAQI = "iraqi"
         const val IRAQ = "iraq"
-
-
     }
 }
 
