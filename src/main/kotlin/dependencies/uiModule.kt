@@ -1,9 +1,16 @@
 package dependencies
 
 import org.koin.dsl.module
+import presentation.common.ConsoleReader
+import presentation.common.ConsoleViewer
+import presentation.common.Reader
+import presentation.common.Viewer
 import presentation.features.*
 
 val uiModule = module {
+    single<Reader> { ConsoleReader() }
+    single<Viewer> { ConsoleViewer() }
+
     single { GuessGameConsoleUi(get()) }
     single { MealIngredientsGameUI(get(), get(), get()) }
     single { SearchMealsByDateUI(get()) }
