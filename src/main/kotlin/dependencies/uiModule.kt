@@ -15,7 +15,7 @@ val uiModule = module {
     single { MealIngredientsGameUI(get(), get(), get()) } bind BaseUIController::class
     single { SearchMealsByDateUI(get()) } bind BaseUIController::class
     single { EasyFoodSuggestionGameUI(get()) } bind BaseUIController::class
-    single { ExploreOtherCountriesFoodCultureUI(get()) } bind BaseUIController::class
+    single { ExploreOtherCountriesFoodCultureUI(get(), get()) } bind BaseUIController::class
     single { GetHealthyFastFoodMealsUI(get()) } bind BaseUIController::class
     single { GetIraqMealUI(get()) } bind BaseUIController::class
     single { GymHelperUI(get()) } bind BaseUIController::class
@@ -23,7 +23,7 @@ val uiModule = module {
     single { KetoDietMealHelperUI(get()) } bind BaseUIController::class
     single { LargeItaliansMealsUI(get()) } bind BaseUIController::class
     single { SeaFoodMealsUI(get()) } bind BaseUIController::class
-    single { SearchMealByNameUI(get()) } bind BaseUIController::class
+    single { SearchMealByNameUI(get(), get()) } bind BaseUIController::class
     single { SweetWithNoEggsUI(get()) } bind BaseUIController::class
     single { SuggestMealWithHighCalorieUI(get()) } bind BaseUIController::class
 
