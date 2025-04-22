@@ -18,4 +18,5 @@ val uiModule = module {
     single { SeaFoodMealsUI() }
     single { SearchMealByNameUI() }
     single { SweetWithNoEggsUI() }
+    single { SuggestMealWithHighCalorieUI(get()) }
 }

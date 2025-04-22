@@ -1,4 +1,4 @@
-package presentation
+package presentation.features
 
 import data.models.Meal
 import logic.usecase.SuggestMealWithHighCalorieUseCase

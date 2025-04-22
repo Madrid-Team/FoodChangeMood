@@ -4,6 +4,7 @@ import logic.usecase.*
 import presentation.features.GuessGameConsoleUi
 import presentation.features.MealIngredientsGameUI
 import presentation.features.SearchMealsByDateUI
+import presentation.features.SuggestMealWithHighCalorieUI
 
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,

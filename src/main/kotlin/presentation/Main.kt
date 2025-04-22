@@ -4,6 +4,7 @@ import dependencies.appModule
 import dependencies.useCaseModule
 import org.koin.core.context.startKoin
 import org.koin.java.KoinJavaComponent.getKoin
+import presentation.features.GuessGameConsoleUi
 
 
 fun main() {
