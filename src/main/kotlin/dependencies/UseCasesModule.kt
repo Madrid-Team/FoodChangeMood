@@ -72,5 +72,4 @@ val useCaseModule = module {
     single {
         GetMealsSuitableForGymUseCase(get())
     }
-
 }

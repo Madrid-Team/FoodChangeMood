@@ -14,7 +14,7 @@ class FoodChangeMoodConsoleUI(
     private val guessGameConsoleUi: GuessGameConsoleUi,
     private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
     private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
-    private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
+    private val suggestMealWithHighCalorieUI: SuggestMealWithHighCalorieUI,
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
     private val getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase,
     private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
@@ -129,7 +129,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun suggestMealWithHighCalories() {
-        println(suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal())
+        suggestMealWithHighCalorieUI.suggestHighCalorieMeal()
     }
 
     private fun getOneRandomKetoMeal() {
