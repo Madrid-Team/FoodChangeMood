@@ -15,7 +15,7 @@ class MealIngredientsGameUI(
         "11- Ingredient Game ..\n" +
                 "- you will get a meal name and three ingredient options.\n" +
                 "- you can guess once .. A correct guess earns 1000 points , an incorrect guess ends the game.\n" +
-                "- The game also ends after 15 correct answers.\n"
+                "- The game also ends after 15 correct answers."
 
     override fun start() {
         displayWelcomeMessage()
