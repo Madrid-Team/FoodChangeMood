@@ -11,43 +11,48 @@ class FoodChangeMoodConsoleUI(
     override val message: String = "---Welcome to food change mood app---"
 
     override fun start() {
-        presentFeatures()
-        println("Choose feature between 1 to 15")
-        val input = reader.getUserInput()?.trim()
-        input?.toIntOrNull()?.let { choice ->
-            controllers.find { it.id == choice }
-        }?.start() ?: letUserTryAgain()
+        while (true) {
+            presentFeatures()
+            val input = reader.getUserInput()?.trim()?.toIntOrNull()
+            if (input == 0) {
+                println("Exiting from the program")
+                break
+            }
+            if (input in 1..15) {
+                input.let { choice ->
+                    controllers.find { it.id == choice }
+                }?.start()
+            } else {
+                if (!letUserTryAgain()) {
+                    break
+                }
+            }
+        }
     }
 
     private fun presentFeatures() {
         println(message)
+        println("Choose feature between 1 to 15 .. press zero if you want to exit")
         controllers.sortedBy { it.id }.forEach { controller ->
             println(controller.message)
         }
     }
 
-    private fun letUserTryAgain() {
+    private fun letUserTryAgain(): Boolean {
         println(
             "You have entered invalid input \n " +
                     "If you want to continue press 1 if you want to end the program press 0"
         )
-        getUserIntInput().let {
-            when (it) {
-                1 -> {
-                    presentFeatures()
-                }
-
-                0 -> {
-                    return
-                }
-
-                else -> {
-                    println("Invalid Input")
-                    letUserTryAgain()
-                }
+        return when (getUserIntInput()) {
+            1 -> true
+            0 -> false
+            else -> {
+                println("Invalid Input")
+                letUserTryAgain()
             }
         }
     }
+}
 
 //    fun start() {
 //        showWelcome()
@@ -208,70 +213,69 @@ class FoodChangeMoodConsoleUI(
 //        }
 //    }
 
-    private fun getLikeOrDislikeInput(): String? {
-        return readlnOrNull()?.trim()?.lowercase()
-    }
-
-    private fun showOptions() {
-        println("\n\n please enter one of the following options")
-        println(
-            "1- Get a list of healthy fast food meals that can be prepared in 15 minutes or less," +
-                    " with very low total fat, saturated fat, and carbohydrate."
-        )
-        println("2- Enter any meal's name to search about it")
-        println("3- Get All Iraq meals ")
-
-        println(
-            "4- Play a fun game ..\n" +
-                    "- Get 10 get a list of healthy fast food meals that can be prepared in 15 minutes or less, " +
-                    "with very low total fat, saturated fat, and carbohydrate."
-        )
-        println(
-            "5- Guess game .. you will show the random meal name and you will guess it's preparation time.\n" +
-                    "- you have 3 attempts .. After each attempt, The guessed time is correct, too low, or too high.\n" +
-                    "- If all attempts are incorrect, you will see the correct time."
-        )
-        println(
-            "6- Get one sweet that not contains no eggs .. \n" +
-                    "- Write yes if you like it and want more details about this meal.\n" +
-                    "- Write no if you dislike it and want another sweet."
-        )
-        println(
-            "7- Get one keto-friendly meal .. \n"
-        )
-        println(
-            "8- Add a date and get list of meals added on this date.\n" +
-                    "- Enter the Id of any meal and you will get more details about it."
-        )
-        println(
-            "9- Enter a desired amount of calories and protein," +
-                    "and return a list of meals that match or approximate those values."
-        )
-        println("10- Enter a country name and you will get up to 20 meals related to this country.")
-        println(
-            "11- Ingredient Game ..\n" +
-                    "- you will get a meal name and three ingredient options.\n" +
-                    "- you can guess once .. A correct guess earns 1000 points , an incorrect guess ends the game.\n" +
-                    "- The game also ends after 15 correct answers."
-        )
-        println("12- You will get random list of 10 meals that include potatoes in their ingredients.")
-        println(
-            "13- You will get a random meal more than 700 calories"
-        )
-        println(
-            "14- You will get a list of all seafood meals sorted by protein content," +
-                    "from highest to lowest."
-        )
-        println("15- You will get Italian meals suitable for large groups.")
-        println("----------------------------------------------------------------------------")
-    }
-
-    private fun getUserIntInput(): Int? {
-        return readlnOrNull()?.toIntOrNull()
-    }
-
-    private fun getUserDoubleInput(): Double? {
-        return readlnOrNull()?.toDoubleOrNull()
-    }
-
+private fun getLikeOrDislikeInput(): String? {
+    return readlnOrNull()?.trim()?.lowercase()
 }
+
+private fun showOptions() {
+    println("\n\n please enter one of the following options")
+    println(
+        "1- Get a list of healthy fast food meals that can be prepared in 15 minutes or less," +
+                " with very low total fat, saturated fat, and carbohydrate."
+    )
+    println("2- Enter any meal's name to search about it")
+    println("3- Get All Iraq meals ")
+
+    println(
+        "4- Play a fun game ..\n" +
+                "- Get 10 get a list of healthy fast food meals that can be prepared in 15 minutes or less, " +
+                "with very low total fat, saturated fat, and carbohydrate."
+    )
+    println(
+        "5- Guess game .. you will show the random meal name and you will guess it's preparation time.\n" +
+                "- you have 3 attempts .. After each attempt, The guessed time is correct, too low, or too high.\n" +
+                "- If all attempts are incorrect, you will see the correct time."
+    )
+    println(
+        "6- Get one sweet that not contains no eggs .. \n" +
+                "- Write yes if you like it and want more details about this meal.\n" +
+                "- Write no if you dislike it and want another sweet."
+    )
+    println(
+        "7- Get one keto-friendly meal .. \n"
+    )
+    println(
+        "8- Add a date and get list of meals added on this date.\n" +
+                "- Enter the Id of any meal and you will get more details about it."
+    )
+    println(
+        "9- Enter a desired amount of calories and protein," +
+                "and return a list of meals that match or approximate those values."
+    )
+    println("10- Enter a country name and you will get up to 20 meals related to this country.")
+    println(
+        "11- Ingredient Game ..\n" +
+                "- you will get a meal name and three ingredient options.\n" +
+                "- you can guess once .. A correct guess earns 1000 points , an incorrect guess ends the game.\n" +
+                "- The game also ends after 15 correct answers."
+    )
+    println("12- You will get random list of 10 meals that include potatoes in their ingredients.")
+    println(
+        "13- You will get a random meal more than 700 calories"
+    )
+    println(
+        "14- You will get a list of all seafood meals sorted by protein content," +
+                "from highest to lowest."
+    )
+    println("15- You will get Italian meals suitable for large groups.")
+    println("----------------------------------------------------------------------------")
+}
+
+private fun getUserIntInput(): Int? {
+    return readlnOrNull()?.toIntOrNull()
+}
+
+private fun getUserDoubleInput(): Double? {
+    return readlnOrNull()?.toDoubleOrNull()
+}
+
