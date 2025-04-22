@@ -15,16 +15,16 @@ val uiModule = module {
     single { MealIngredientsGameUI(get(), get(), get()) } bind BaseUIController::class
     single { SearchMealsByDateUI(get()) } bind BaseUIController::class
     single { EasyFoodSuggestionGameUI(get()) } bind BaseUIController::class
-    single { ExploreOtherCountriesFoodCultureUI() } bind BaseUIController::class
-    single { GetHealthyFastFoodMealsUI() } bind BaseUIController::class
-    single { GetIraqMealUI() } bind BaseUIController::class
-    single { GymHelperUI() } bind BaseUIController::class
-    single { ILovePotatoUI() } bind BaseUIController::class
-    single { KetoDietMealHelperUI() } bind BaseUIController::class
-    single { LargeItaliansMealsUI() } bind BaseUIController::class
-    single { SeaFoodMealsUI() } bind BaseUIController::class
-    single { SearchMealByNameUI() } bind BaseUIController::class
-    single { SweetWithNoEggsUI() } bind BaseUIController::class
+    single { ExploreOtherCountriesFoodCultureUI(get()) } bind BaseUIController::class
+    single { GetHealthyFastFoodMealsUI(get()) } bind BaseUIController::class
+    single { GetIraqMealUI(get()) } bind BaseUIController::class
+    single { GymHelperUI(get()) } bind BaseUIController::class
+    single { ILovePotatoUI(get()) } bind BaseUIController::class
+    single { KetoDietMealHelperUI(get()) } bind BaseUIController::class
+    single { LargeItaliansMealsUI(get()) } bind BaseUIController::class
+    single { SeaFoodMealsUI(get()) } bind BaseUIController::class
+    single { SearchMealByNameUI(get()) } bind BaseUIController::class
+    single { SweetWithNoEggsUI(get()) } bind BaseUIController::class
     single { SuggestMealWithHighCalorieUI(get()) } bind BaseUIController::class
 
     single {

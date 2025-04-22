@@ -1,8 +1,11 @@
 package presentation.features
 
+import logic.usecase.GetSweetsWithNoEggsUseCase
 import presentation.common.BaseUIController
 
-class SweetWithNoEggsUI : BaseUIController {
+class SweetWithNoEggsUI(
+    private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase
+) : BaseUIController {
     override val id: Int = 6
     override val message: String =
         "6- Get one sweet that not contains no eggs .. \n" +

@@ -1,8 +1,11 @@
 package presentation.features
 
+import logic.usecase.GetMealsSuitableForGymUseCase
 import presentation.common.BaseUIController
 
-class GymHelperUI : BaseUIController {
+class GymHelperUI(
+    private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase
+) : BaseUIController {
     override val id: Int = 9
     override val message: String =
         "9- Enter a desired amount of calories and protein,\n" +
