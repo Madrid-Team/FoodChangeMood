@@ -9,7 +9,7 @@ class FoodChangeMoodConsoleUI(
     private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
-    private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
+    private val suggestNewKetoMealUseCase: SuggestNewKetoMealUseCase,
     private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
     private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
@@ -130,10 +130,10 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getOneRandomKetoMeal() {
-
+        val alreadySuggestedIds: MutableSet<Int> = mutableSetOf()
         while (true) {
             try {
-                val ketoMeal = getKetoMealSuggestUseCase.getKetoMeal()
+                val ketoMeal = suggestNewKetoMealUseCase.execute(alreadySuggestedIds.toSet())
                 println("Name of keto meal : ${ketoMeal.name} \n and description of this keto : ${ketoMeal.description}")
 
                 println("Enter yes if you like Keto meal to view it's details \n and no if you don't like it to suggest another Keto meal ")
@@ -145,6 +145,7 @@ class FoodChangeMoodConsoleUI(
 
                     "no" -> {
                         println("lets try another one")
+                        alreadySuggestedIds.add(ketoMeal.id)
                     }
                 }
             } catch (exception: Exception) {
