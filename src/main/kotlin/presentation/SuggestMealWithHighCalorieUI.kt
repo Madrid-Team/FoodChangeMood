@@ -1,14 +1,13 @@
 package presentation
 
+import data.models.Meal
 import logic.usecase.SuggestMealWithHighCalorieUseCase
 
 class SuggestMealWithHighCalorieUI(private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase) {
     private val alreadySuggested = mutableSetOf<Int>()
 
     fun suggestHighCalorieMeal() {
-        println("Welcome! suggest a high calorie meal.")
-        println("If you like the suggested meal, type:\n- like (to see more details)\n- dislike (to get another suggestion)")
-
+        greetUser()
 
         while (true) {
             val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
@@ -23,11 +22,7 @@ class SuggestMealWithHighCalorieUI(private val suggestMealWithHighCalorieUseCase
             println("Do you like this meal? (like - dislike): ")
             when (readlnOrNull()?.lowercase()) {
                 "like" -> {
-                    println("Here are the full details of the meal:")
-                    println("Name: ${meal.name}")
-                    println("Description: ${meal.description ?: "No description available"}")
-                    println("Calories: ${meal.nutrition.calories}")
-                    println("Time: ${meal.minutes} minutes")
+                    showMealDetails(meal)
                     break
                 }
 
@@ -40,5 +35,20 @@ class SuggestMealWithHighCalorieUI(private val suggestMealWithHighCalorieUseCase
                 }
             }
         }
+    }
+
+    private fun greetUser() {
+        println("Welcome! Let's suggest a high calorie meal.")
+        println("Type one of the following:")
+        println("- like: to see more details")
+        println("- dislike: to get another suggestion")
+    }
+
+    private fun showMealDetails(meal: Meal) {
+        println("Here are the full details of the meal:")
+        println("Name: ${meal.name}")
+        println("Description: ${meal.description ?: "No description available"}")
+        println("Calories: ${meal.nutrition.calories}")
+        println("Preparation Time: ${meal.minutes} minutes")
     }
 }
