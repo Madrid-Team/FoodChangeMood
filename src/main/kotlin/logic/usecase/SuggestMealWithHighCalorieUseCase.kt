@@ -5,16 +5,17 @@ import logic.Repository.MealsRepository
 
 class SuggestMealWithHighCalorieUseCase(private val mealsRepository: MealsRepository) {
 
-    fun suggestRandomHighCalorieMeal(): Meal? {
+    fun suggestRandomHighCalorieMeal(alreadySuggested: Set<Int>): Meal? {
         return mealsRepository.getAllMeals()
             .asSequence()
             .filter(::isHighCalorie)
-            .shuffled()
-            .firstOrNull()
+            .filter { it.id !in alreadySuggested }
+            .toList()
+            .randomOrNull()
     }
 
     private fun isHighCalorie(meal: Meal): Boolean {
-        return meal.nutrition.calories > HIGH_CALORIES
+        return meal.nutrition.calories > HIGH_CALORIES && meal.description != null
     }
 
     companion object{
