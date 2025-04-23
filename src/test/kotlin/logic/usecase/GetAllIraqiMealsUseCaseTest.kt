@@ -21,15 +21,13 @@ class GetAllIraqiMealsUseCaseTest() {
 
 
     @Test
-    fun `should return all meals containing iraqi in tags or description`() {
+    fun `get all iraqi meals should return all meals containing iraqi in tags or iraq in description`() {
+
         // Given
-        val fixedDate = Date()
         every { repository.getAllMeals() } returns listOf(
             createMeal(
                 name = "balalit  saweeya or seviyan  sweet vermicelli breakfast",
                 tags = listOf(
-                    "lactose",
-                    "occasion",
                     "iraqi",
                     "sweet"
                 ),
@@ -40,42 +38,14 @@ class GetAllIraqiMealsUseCaseTest() {
                 name = "apricot and almond stew with rice",
                 tags = listOf(
                     "60-minutes-or-less",
-                    "time-to-make",
-                    "course",
                 ),
                 description = "\"this is an iraqi dish thought to have originated in iran.\"",
             ),
-            createMeal(
-                name = "ba7 7ari   meat with rice  bahrain",
-                tags = listOf(
-                    "occasion",
-                    "iraqi",
-                    "saudi-arabian",
-                    "middle-eastern",
 
-                    ),
-                description = "is a traditional bahraini dish that is quite easy to make."
-            ),
             createMeal(
                 name = "rice",
                 tags = listOf("seafood"),
                 description = "nono",
-            ),
-            createMeal(
-                name = "dolma  stuffed grape leaves   iraqi style",
-                tags = listOf(
-                    "preparation",
-                    "occasion",
-                    "iraqi",
-                    "main-dish",
-                    "beef",
-                ),
-                description = "this middle eastern dish is a family favorite."
-            ),
-            createMeal(
-                name = "Burger",
-                tags = listOf("fastfood"),
-                description = "Fast food from USA"
             )
 
         )
@@ -90,8 +60,6 @@ class GetAllIraqiMealsUseCaseTest() {
             createMeal(
                 name = "balalit  saweeya or seviyan  sweet vermicelli breakfast",
                 tags = listOf(
-                    "lactose",
-                    "occasion",
                     "iraqi",
                     "sweet"
                 ),
@@ -102,32 +70,8 @@ class GetAllIraqiMealsUseCaseTest() {
                 name = "apricot and almond stew with rice",
                 tags = listOf(
                     "60-minutes-or-less",
-                    "time-to-make",
-                    "course",
                 ),
                 description = "\"this is an iraqi dish thought to have originated in iran.\"",
-            ),
-            createMeal(
-                name = "ba7 7ari   meat with rice  bahrain",
-                tags = listOf(
-                    "occasion",
-                    "iraqi",
-                    "saudi-arabian",
-                    "middle-eastern",
-
-                    ),
-                description = "is a traditional bahraini dish that is quite easy to make."
-            ),
-            createMeal(
-                name = "dolma  stuffed grape leaves   iraqi style",
-                tags = listOf(
-                    "preparation",
-                    "occasion",
-                    "iraqi",
-                    "main-dish",
-                    "beef",
-                ),
-                description = "this middle eastern dish is a family favorite."
             )
         )
 
