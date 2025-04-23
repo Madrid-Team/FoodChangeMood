@@ -2,7 +2,7 @@ package dependencies
 
 import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
-import data.csvHandler.Repository.MealsRepositoryImpl
+import data.csvHandler.repository.MealsRepositoryImpl
 import data.csvHandler.Tags
 import logic.Repository.MealsRepository
 import org.koin.dsl.module

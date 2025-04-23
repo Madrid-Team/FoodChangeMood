@@ -1,4 +1,4 @@
-package data.csvHandler.Repository
+package data.csvHandler.repository
 
 import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
