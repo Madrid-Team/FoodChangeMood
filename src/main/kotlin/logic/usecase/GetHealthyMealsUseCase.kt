@@ -5,13 +5,14 @@ import logic.Repository.MealsRepository
 
 class GetHealthyMealsUseCase(private val mealsRepository: MealsRepository) {
 
-    fun execute(): List<Meal> {
+    fun execute(count: Int): List<Meal> {
         if (mealsRepository.getAllMeals().isEmpty()) throw Exception("Meal list is empty")
         return mealsRepository.getAllMeals()
             .filter(::isHealthyMeal)
+            .sortedBy(::nutrientsSum)
+            .take(count)
             .takeIf { it.isNotEmpty() }
-            ?.sortedBy(::nutrientsSum)
-            ?.take(TOP_HEALTHY_MEAL) ?: throw NoSuchElementException("There is no healthy meals")
+            ?: throw NoSuchElementException("There is no healthy meals")
     }
 
     private fun isHealthyMeal(meal: Meal): Boolean {
@@ -30,6 +31,5 @@ class GetHealthyMealsUseCase(private val mealsRepository: MealsRepository) {
         const val MAX_TOTAL_FAT = 20.0
         const val MAX_SATURATED_FAT = 5.0
         const val MAX_CARBOHYDRATES = 50.0
-        const val TOP_HEALTHY_MEAL = 15
     }
 }
