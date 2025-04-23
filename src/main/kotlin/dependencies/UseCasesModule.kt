@@ -2,7 +2,6 @@ package dependencies
 
 import logic.usecase.GetAllMealsUseCase
 import logic.usecase.SuggestEasyMealUseCase
-import logic.usecase.GetHealthyFoodUseCase
 import logic.usecase.*
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase

@@ -1,10 +1,10 @@
 package presentation.features
 
-import logic.usecase.GetEasyFoodSuggestionUseCase
+import logic.usecase.SuggestEasyMealUseCase
 import presentation.common.BaseUIController
 
-class EasyFoodSuggestionGameUI(
-    private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase
+class SuggestEasyMealGameUI(
+    private val suggestEasyMealUseCase: SuggestEasyMealUseCase
 ) : BaseUIController {
     override val id: Int = 4
     override val message: String =
@@ -13,7 +13,7 @@ class EasyFoodSuggestionGameUI(
                 "with very low total fat, saturated fat, and carbohydrate."
 
     override fun start() {
-        getEasyFoodSuggestionUseCase.getFilterMeals().forEach {
+        suggestEasyMealUseCase.execute(10).forEach {
             println(it)
         }
     }
