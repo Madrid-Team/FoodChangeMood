@@ -1,5 +1,6 @@
 package logic.usecase
 
+import data.csvHandler.Tags.MealCategories.SEAFOOD
 import data.models.SeafoodMeal
 import logic.Repository.MealsRepository
 
@@ -8,7 +9,7 @@ class GetAllSeafoodMealsUseCase(
 ) {
     fun getAllSeafoodMeals(): List<SeafoodMeal> {
         return repository.getAllMeals().filter { meal ->
-            meal.tags.contains("seafood")
+            meal.tags.contains(SEAFOOD)
         }.sortedByDescending {
             it.nutrition.protein
         }.map { it.toSeafoodMeal() }

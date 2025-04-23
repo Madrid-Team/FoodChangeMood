@@ -5,10 +5,9 @@ import data.models.Meal
 import data.models.Nutrition
 import data.models.Steps
 import data.utilities.*
-import java.io.File
 
 
-class MealsCsvParser() {
+class MealsCsvParser {
 
     fun parseOnLine(line: String): Meal{
         val mealInfo = splitIgnoringQuotedCommas(line)

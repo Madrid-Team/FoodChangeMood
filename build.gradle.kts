@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-
+    testImplementation(kotlin("test"))
     implementation("io.insert-koin:koin-core:3.5.3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.13.0-M2")
     testImplementation(kotlin("test"))
@@ -19,6 +19,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:5.7.2")
     testImplementation("com.google.truth:truth:1.4.2")
     testImplementation("io.mockk:mockk:1.14.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 tasks.test {
