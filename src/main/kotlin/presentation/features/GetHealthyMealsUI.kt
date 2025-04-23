@@ -1,10 +1,10 @@
 package presentation.features
 
-import logic.usecase.GetHealthyFoodUseCase
+import logic.usecase.GetHealthyMealsUseCase
 import presentation.common.BaseUIController
 
-class GetHealthyFastFoodMealsUI(
-    private val getHealthyFoodUseCase: GetHealthyFoodUseCase
+class GetHealthyMealsUI(
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase
 ) : BaseUIController {
     override val id: Int = 1
     override val message: String =
@@ -12,6 +12,12 @@ class GetHealthyFastFoodMealsUI(
                 " with very low total fat, saturated fat, and carbohydrate."
 
     override fun start() {
-        println("Test Test .. Add your feature here")
+        try {
+            getHealthyMealsUseCase.execute(10).forEach {
+                println(it)
+            }
+        } catch (exception: Exception) {
+            println(exception.message)
+        }
     }
 }
