@@ -43,4 +43,20 @@ class GetAllSeafoodMealsUseCaseTest() {
             SeafoodMeal("fish dish",1.0),
         )
     }
+    @Test
+    fun `get all seafood meals should return empty list when has no seafood meals`(){
+        // Given
+        every { mealsRepository.getAllMeals() } returns listOf(
+            createMeal(name = "tuna salad",tags =  listOf("occasion")),
+            createMeal(name = "fish dish",tags =  listOf("sweets")),
+            createMeal(name = "rice",tags =  listOf("time-to-make","occasion")),
+            createMeal(name = "pizza",tags =  listOf("time-to-make","sweets")),
+        )
+
+        // When
+        val result  = getAllSeafoodMealsUseCase.getAllSeafoodMeals()
+
+        // Then
+        Truth.assertThat(result).isEmpty()
+    }
 }
