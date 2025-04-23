@@ -6,7 +6,6 @@ import io.mockk.mockk
 import logic.Repository.MealsRepository
 import logic.helper.createMeal
 import org.junit.jupiter.api.BeforeEach
-import java.util.*
 import kotlin.test.Test
 
 class GetAllIraqiMealsUseCaseTest() {
@@ -104,5 +103,30 @@ class GetAllIraqiMealsUseCaseTest() {
         Truth.assertThat(result).isEmpty()
     }
 
+    @Test
+    fun `get all iraqi meals should return meals with iraqi tag even if description is null`() {
+        every { repository.getAllMeals() } returns listOf(
+            createMeal(name = "Soup", tags = listOf("soups"), description = null),
+            createMeal(
+                name = "null",
+                tags = listOf(
+                    "iraqi",
+                    "sweet"
+                )
+            )
+        )
+
+        val result = getAllIraqiMealsUseCase.getAllIraqiMeals()
+
+        Truth.assertThat(result).containsExactly(
+            createMeal(
+                name = "null",
+                tags = listOf(
+                    "iraqi",
+                    "sweet"
+                )
+            )
+        )
+    }
 
 }
