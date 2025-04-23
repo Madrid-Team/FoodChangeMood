@@ -78,4 +78,16 @@ class GetAllIraqiMealsUseCaseTest() {
 
     }
 
+
+    @Test
+    fun `get all iraqi meals should return empty list when there are no meals`() {
+        // Given
+        every { repository.getAllMeals() } returns emptyList()
+        //When
+        val result = getAllIraqiMealsUseCase.getAllIraqiMeals()
+        //Then
+        Truth.assertThat(result).isEmpty()
+    }
+
+
 }
