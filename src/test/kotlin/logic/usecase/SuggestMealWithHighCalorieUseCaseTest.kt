@@ -1,16 +1,11 @@
 package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
-import data.models.Ingredients
-import data.models.Meal
-import data.models.Nutrition
-import data.models.Steps
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.util.Date
 
 class SuggestMealWithHighCalorieUseCaseTest {
 
@@ -36,4 +31,29 @@ class SuggestMealWithHighCalorieUseCaseTest {
 
         assertThat(result!!.nutrition.calories).isGreaterThan(700.0)
     }
+
+    @Test
+    fun `should return null when all high calorie meals are already suggested`() {
+        every { mealsRepository.getAllMeals() } returns  listOf(
+            createTestMeal(id = 1, calories = 800.0, description = "delicious toast"),
+            createTestMeal(id = 2, calories = 750.0, description = "delicious toast")
+        )
+
+        val result = useCase.suggestRandomHighCalorieMeal(alreadySuggested = setOf(1, 2))
+
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun `should skip meals when description is null`() {
+        every { mealsRepository.getAllMeals() } returns listOf(
+            createTestMeal(id = 1, calories = 800.0, description = null),
+            createTestMeal(id = 2, calories = 800.0, description = "delicious toast")
+        )
+
+        val result = useCase.suggestRandomHighCalorieMeal(alreadySuggested = setOf())
+
+        assertThat(result!!.description).isNotNull()
+    }
+
 }
