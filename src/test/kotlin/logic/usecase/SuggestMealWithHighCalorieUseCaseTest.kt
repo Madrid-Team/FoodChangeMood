@@ -24,52 +24,16 @@ class SuggestMealWithHighCalorieUseCaseTest {
     }
 
     @Test
-    fun `should return high calorie meal when is available`(){
-        val meals = listOf(
-            Meal(
-                name = "",
-                id = 1,
-                minutes = 1,
-                tags = listOf(),
-                description = "delicious toast",
-                nutrition = Nutrition(450.0, 0.0, 0.0, 0.0, 0.0, 0.0, 50.0),
-                steps = Steps(listOf(),0),
-                ingredients = Ingredients(listOf(),0),
-                submitted = Date(),
-                contributorId = 101
-            ),
-            Meal(
-                name = "",
-                id = 2,
-                minutes = 10,
-                tags = listOf(),
-                description = "delicious toast",
-                nutrition = Nutrition(250.0, 0.0, 0.0, 0.0, 0.0, 0.0, 50.0),
-                steps = Steps(listOf(),0),
-                ingredients = Ingredients(listOf(),0),
-                submitted = Date(),
-                contributorId = 102
-            ),
-            Meal(
-                name = "",
-                id = 3,
-                minutes = 20,
-                tags = listOf("", "", ""),
-                description = "delicious toast",
-                nutrition = Nutrition(850.0, 0.0, 0.0, 0.0, 0.0, 0.0, 50.0),
-                steps = Steps(listOf(),0),
-                ingredients = Ingredients(listOf(),0),
-                submitted = Date(),
-                contributorId = 103
-            )
-        )
+    fun `should return high calorie meal when is available`() {
 
-        every { mealsRepository.getAllMeals() } returns meals
+        every { mealsRepository.getAllMeals() } returns listOf(
+            createTestMeal(id = 1, calories = 450.0, description = "delicious toast"),
+            createTestMeal(id = 2, calories = 250.0, description = "delicious toast"),
+            createTestMeal(id = 3, calories = 850.0, description = "delicious toast")
+        )
 
         val result = useCase.suggestRandomHighCalorieMeal(setOf())
 
         assertThat(result!!.nutrition.calories).isGreaterThan(700.0)
-
-
     }
 }
