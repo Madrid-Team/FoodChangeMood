@@ -88,18 +88,21 @@ class GetAllIraqiMealsUseCaseTest() {
         //Then
         Truth.assertThat(result).isEmpty()
     }
+
     @Test
     fun `get all iraqi meals should return empty list when no meals match iraqi or iraq`() {
+        // Given
         every { repository.getAllMeals() } returns listOf(
             createMeal(name = "Pizza", tags = listOf("italian"), description = "Delicious"),
             createMeal(name = "Burger", tags = listOf("fastfood"), description = "Yummy")
         )
 
+        //When
         val result = getAllIraqiMealsUseCase.getAllIraqiMeals()
 
+        //Then
         Truth.assertThat(result).isEmpty()
     }
-
 
 
 }
