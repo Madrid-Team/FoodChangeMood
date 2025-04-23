@@ -1,5 +1,7 @@
 package logic.usecase
 
+import data.csvHandler.Tags.MealCategories.SWEETS
+import data.csvHandler.Tags.MealCategories.EGG
 import data.models.Meal
 import logic.Repository.MealsRepository
 
@@ -17,7 +19,7 @@ class GetSweetsWithNoEggsUseCase(private val mealsRepository: MealsRepository) {
     }
 
     private fun isSweetWithoutEggs(meal : Meal, sweetsWithoutEggsIds: List<Int> ): Boolean{
-        return meal.tags.contains("sweet") && !meal.ingredients.ingredients.contains("egg") && meal.id !in sweetsWithoutEggsIds
+        return meal.tags.contains(SWEETS) && !meal.ingredients.ingredients.contains(EGG) && meal.id !in sweetsWithoutEggsIds
     }
 
 
