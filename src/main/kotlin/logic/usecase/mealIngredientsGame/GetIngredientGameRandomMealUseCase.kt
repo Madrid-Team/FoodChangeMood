@@ -1,5 +1,6 @@
 package logic.usecase.mealIngredientsGame
 
+import data.csvHandler.Tags.GameScore.INCORRECT_INGREDIENT_NUMBER
 import data.models.IngredientGameData
 import logic.Repository.MealsRepository
 
@@ -23,7 +24,7 @@ class GetIngredientGameRandomMealUseCase(
         val incorrectIngredients = getNIncorrectIngredientsUseCase.invoke(
             allMeals = allMeals,
             correctIngredient = correctIngredient,
-            incorrectIngredientsNumber = 2
+            incorrectIngredientsNumber = INCORRECT_INGREDIENT_NUMBER
         )
 
         val options = (incorrectIngredients + listOf(correctIngredient)).shuffled()
