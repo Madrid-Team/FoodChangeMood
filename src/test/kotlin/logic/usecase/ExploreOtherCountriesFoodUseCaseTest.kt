@@ -47,6 +47,18 @@ class ExploreOtherCountriesFoodUseCaseTest {
     }
 
     @Test
+    fun `should return throw exception when list is empty`() {
+        //given
+        every { mealsRepository.getAllMeals() } returns listOf()
+
+        //when && then
+        assertThrows<NoSuchElementException> {
+            exploreOtherCountriesFoodUseCase.getSearchedCountryMeals("Syria")
+        }
+    }
+
+
+    @Test
     fun `should return throw exception when input is empty or blank`() {
         //given
         every { mealsRepository.getAllMeals() } returns listOf(
@@ -61,7 +73,7 @@ class ExploreOtherCountriesFoodUseCaseTest {
 
 
     companion object {
-        private const val   name = "egyptian lentils rice and  macaroni"
+        private const val name = "egyptian lentils rice and  macaroni"
         private const val description =
             "although a vegetarian dish, this gets eaten with reckless abandon by" +
                     "carnivores.it sounds way too healthy (and it is) but dang! it is good. " +
