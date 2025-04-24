@@ -24,7 +24,7 @@ class SuggestMealWithHighCalorieUI(
         greetUser()
 
         while (true) {
-            val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
+            val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal()
 
             if (meal == null) {
                 println("No more high calorie meals to suggest")

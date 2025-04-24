@@ -12,10 +12,6 @@ fun main() {
         modules(appModule, useCaseModule, uiModule)
     }
 
-    val guessGameConsolUi: GuessGameConsoleUi = getKoin().get()
-    guessGameConsolUi.startGame()
-
-
     val startTime = System.currentTimeMillis()
     val consoleUi: FoodChangeMoodConsoleUI = getKoin().get()
     val endTime = System.currentTimeMillis()

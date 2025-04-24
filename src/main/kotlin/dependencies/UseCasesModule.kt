@@ -7,7 +7,6 @@ import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import org.koin.dsl.module
 import presentation.features.GuessGameConsoleUi
-import presentation.GuessGameConsoleUi
 
 
 val useCaseModule = module {
