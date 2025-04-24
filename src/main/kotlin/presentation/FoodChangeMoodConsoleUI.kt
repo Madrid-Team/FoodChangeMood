@@ -5,7 +5,7 @@ import logic.usecase.*
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
-    private val getHealthyFoodUseCase: GetHealthyFoodUseCase,
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
@@ -32,7 +32,7 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserIntInput()
         when (input) {
-            1 -> getHealthyFastFoodMeals()
+            1 -> getHealthyMeals()
             2 -> searchMealByName()
             3 -> getAllIraqiMeals()
             4 -> getEasySuggestedMeals()
@@ -143,9 +143,13 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
-    private fun getHealthyFastFoodMeals() {
-        getHealthyFoodUseCase.getFilterMeals().forEach {
-            println(it)
+    private fun getHealthyMeals() {
+        try {
+            getHealthyMealsUseCase.execute().forEach {
+                println(it)
+            }
+        } catch (exception: Exception) {
+            println(exception.message)
         }
     }
 
