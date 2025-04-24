@@ -1,9 +1,8 @@
 package logic.usecase.mealIngredientsGame
 
-import data.csvHandler.Tags.GameScore.EXTRA_INGREDIENT_MULTIPLIER
 import data.models.Meal
 
-class GetNIncorrectIngredientsUseCase {
+class GetNIncorrectIngredientsUseCase() {
 
     operator fun invoke(
         allMeals: List<Meal>,
@@ -11,7 +10,7 @@ class GetNIncorrectIngredientsUseCase {
         incorrectIngredientsNumber: Int
     ): List<String> {
         val incorrectIngredients = allMeals
-            .take(incorrectIngredientsNumber * EXTRA_INGREDIENT_MULTIPLIER)
+            .take(incorrectIngredientsNumber * 10)
             .flatMap { it.ingredients.ingredients }
             .distinct()
             .filter { it != correctIngredient }

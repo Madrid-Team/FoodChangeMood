@@ -1,7 +1,5 @@
 package logic.usecase
 
-import data.csvHandler.Tags.GymMealParameters.CALORIES_MARGIN
-import data.csvHandler.Tags.GymMealParameters.PROTEIN_MARGIN
 import data.models.Meal
 import logic.Repository.MealsRepository
 
@@ -14,8 +12,8 @@ class GetMealsSuitableForGymUseCase(private val mealsRepository: MealsRepository
     }
 
     private fun isMealWithinCaloriesAndProteinRange(meal: Meal, calories: Double, protein: Double): Boolean {
-        val calorieRange = (calories - CALORIES_MARGIN)..(calories + CALORIES_MARGIN)
-        val proteinRange = (protein - PROTEIN_MARGIN)..(protein + PROTEIN_MARGIN)
+        val calorieRange = (calories - 10)..(calories + 10)
+        val proteinRange = (protein - 10)..(protein + 10)
 
         return meal.nutrition.calories in calorieRange && meal.nutrition.protein in proteinRange
     }

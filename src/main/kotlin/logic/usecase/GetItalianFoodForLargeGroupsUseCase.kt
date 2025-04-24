@@ -1,8 +1,6 @@
 package logic.usecase
 
-import data.csvHandler.Tags.MealCategories.FOR_LARGE_GROUP
 import data.models.Meal
-import data.utilities.italian
 import logic.Repository.MealsRepository
 
 class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepository) {
@@ -11,17 +9,22 @@ class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepo
         return mealsRepository.getAllMeals().filter { meal -> isItalian(meal) && isForLargeGroups(meal) }
     }
 
-    private fun isForLargeGroups(meal: Meal): Boolean {
-        return meal.tags.contains(FOR_LARGE_GROUP)
+    fun isForLargeGroups(meal: Meal): Boolean {
+        return meal.tags.contains("for-large-groups")
     }
 
 
-    private fun isItalian(meal: Meal): Boolean {
-        return meal.tags.contains(String.italian) ||
-                meal.ingredients.ingredients.contains(String.italian) ||
-                (meal.description?.contains(String.italian, ignoreCase = true) ?: false)
+    fun isItalian(meal: Meal): Boolean {
+        return meal.tags.contains(ITALIAN_KEYWORD) ||
+                meal.ingredients.ingredients.contains(ITALIAN_KEYWORD) ||
+                (meal.description?.contains(ITALIAN_KEYWORD, ignoreCase = true) ?: false)
     }
 
+
+    companion object {
+        const val ITALIAN_KEYWORD = "italian"
+
+    }
 
 
 }
