@@ -63,3 +63,29 @@ fun createMeals(
     submitted = Date(),
     contributorId = 1
 )
+
+fun createMeals(
+    ingredients: Ingredients
+) = Meal(
+    name = "name",
+    id = 1,
+    minutes = 2,
+    tags = listOf("tag1", "tag2"),
+    description = "description",
+    nutrition = Nutrition(
+        calories = 1.0,
+        totalFat = 1.0,
+        sugar = 1.0,
+        sodium = 1.0,
+        saturatedFat = 1.0,
+        carbohydrates = 1.0,
+        protein = 1.0
+    ),
+    steps = Steps(
+        steps = listOf("Step1", "Step2"),
+        stepsCount = 2
+    ),
+    ingredients = ingredients,
+    submitted = Date(),
+    contributorId = 1
+)
