@@ -24,35 +24,43 @@ class MealIngredientsGameUI : KoinComponent {
         println("-".repeat(50))
         println("Let's get started!")
     }
-    
+
     private fun playGame() {
         try {
             val randomMeal = getRandomMealUseCase()
-            
+
             println("\n===== Your Challenge =====")
             println("The meal is: ${randomMeal.mealName}")
             println("\nPossible ingredients:")
             println("-".repeat(30))
-            
+
             randomMeal.options.forEachIndexed { index, ingredient ->
                 println("${index + 1}. $ingredient")
             }
-            
-            println("\nWhat is the correct ingredient? Enter the name of the ingredient:")
-            
-            val userGuess = readlnOrNull() ?: ""
-            
-            if (userGuess.isBlank()) {
+
+            println("\nWhat is the correct ingredient? Enter the number of your choice (1-${randomMeal.options.size}):")
+
+            val userInput = readlnOrNull() ?: ""
+
+            if (userInput.isBlank()) {
                 println("\n⚠ You didn't enter anything!")
             } else {
                 try {
-                    val result = makeGuessUseCase.invoke(guess = userGuess, correctGuess = randomMeal.correctAnswer)
-                    println("\n✓ $result")
+                    val userChoice = userInput.toInt()
+                    if (userChoice < 1 || userChoice > randomMeal.options.size) {
+                        println("\n⚠ Invalid number! Please choose between 1 and ${randomMeal.options.size}.")
+                    } else {
+                        val selectedIngredient = randomMeal.options[userChoice - 1]
+                        val result = makeGuessUseCase.invoke(guess = selectedIngredient, correctGuess = randomMeal.correctAnswer)
+                        println("\n✓ $result")
+                    }
+                } catch (_: NumberFormatException) {
+                    println("\n⚠ Please enter a valid number.")
                 } catch (exception: MealsExceptions.GuessMealGameNotPassed) {
                     println("\n✗ ${exception.message}")
                     println("The correct answer was: ${randomMeal.correctAnswer}")
                 } catch (exception: MealsExceptions.GuessMealGamePassed) {
-                    println("\n🏆 ${exception.message}")
+                    println("\n🏆  ${exception.message}")
                 } finally {
                     displayScore()
                 }
