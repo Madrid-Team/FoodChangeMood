@@ -13,7 +13,7 @@ class ExploreOtherCountriesFoodUseCase(
             .filter { isMealRelatedToTheCountry(it, lowerCaseCountryName) }
             .shuffled()
             .take(COUNTRY_MEAL_COUNT)
-        if (filteredMeals.isEmpty()) throw NoSuchElementException("Can't find meals for this country")
+        if (filteredMeals.isEmpty() || countryName.isBlank() || countryName.isEmpty()) throw NoSuchElementException("Can't find meals for this country")
         return filteredMeals
     }
 
