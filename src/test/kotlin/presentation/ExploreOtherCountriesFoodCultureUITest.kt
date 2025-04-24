@@ -1,4 +1,4 @@
-package features
+package presentation
 
 import createMeal
 import io.mockk.every
@@ -44,6 +44,7 @@ class ExploreOtherCountriesFoodCultureUITest {
         //then
         verify { exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(any()) }
     }
+
 
     companion object {
         private val meal = createMeal(id = 1, name = "meal", description = "description")
