@@ -1,7 +1,5 @@
 package logic.usecase
 
-import data.csvHandler.Tags.Keto
-import data.csvHandler.Tags.UserMessages
 import data.models.Meal
 import logic.Repository.MealsRepository
 
@@ -13,7 +11,7 @@ class GetKetoMealSuggestUseCase(mealsRepository: MealsRepository) {
 
     fun getKetoMeal(): Meal {
         if (mealsFilter.isEmpty()) {
-            throw NoSuchElementException(UserMessages.MESSAGE_NO_MEAL_SUGGEST)
+            throw NoSuchElementException("There is no Meal Suggest!")
         }
 
         return mealsFilter
@@ -29,18 +27,18 @@ class GetKetoMealSuggestUseCase(mealsRepository: MealsRepository) {
      * - fat 30g+ per meal
      */
     private fun isKetoFriendly(meal: Meal): Boolean {
-        val nutritionValue = meal.nutrition.carbohydrates <  Keto.MAX_NUTRITION_CARBOHYDRATE &&
-                meal.nutrition.protein in  Keto.MIN_NUTRITION_PROTEIN.. Keto.MAX_NUTRITION_PROTEIN &&
-                meal.nutrition.totalFat >=  Keto.MIN_TOTAL_FAT
+        val nutritionValue = meal.nutrition.carbohydrates < MAX_NUTRITION_CARBOHYDRATE &&
+                meal.nutrition.protein in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN &&
+                meal.nutrition.totalFat >= MIN_TOTAL_FAT
 
         val calories = meal.nutrition.calories
-        val carbPercentage = (meal.nutrition.carbohydrates *  Keto.CARBS_PROTEIN_PER_GRAM) / calories * Keto.PERCENTAGE
-        val proteinPercentage = (meal.nutrition.protein *  Keto.CARBS_PROTEIN_PER_GRAM) / calories *  Keto.PERCENTAGE
-        val fatPercentage = (meal.nutrition.totalFat *  Keto.FAT_CALORIES_PER_GRAM) / calories *  Keto.PERCENTAGE
+        val carbPercentage = (meal.nutrition.carbohydrates * CARBS_PROTEIN_PER_GRAM) / calories * PERCENTAGE
+        val proteinPercentage = (meal.nutrition.protein * CARBS_PROTEIN_PER_GRAM) / calories * PERCENTAGE
+        val fatPercentage = (meal.nutrition.totalFat * FAT_CALORIES_PER_GRAM) / calories * PERCENTAGE
 
-        val percentage = carbPercentage <  Keto.MAX_CARB_PERCENTAGE &&
-                fatPercentage >  Keto.MIN_FAT_PERCENTAGE &&
-                proteinPercentage in  Keto.MIN_NUTRITION_PROTEIN.. Keto.MAX_NUTRITION_PROTEIN
+        val percentage = carbPercentage < MAX_CARB_PERCENTAGE &&
+                fatPercentage > MIN_FAT_PERCENTAGE &&
+                proteinPercentage in MIN_NUTRITION_PROTEIN..MAX_NUTRITION_PROTEIN
 
         return nutritionValue && percentage
 

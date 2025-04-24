@@ -1,57 +1,23 @@
-package data.csvHandler.repository
+package data.csvHandler.Repository
 
 import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
-import data.csvHandler.MealsJsonConverter
-import data.csvHandler.MealsJsonReader
 import data.models.Meal
 import logic.Repository.MealsRepository
-import java.io.File
-import java.util.*
+import java.util.Date
 
 class MealsRepositoryImpl(
     private val csvReader: MealsCsvReader,
-    private val mealsCsvParser: MealsCsvParser,
-    private val jsonConverter: MealsJsonConverter = MealsJsonConverter()
-
+    private val mealsCsvParser: MealsCsvParser
 ):MealsRepository {
     private val correctGuessedMeals: MutableList<String> = mutableListOf()
 
     private val allMeals: MutableList<Meal> = mutableListOf()
     private val mealsByDate: MutableMap<Date, MutableList<Meal>> = mutableMapOf()
 
-
-     private val jsonFile = File("meals.json")
-
     init {
-        if (jsonFile.exists()) {
-            try {
-                readMealsFromJsonFile()
-            } catch (e: Exception) {
-                allMeals.clear()
-                mealsByDate.clear()
-                readMealsFromCsvFile()
-            }
-        } else {
-            readMealsFromCsvFile()
-        }
-
-
-     }
-
-    private fun readMealsFromJsonFile(): List<Meal> {
-        val jsonReader = MealsJsonReader(jsonFile)
-        val meals = jsonReader.readJsonFile()
-
-        meals.forEach { meal ->
-            allMeals.add(meal)
-            mealsByDate.getOrPut(meal.submitted) { mutableListOf() }.add(meal)
-        }
-
-        return allMeals
+        readMealsFromCsvFile()
     }
-
-
 
     override fun getAllMeals(): List<Meal> = allMeals
 
@@ -75,11 +41,8 @@ class MealsRepositoryImpl(
             allMeals.add(newMeal)
             mealsByDate.getOrPut(newMeal.submitted) { mutableListOf() }.add(newMeal)
         }
-        jsonConverter.saveToJsonFile(allMeals, jsonFile)
-
         return allMeals
     }
-
 
     override fun addCorrectGuessedMealName(mealName: String) {
         correctGuessedMeals.add(mealName)
