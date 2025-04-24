@@ -23,8 +23,4 @@ class GetSweetsWithNoEggsUseCase(private val mealsRepository: MealsRepository) {
                 meal.id !in sweetsWithoutEggsIds
     }
 
-
-
-
-
 }

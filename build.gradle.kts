@@ -17,6 +17,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
     testImplementation ("com.google.truth:truth:1.4.4")
     testImplementation("io.mockk:mockk:1.14.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 tasks.test {
