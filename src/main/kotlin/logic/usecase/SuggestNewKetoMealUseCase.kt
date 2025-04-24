@@ -6,6 +6,10 @@ import logic.Repository.MealsRepository
 class SuggestNewKetoMealUseCase(private val mealsRepository: MealsRepository) {
 
     fun execute(alreadySuggestedIds: Set<Int>): Meal {
+        if (mealsRepository.getAllMeals().isEmpty()) {
+            throw Exception("Not found Meals")
+        }
+
         return mealsRepository.getAllMeals()
             .filter { isKetoFriendly(it) && it.id !in alreadySuggestedIds }
             .takeIf { it.isNotEmpty() }
