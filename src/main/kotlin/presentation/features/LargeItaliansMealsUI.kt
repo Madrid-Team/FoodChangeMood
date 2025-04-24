@@ -11,6 +11,12 @@ class LargeItaliansMealsUI(
         "15- You will get Italian meals suitable for large groups."
 
     override fun start() {
-        println("Test Test .. Add your feature here")
+        try {
+            getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups().forEach {
+                println(it)
+            }
+        } catch (e: Exception) {
+            println(e.message)
+        }
     }
 }
