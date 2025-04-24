@@ -1,15 +1,15 @@
-package test
+package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
-import logic.usecase.MealSearchingByNameUseCase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
+import createMeals
 
 class MealSearchingByNameUseCaseTest {
     private lateinit var mealsRepository: MealsRepository
