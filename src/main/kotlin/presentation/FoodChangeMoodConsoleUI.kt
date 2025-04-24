@@ -5,11 +5,11 @@ import logic.usecase.*
 class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
-    private val getHealthyFoodUseCase: GetHealthyFoodUseCase,
+    private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
     private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
-    private val suggestNewKetoMealUseCase: SuggestNewKetoMealUseCase,
+    private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
     private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
     private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
@@ -32,7 +32,7 @@ class FoodChangeMoodConsoleUI(
         showOptions()
         val input = getUserIntInput()
         when (input) {
-            1 -> getHealthyFastFoodMeals()
+            1 -> getHealthyMeals()
             2 -> searchMealByName()
             3 -> getAllIraqiMeals()
             4 -> getEasySuggestedMeals()
@@ -130,29 +130,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getOneRandomKetoMeal() {
-        val alreadySuggestedIds: MutableSet<Int> = mutableSetOf()
-        while (true) {
-            try {
-                val ketoMeal = suggestNewKetoMealUseCase.execute(alreadySuggestedIds.toSet())
-                println("Name of keto meal : ${ketoMeal.name} \n and description of this keto : ${ketoMeal.description}")
-
-                println("Enter yes if you like Keto meal to view it's details \n and no if you don't like it to suggest another Keto meal ")
-                when (getLikeOrDislikeInput()) {
-                    "yes" -> {
-                        println(ketoMeal)
-                        break
-                    }
-
-                    "no" -> {
-                        println("lets try another one")
-                        alreadySuggestedIds.add(ketoMeal.id)
-                    }
-                }
-            } catch (exception: Exception) {
-                println(exception.message)
-                break
-            }
-        }
+        println(getKetoMealSuggestUseCase.getKetoMeal())
     }
 
     private fun showGuessGame() {
@@ -165,9 +143,13 @@ class FoodChangeMoodConsoleUI(
         }
     }
 
-    private fun getHealthyFastFoodMeals() {
-        getHealthyFoodUseCase.getFilterMeals().forEach {
-            println(it)
+    private fun getHealthyMeals() {
+        try {
+            getHealthyMealsUseCase.execute().forEach {
+                println(it)
+            }
+        } catch (exception: Exception) {
+            println(exception.message)
         }
     }
 
@@ -247,9 +229,7 @@ class FoodChangeMoodConsoleUI(
                     "- Write no if you dislike it and want another sweet."
         )
         println(
-            "7- Get one keto-friendly meal .. \n" +
-                    "- Write yes if you like it and want more details about this meal.\n" +
-                    "- Write no if you dislike it and want another sweet."
+            "7- Get one keto-friendly meal .. \n"
         )
         println(
             "8- Add a date and get list of meals added on this date.\n" +
