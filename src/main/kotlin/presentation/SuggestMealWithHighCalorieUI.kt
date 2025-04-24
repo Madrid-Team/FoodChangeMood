@@ -10,9 +10,9 @@ class SuggestMealWithHighCalorieUI(private val suggestMealWithHighCalorieUseCase
         greetUser()
 
         while (true) {
-            val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
-
-            if (meal == null) {
+            val meal = try {
+                suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
+            } catch (exception: NoSuchElementException) {
                 println("No more high calorie meals to suggest")
                 break
             }
