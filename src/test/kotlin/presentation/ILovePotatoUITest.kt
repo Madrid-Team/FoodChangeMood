@@ -40,8 +40,12 @@ class ILovePotatoUITest {
 
         //then
         verify { showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes() }
-//        verify { println(Exception().message) } // using display
+//        verify { display("Can't found meals include potatoes") } // using display
     }
+
+//    private fun display(input: String?) {
+//        println(input)
+//    }
 
 
     companion object {
