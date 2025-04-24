@@ -8,6 +8,12 @@ class GetItalianFoodForLargeGroupsUseCaseTest {
     private lateinit var mealRepository: MealsRepository
     private lateinit var getItalianFoodForLargeGroupsUseCase: GetItalianFoodForLargeGroupsUseCase
 
+    @BeforeEach
+    fun setup(){
+        mealRepository = mockk(relaxed = true)
+        getItalianFoodForLargeGroupsUseCase = GetItalianFoodForLargeGroupsUseCase(mealRepository)
+
+    }
 
 
 
