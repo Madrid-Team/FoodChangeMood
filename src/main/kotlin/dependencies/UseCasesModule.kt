@@ -7,7 +7,6 @@ import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import org.koin.dsl.module
 import presentation.GuessGameConsoleUi
-import presentation.SuggestMealWithHighCalorieUI
 
 
 val useCaseModule = module {
@@ -16,7 +15,6 @@ val useCaseModule = module {
         GetAllMealsUseCase(get())
         GetAllSeafoodMealsUseCase(get())
     }
-    single { GetKetoMealSuggestUseCase(get()) }
     single { StartGuessGameUseCase(get()) }
 
     single {
@@ -57,10 +55,10 @@ val useCaseModule = module {
     single { GetAllMealsUseCase(get()) }
     single { GetFoodByAddDateUseCase(get()) }
     single {
-        GetEasyFoodSuggestionUseCase(get())
+        SuggestEasyMealUseCase(get())
     }
     single {
-        GetHealthyFoodUseCase(get())
+        GetHealthyMealsUseCase(get())
     }
     single {
         GetSweetsWithNoEggsUseCase(get())
@@ -68,12 +66,10 @@ val useCaseModule = module {
     single { StartGuessGameUseCase(get()) }
     single { GuessGameConsoleUi(get()) }
     single { SuggestMealWithHighCalorieUseCase(get()) }
-    single { GetKetoMealSuggestUseCase(get()) }
+    single { SuggestNewKetoMealUseCase(get()) }
 
     single {
         GetMealsSuitableForGymUseCase(get())
     }
     single { SuggestMealWithHighCalorieUI(get()) }
-    single { SuggestNewKetoMealUseCase(get()) }
-
 }

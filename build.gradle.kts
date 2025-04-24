@@ -12,6 +12,11 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation("io.insert-koin:koin-core:3.5.3")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
+    testImplementation ("com.google.truth:truth:1.4.4")
+    testImplementation("io.mockk:mockk:1.14.0")
     implementation("com.google.code.gson:gson:2.10.1")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test")
