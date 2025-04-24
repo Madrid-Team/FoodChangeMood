@@ -5,13 +5,13 @@ import logic.Repository.MealsRepository
 
 class SuggestMealWithHighCalorieUseCase(private val mealsRepository: MealsRepository) {
 
-    fun suggestRandomHighCalorieMeal(alreadySuggested: Set<Int>): Meal? {
+    fun suggestRandomHighCalorieMeal(alreadySuggested: Set<Int>): Meal {
         return mealsRepository.getAllMeals()
             .asSequence()
             .filter(::isHighCalorie)
             .filter { it.id !in alreadySuggested }
             .toList()
-            .randomOrNull()
+            .randomOrNull() ?: throw NoSuchElementException("No high calorie meal available to suggest")
     }
 
     private fun isHighCalorie(meal: Meal): Boolean {
