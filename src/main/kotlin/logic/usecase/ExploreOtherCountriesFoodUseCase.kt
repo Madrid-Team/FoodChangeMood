@@ -8,10 +8,12 @@ class ExploreOtherCountriesFoodUseCase(
 ) {
     fun getSearchedCountryMeals(countryName: String): List<Meal> {
         val lowerCaseCountryName = countryName.lowercase()
-        return mealsRepository.getAllMeals()
+        val filteredMeals = mealsRepository.getAllMeals()
             .filter { isMealRelatedToTheCountry(it, lowerCaseCountryName) }
             .shuffled()
             .take(20)
+        if (filteredMeals.isEmpty() || countryName.isBlank() || countryName.isEmpty()) throw NoSuchElementException("Can't find meals for this country")
+        return filteredMeals
     }
 
     private fun isMealRelatedToTheCountry(meal: Meal, lowerCountryName: String): Boolean {
