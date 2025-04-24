@@ -8,16 +8,19 @@ class GetSweetsWithNoEggsUseCase(private val mealsRepository: MealsRepository) {
     fun getOneSweetWithNoEggs(): Meal {
         val sweetsWithNoeEggsIds = mutableListOf<Int>()
 
-        val oneSweetWithNoEggs = mealsRepository.getAllMeals().filter { meal ->
-            isSweetWithoutEggs(meal, sweetsWithNoeEggsIds)
-        }.random()
-        oneSweetWithNoEggs.let { sweet -> sweetsWithNoeEggsIds.add(sweet.id) }
+        val oneSweetWithNoEggs = mealsRepository.getAllMeals()
+            .filter { meal -> isSweetWithoutEggs(meal, sweetsWithNoeEggsIds) }
+            .takeIf { it.isNotEmpty() }
+            ?.random() ?: throw NoSuchElementException("No sweet without eggs exist")
 
+        oneSweetWithNoEggs.let { sweet -> sweetsWithNoeEggsIds.add(sweet.id) }
         return oneSweetWithNoEggs
     }
 
-    private fun isSweetWithoutEggs(meal : Meal, sweetsWithoutEggsIds: List<Int> ): Boolean{
-        return meal.tags.contains("sweet") && !meal.ingredients.ingredients.contains("egg") && meal.id !in sweetsWithoutEggsIds
+    private fun isSweetWithoutEggs(meal: Meal, sweetsWithoutEggsIds: List<Int>): Boolean {
+        return meal.tags.any { it.contains("sweet", ignoreCase = true) } &&
+                !meal.ingredients.ingredients.any { it.contains("egg", ignoreCase = true) } &&
+                meal.id !in sweetsWithoutEggsIds
     }
 
 

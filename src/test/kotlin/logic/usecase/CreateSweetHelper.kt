@@ -47,7 +47,7 @@ fun createMealsForSweetWithoutEggs(): List<Meal> {
         ),
         createSweet(
             name = "Mexican Baked Squash",
-            tags = listOf("vegetarian", "mexican", "fall", "easy", "SWEET"),
+            tags = listOf("vegetarian", "mexican", "fall", "easy", "sweet"),
             ingredients = Ingredients(
                 listOf("winter squash", "mexican seasoning", "butter", "olive oil", "salt"),
                 6
