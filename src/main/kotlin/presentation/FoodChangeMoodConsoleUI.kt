@@ -130,7 +130,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getOneRandomKetoMeal() {
-    //    println(getKetoMealSuggestUseCase.getKetoMeal())
+        println(getKetoMealSuggestUseCase.execute(setOf()))
     }
 
     private fun showGuessGame() {
@@ -138,19 +138,15 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getEasySuggestedMeals() {
-//        getEasyFoodSuggestionUseCase.getFilterMeals().forEach {
-//            println(it)
-//        }
+
     }
 
     private fun getHealthyMeals() {
-//        try {
-//            getHealthyMealsUseCase.execute().forEach {
-//                println(it)
-//            }
-//        } catch (exception: Exception) {
-//            println(exception.message)
-//        }
+       
+    }
+
+    private fun getHealthyMeals() {
+
     }
 
     private fun searchMealByName() {
