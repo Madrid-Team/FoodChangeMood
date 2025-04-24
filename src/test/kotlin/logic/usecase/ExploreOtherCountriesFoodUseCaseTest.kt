@@ -61,7 +61,7 @@ class ExploreOtherCountriesFoodUseCaseTest {
 
 
     companion object {
-        private const val name = "egyptian lentils rice and  macaroni"
+        private const val   name = "egyptian lentils rice and  macaroni"
         private const val description =
             "although a vegetarian dish, this gets eaten with reckless abandon by" +
                     "carnivores.it sounds way too healthy (and it is) but dang! it is good. " +
