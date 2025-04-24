@@ -1,5 +1,6 @@
 package logic.usecase
 
+import data.csvHandler.Tags.MealCategories.COUNTRY_MEAL_COUNT
 import data.models.Meal
 import logic.Repository.MealsRepository
 
@@ -11,7 +12,7 @@ class ExploreOtherCountriesFoodUseCase(
         return mealsRepository.getAllMeals()
             .filter { isMealRelatedToTheCountry(it, lowerCaseCountryName) }
             .shuffled()
-            .take(20)
+            .take(COUNTRY_MEAL_COUNT)
     }
 
     private fun isMealRelatedToTheCountry(meal: Meal, lowerCountryName: String): Boolean {

@@ -1,5 +1,10 @@
 package logic.usecase
 
+import data.csvHandler.Tags.MealFilters.MAX_INGREDIENTS_COUNT
+import data.csvHandler.Tags.MealFilters.MAX_PREPARED_TIME_FOR_EASY_FOOD
+import data.csvHandler.Tags.MealFilters.MAX_STEPS_COUNT
+import data.csvHandler.Tags.MealFilters.TOP_TEN_SUGGEST
+import data.csvHandler.Tags.UserMessages
 import data.models.Meal
 import logic.MealsFilter
 import logic.Repository.MealsRepository
@@ -14,20 +19,13 @@ class GetEasyFoodSuggestionUseCase(
         return allMeals.filter(::isEasyFood)
             .takeIf { it.isNotEmpty() }
             ?.take(TOP_TEN_SUGGEST)
-            ?: throw NoSuchElementException("There is no easy food suggestion")
+            ?: throw NoSuchElementException(UserMessages.MESSAGE_NO_EASY_MEAL_SUGGEST)
     }
 
     private fun isEasyFood(meal: Meal): Boolean {
-        return meal.minutes <= MAX_PREPARED_TIME &&
+        return meal.minutes <= MAX_PREPARED_TIME_FOR_EASY_FOOD &&
                 meal.steps.stepsCount <= MAX_STEPS_COUNT &&
                 meal.ingredients.ingredientsCount <= MAX_INGREDIENTS_COUNT
-    }
-
-    companion object {
-        const val TOP_TEN_SUGGEST = 10
-        const val MAX_PREPARED_TIME = 30
-        const val MAX_STEPS_COUNT = 6
-        const val MAX_INGREDIENTS_COUNT = 5
     }
 
 }
