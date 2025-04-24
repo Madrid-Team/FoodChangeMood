@@ -2,16 +2,13 @@ package logic.usecase
 
 
 import com.google.common.truth.Truth
-import data.models.*
-import io.kotest.matchers.shouldBe
+import createMeal
+import data.models.SeafoodMeal
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
-import logic.helper.createMeal
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class GetAllSeafoodMealsUseCaseTest() {
 

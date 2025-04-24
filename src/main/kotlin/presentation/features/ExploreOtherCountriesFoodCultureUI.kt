@@ -19,7 +19,7 @@ class ExploreOtherCountriesFoodCultureUI(
                     println(it)
                 }
             } catch (exception: Exception) {
-                println("$countryName not found")
+                println(exception.message)
             }
         }
     }
