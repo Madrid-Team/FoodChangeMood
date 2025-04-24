@@ -6,10 +6,10 @@ class FoodChangeMoodConsoleUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
-    private val getEasyFoodSuggestionUseCase: GetEasyFoodSuggestionUseCase,
+    private val getEasyFoodSuggestionUseCase: SuggestEasyMealUseCase,
     private val getSweetsWithNoEggsUseCase: GetSweetsWithNoEggsUseCase,
     private val guessGameConsoleUi: GuessGameConsoleUi,
-    private val getKetoMealSuggestUseCase: GetKetoMealSuggestUseCase,
+    private val getKetoMealSuggestUseCase: SuggestNewKetoMealUseCase,
     private val getMealsSuitableForGymUseCase: GetMealsSuitableForGymUseCase,
     private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
     private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase,
@@ -130,7 +130,7 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getOneRandomKetoMeal() {
-        println(getKetoMealSuggestUseCase.getKetoMeal())
+        println(getKetoMealSuggestUseCase.execute(setOf()))
     }
 
     private fun showGuessGame() {
@@ -138,14 +138,14 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getEasySuggestedMeals() {
-        getEasyFoodSuggestionUseCase.getFilterMeals().forEach {
+        getEasyFoodSuggestionUseCase.execute(10).forEach {
             println(it)
         }
     }
 
     private fun getHealthyMeals() {
         try {
-            getHealthyMealsUseCase.execute().forEach {
+            getHealthyMealsUseCase.execute(10).forEach {
                 println(it)
             }
         } catch (exception: Exception) {
