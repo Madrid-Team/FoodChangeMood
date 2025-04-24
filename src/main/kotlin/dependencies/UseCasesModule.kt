@@ -71,7 +71,5 @@ val useCaseModule = module {
     single {
         GetMealsSuitableForGymUseCase(get())
     }
-    single { SuggestMealWithHighCalorieUI(get()) }
     single { SuggestNewKetoMealUseCase(get()) }
-
 }
