@@ -1,6 +1,5 @@
 package logic.usecase
 
-import data.csvHandler.Tags.UserMessages
 import data.models.Meal
 import data.utilities.MealsExceptions
 import data.utilities.parseDateString
@@ -13,7 +12,7 @@ class GetFoodByAddDateUseCase(private val mealRepository: MealsRepository) {
         val parsedDate = parseDateString(date)
         val meals = mealRepository.getMealsByDate(date = parsedDate)
         if (meals.isEmpty()) {
-            throw MealsExceptions.MealNotFoundException(UserMessages.MESSAGE_MEALS_FOUND_FOR_DATE.format(date))
+            throw MealsExceptions.MealNotFoundException("No meals found for date: $date")
         }
         return meals
     }
