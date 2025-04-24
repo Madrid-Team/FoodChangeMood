@@ -8,9 +8,6 @@ class SuggestEasyMealUseCase(
 ) {
 
     fun execute(count: Int): List<Meal> {
-        if (mealsRepository.getAllMeals().isEmpty()) {
-            throw Exception("Meal list is empty")
-        }
         return mealsRepository.getAllMeals()
             .filter(::isEasyFood)
             .take(count)
