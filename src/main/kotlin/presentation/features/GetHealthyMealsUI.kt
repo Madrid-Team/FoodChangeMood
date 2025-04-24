@@ -14,9 +14,13 @@ class GetHealthyMealsUI(
     override fun start() {
         try {
             println("Enter your maximum count of healthy meals you want to proceed: ")
-            val countOfHealthyMeals = readlnOrNull()?.toIntOrNull() ?: 0
-            getHealthyMealsUseCase.execute(countOfHealthyMeals).forEach {
-                println(it)
+            val countOfHealthyMeals = readlnOrNull()?.toIntOrNull()
+            if (countOfHealthyMeals == null || countOfHealthyMeals <= 0) {
+                println("Please enter a positive number.\n")
+            } else {
+                getHealthyMealsUseCase.execute(countOfHealthyMeals).forEach {
+                    println(it)
+                }
             }
         } catch (exception: Exception) {
             println(exception.message)
