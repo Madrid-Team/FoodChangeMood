@@ -2,16 +2,13 @@ package logic.usecase
 
 
 import com.google.common.truth.Truth
-import data.models.*
-import io.kotest.matchers.shouldBe
+import createMeal
+import data.models.SeafoodMeal
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
-import logic.helper.createMeal
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class GetAllSeafoodMealsUseCaseTest() {
 
@@ -39,8 +36,8 @@ class GetAllSeafoodMealsUseCaseTest() {
 
         // Then
         Truth.assertThat(result).containsExactly(
-            SeafoodMeal("tuna salad",1.0),
-            SeafoodMeal("fish dish",1.0),
+            SeafoodMeal("tuna salad",10.0),
+            SeafoodMeal("fish dish",10.0),
         )
     }
     @Test
