@@ -78,5 +78,21 @@ class StartGuessGameUseCaseTest {
         assertThat(meals.map { it.name }).contains(name)
     }
 
+    @Test
+    fun `should return random meal preparation time from list`() {
+        val meals = listOf(
+            createTestMeal(id = 1, calories = 500.0, description = "").copy(name = "Pizza", minutes = 15),
+            createTestMeal(id = 2, calories = 500.0, description = "").copy(name = "Burger", minutes = 10),
+            createTestMeal(id = 3, calories = 500.0, description = "").copy(name = "Pasta", minutes = 25)
+        )
+        every { mealsRepository.getAllMeals() } returns meals
+
+        // When
+        val (_, minutes) = useCase.startGuessGame()
+
+        // Then
+        assertThat(meals.map { it.minutes }).contains(minutes)
+    }
+
 
 }
