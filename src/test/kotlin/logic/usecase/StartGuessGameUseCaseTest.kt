@@ -32,4 +32,19 @@ class StartGuessGameUseCaseTest {
         assertThat(name).isEqualTo("Spaghetti")
     }
 
+    @Test
+    fun `should return correct meal preparation time`() {
+
+        every { mealsRepository.getAllMeals() } returns listOf(
+            createTestMeal(id = 1, calories = 500.0, description = "").copy(
+                name = "Spaghetti",
+                minutes = 20
+            )
+        )
+
+        val (_, minutes) = useCase.startGuessGame()
+
+        assertThat(minutes).isEqualTo(20)
+    }
+
 }
