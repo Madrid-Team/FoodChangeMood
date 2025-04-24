@@ -5,8 +5,8 @@ import data.models.Steps
 import java.util.*
 
 fun createMeal(
-    name: String,
-    id: Int,
+    name: String = "Name",
+    id: Int = 0,
     minutes: Int = 15,
     tags: List<String> = listOf("TAG_1", "TAG_2", "TAG_3"),
     calories: Double = 10.0,
