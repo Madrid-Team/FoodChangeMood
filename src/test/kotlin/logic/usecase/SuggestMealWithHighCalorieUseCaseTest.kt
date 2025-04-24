@@ -6,6 +6,7 @@ import io.mockk.mockk
 import logic.Repository.MealsRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 class SuggestMealWithHighCalorieUseCaseTest {
 
@@ -29,19 +30,20 @@ class SuggestMealWithHighCalorieUseCaseTest {
 
         val result = useCase.suggestRandomHighCalorieMeal(setOf())
 
-        assertThat(result!!.nutrition.calories).isGreaterThan(700.0)
+        assertThat(result.nutrition.calories).isGreaterThan(700.0)
     }
 
     @Test
-    fun `should return null when all high calorie meals are already suggested`() {
+    fun `should throw exception when all high calorie meals are already suggested`() {
         every { mealsRepository.getAllMeals() } returns  listOf(
             createTestMeal(id = 1, calories = 800.0, description = "delicious toast"),
             createTestMeal(id = 2, calories = 750.0, description = "delicious toast")
         )
 
-        val result = useCase.suggestRandomHighCalorieMeal(alreadySuggested = setOf(1, 2))
-
-        assertThat(result).isNull()
+        // when and then
+        assertThrows<NoSuchElementException> {
+            useCase.suggestRandomHighCalorieMeal(alreadySuggested = setOf(1, 2))
+        }
     }
 
     @Test
@@ -53,7 +55,7 @@ class SuggestMealWithHighCalorieUseCaseTest {
 
         val result = useCase.suggestRandomHighCalorieMeal(alreadySuggested = setOf())
 
-        assertThat(result!!.description).isNotNull()
+        assertThat(result.description).isNotNull()
     }
 
 }
