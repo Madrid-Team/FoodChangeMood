@@ -2,6 +2,7 @@ package presentation.features
 
 import logic.usecase.GetAllIraqiMealsUseCase
 import presentation.common.BaseUIController
+import utils.displayMeals
 
 class GetIraqMealUI(
     private val getAllIraqiMealsUseCase: GetAllIraqiMealsUseCase
@@ -9,6 +10,6 @@ class GetIraqMealUI(
     override val id: Int = 3
     override val message: String = "3- Get All Iraq meals "
     override fun start() {
-        println("Test Test .. Add your feature here")
+        getAllIraqiMealsUseCase.getAllIraqiMeals().displayMeals()
     }
 }
