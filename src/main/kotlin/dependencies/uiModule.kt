@@ -10,11 +10,11 @@ val uiModule = module {
     single<Reader> { ConsoleReader() }
     single<Viewer> { ConsoleViewer() }
 
-    single { GuessGameConsoleUi(get()) } bind BaseUIController::class
-    single { MealIngredientsGameUI(get(), get(), get()) } bind BaseUIController::class
-    single { SearchMealsByDateUI(get()) } bind BaseUIController::class
-    single { SuggestEasyMealGameUI(get(),get(),get()) } bind BaseUIController::class
-    single { ExploreOtherCountriesFoodCultureUI(get(), get()) } bind BaseUIController::class
+    single { GuessGameConsoleUi(get(), get(), get()) } bind BaseUIController::class
+    single { MealIngredientsGameUI(get(), get(), get(), get(), get()) } bind BaseUIController::class
+    single { SearchMealsByDateUI(get(), get(), get()) } bind BaseUIController::class
+    single { SuggestEasyMealGameUI(get(), get()) } bind BaseUIController::class
+    single { ExploreOtherCountriesFoodCultureUI(get(), get(), get()) } bind BaseUIController::class
     single { GetHealthyMealsUI(get(), get(), get()) } bind BaseUIController::class
     single { GetIraqMealUI(get()) } bind BaseUIController::class
     single { GymHelperUI(get(), get(), get()) } bind BaseUIController::class
