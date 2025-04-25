@@ -10,9 +10,10 @@ import presentation.features.GuessGameConsoleUi
 
 
 val useCaseModule = module {
-
     single {
         GetAllMealsUseCase(get())
+    }
+    single {
         GetAllSeafoodMealsUseCase(get())
     }
     single { SuggestNewKetoMealUseCase(get()) }
@@ -26,7 +27,6 @@ val useCaseModule = module {
     }
     single { SuggestMealWithHighCalorieUseCase(get()) }
     single {
-
         GetAllIraqiMealsUseCase(get())
     }
 
@@ -53,7 +53,6 @@ val useCaseModule = module {
     single {
         GetGameScoreUseCase(get())
     }
-    single { GetAllMealsUseCase(get()) }
     single { GetFoodByAddDateUseCase(get()) }
     single {
         SuggestEasyMealUseCase(get())
