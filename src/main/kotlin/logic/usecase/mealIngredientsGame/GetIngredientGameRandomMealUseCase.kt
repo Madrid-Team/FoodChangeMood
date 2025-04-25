@@ -22,14 +22,14 @@ class GetIngredientGameRandomMealUseCase(
 
         val incorrectIngredients = getNIncorrectIngredientsUseCase.invoke(
             allMeals = allMeals,
-            correctIngredient = correctIngredient,
+            correctIngredients = mealIngredients,
             incorrectIngredientsNumber = 2
         )
 
         val options = (incorrectIngredients + listOf(correctIngredient)).shuffled()
 
         return IngredientGameData(
-            mealName = selectedMeal.name,
+            meal = selectedMeal,
             options = options,
             correctAnswer = correctIngredient
         )

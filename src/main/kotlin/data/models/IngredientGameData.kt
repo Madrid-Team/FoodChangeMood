@@ -1,7 +1,7 @@
 package data.models
 
 data class IngredientGameData(
-    val mealName: String,
+    val meal: Meal,
     val options: List<String>,
     val correctAnswer: String
 )

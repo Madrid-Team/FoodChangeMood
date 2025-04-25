@@ -1,5 +1,6 @@
 package presentation
 
+import data.utilities.MealsExceptions
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
@@ -30,7 +31,7 @@ class MealIngredientsGameUI : KoinComponent {
             val randomMeal = getRandomMealUseCase()
 
             println("\n===== Your Challenge =====")
-            println("The meal is: ${randomMeal.mealName}")
+            println("The meal is: ${randomMeal.meal.name}")
             println("\nPossible ingredients:")
             println("-".repeat(30))
 
