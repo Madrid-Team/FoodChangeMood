@@ -15,19 +15,21 @@ class FoodChangeMoodConsoleUI(
     override fun start() {
         while (true) {
             presentFeatures()
-            val input = reader.getUserInput()?.toIntOrNull()
-            if (input == 0) {
+            val input = reader.getUserInput()
+            if (input == "0") {
                 viewer.show("Exiting from the program")
                 break
             }
-            if (input in 1..15) {
-                input.let { choice ->
-                    controllers.find { it.id == choice }
-                }?.start()
-                //Thread.sleep(3000)
-            } else {
-                if (!letUserTryAgain()) {
-                    break
+            if (input?.toInt() != null){
+                if (input.toInt() in 1..controllers.size) {
+                    input.toInt().let { choice ->
+                        controllers.find { it.id == choice }
+                    }?.start()
+                    Thread.sleep(3000)
+                } else {
+                    if (!letUserTryAgain()) {
+                        break
+                    }
                 }
             }
         }
@@ -42,13 +44,11 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun letUserTryAgain(): Boolean {
-        viewer.show(
-            "You have entered invalid input \n " +
-                    "If you want to continue press 1 if you want to end the program press 0"
-        )
-        return when (reader.getUserInput()?.toInt()) {
-            1 -> true
-            0 -> false
+        viewer.show("You have entered invalid input \n")
+        viewer.show("If you want to continue press 1 if you want to end the program press 0")
+        return when (reader.getUserInput()) {
+            "1" -> true
+            "0" -> false
             else -> {
                 viewer.show("Invalid Input")
                 letUserTryAgain()
