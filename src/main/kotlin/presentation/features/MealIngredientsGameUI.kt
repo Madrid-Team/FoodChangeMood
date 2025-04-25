@@ -1,21 +1,27 @@
-package presentation
+package presentation.features
 
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import presentation.common.BaseUIController
 
-class MealIngredientsGameUI : KoinComponent {
-    private val getRandomMealUseCase: GetIngredientGameRandomMealUseCase by inject()
-    private val makeGuessUseCase: MakeGuessUseCase by inject()
-    private val getGameScoreUseCase: GetGameScoreUseCase by inject()
-    
-    fun start() {
+class MealIngredientsGameUI(
+    private val getRandomMealUseCase: GetIngredientGameRandomMealUseCase,
+    private val makeGuessUseCase: MakeGuessUseCase,
+    private val getGameScoreUseCase: GetGameScoreUseCase
+) : BaseUIController {
+    override val id: Int = 11
+    override val message: String =
+        "11- Ingredient Game ..\n" +
+                "- you will get a meal name and three ingredient options.\n" +
+                "- you can guess once .. A correct guess earns 1000 points , an incorrect guess ends the game.\n" +
+                "- The game also ends after 15 correct answers."
+
+    override fun start() {
         displayWelcomeMessage()
         playGame()
     }
-    
+
     private fun displayWelcomeMessage() {
         println("\n===== Meal Ingredients Guessing Game =====")
         println("You will be asked to guess the correct ingredient for a meal")
@@ -51,7 +57,8 @@ class MealIngredientsGameUI : KoinComponent {
                         println("\n⚠ Invalid number! Please choose between 1 and ${randomMeal.options.size}.")
                     } else {
                         val selectedIngredient = randomMeal.options[userChoice - 1]
-                        val result = makeGuessUseCase.invoke(guess = selectedIngredient, correctGuess = randomMeal.correctAnswer)
+                        val result =
+                            makeGuessUseCase.invoke(guess = selectedIngredient, correctGuess = randomMeal.correctAnswer)
                         println("\n✓ $result")
                     }
                 } catch (_: NumberFormatException) {
@@ -65,19 +72,19 @@ class MealIngredientsGameUI : KoinComponent {
                     displayScore()
                 }
             }
-            
+
             askToPlayAgain()
         } catch (exception: Exception) {
             println("\n⚠ An unexpected error occurred: ${exception.message}")
         }
     }
-    
+
     private fun displayScore() {
         println("\n===== Current Score =====")
         println("Your score: ${getGameScoreUseCase()}")
         println("-".repeat(30))
     }
-    
+
     private fun askToPlayAgain() {
         println("\nWould you like to play again? (yes/no)")
         when (readlnOrNull()?.lowercase() ?: "") {
@@ -85,6 +92,7 @@ class MealIngredientsGameUI : KoinComponent {
                 println("\n")
                 playGame()
             }
+
             else -> println("\nThank you for playing!")
         }
     }
