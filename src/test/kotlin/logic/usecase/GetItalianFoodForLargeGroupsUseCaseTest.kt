@@ -5,6 +5,7 @@ import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 
 class GetItalianFoodForLargeGroupsUseCaseTest {
@@ -49,7 +50,13 @@ class GetItalianFoodForLargeGroupsUseCaseTest {
 
     @Test
     fun `should return throw exception when list is empty`(){
+        //Given
+        every { mealRepository.getAllMeals() } returns listOf()
 
+        //when & then
+        assertThrows<Exception> {
+            getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups()
+        }
 
 
 
