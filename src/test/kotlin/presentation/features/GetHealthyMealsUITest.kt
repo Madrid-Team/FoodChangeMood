@@ -70,4 +70,19 @@ class GetHealthyMealsUITest {
         verify { healthyMealsUseCase.execute(2) }
     }
 
+    @Test
+    fun `Should show There is no healthy meals When filter is return empty`() {
+        // Given
+        every { reader.getUserInput() } returns "2"
+        every { healthyMealsUseCase.execute(2) } throws NoSuchElementException("There is no healthy meals")
+
+        // When
+        healthyMealsUI.start()
+
+
+        // Then
+        verify { healthyMealsUseCase.execute(2) }
+        verify { viewer.show("There is no healthy meals") }
+    }
+
 }
