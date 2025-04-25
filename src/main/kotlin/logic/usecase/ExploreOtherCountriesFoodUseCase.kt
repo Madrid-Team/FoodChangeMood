@@ -1,6 +1,5 @@
 package logic.usecase
 
-import data.csvHandler.Tags.MealCategories.COUNTRY_MEAL_COUNT
 import data.models.Meal
 import logic.Repository.MealsRepository
 
@@ -9,10 +8,12 @@ class ExploreOtherCountriesFoodUseCase(
 ) {
     fun getSearchedCountryMeals(countryName: String): List<Meal> {
         val lowerCaseCountryName = countryName.lowercase()
-        return mealsRepository.getAllMeals()
+        val filteredMeals = mealsRepository.getAllMeals()
             .filter { isMealRelatedToTheCountry(it, lowerCaseCountryName) }
             .shuffled()
-            .take(COUNTRY_MEAL_COUNT)
+            .take(20)
+        if (filteredMeals.isEmpty() || countryName.isBlank() || countryName.isEmpty()) throw NoSuchElementException("Can't find meals for this country")
+        return filteredMeals
     }
 
     private fun isMealRelatedToTheCountry(meal: Meal, lowerCountryName: String): Boolean {

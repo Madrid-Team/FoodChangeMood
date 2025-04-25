@@ -2,8 +2,7 @@ package dependencies
 
 import data.csvHandler.MealsCsvParser
 import data.csvHandler.MealsCsvReader
-import data.csvHandler.repository.MealsRepositoryImpl
-import data.csvHandler.Tags
+import data.csvHandler.Repository.MealsRepositoryImpl
 import logic.Repository.MealsRepository
 import org.koin.dsl.module
 import presentation.FoodChangeMoodConsoleUI
@@ -15,7 +14,7 @@ import java.io.File
 val appModule = module {
 
     single {
-        File(Tags.FileConfig.FILE_NAME)
+        File("food.csv")
     }
     single {
         MealsCsvReader(get())
