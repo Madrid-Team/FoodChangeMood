@@ -3,37 +3,39 @@ package presentation.features
 import data.models.Meal
 import logic.usecase.SuggestMealWithHighCalorieUseCase
 import presentation.common.BaseUIController
+import presentation.common.Viewer
 
 class SuggestMealWithHighCalorieUI(
-    private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase
+    private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
+    private val viewer: Viewer
 ) : BaseUIController {
 
     override val id: Int = 13
     override val message: String =
-        "13- Get one sweet that not contains no eggs .. \n" +
+        "$id- Get one sweet that not contains no eggs .. \n" +
                 "- Write yes if you like it and want more details about this meal.\n" +
                 "- Write no if you dislike it and want another sweet."
 
     override fun start() {
-        println("Test Test .. Add your feature here")
+        suggestHighCalorieMeal()
     }
 
     private val alreadySuggested = mutableSetOf<Int>()
 
-    fun suggestHighCalorieMeal() {
+    private fun suggestHighCalorieMeal() {
         greetUser()
 
         while (true) {
             val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal()
 
             if (meal == null) {
-                println("No more high calorie meals to suggest")
+                viewer.show("No more high calorie meals to suggest")
                 break
             }
 
             alreadySuggested.add(meal.id)
-            println("Suggested Meal: ${meal.name} (${meal.nutrition.calories} calories)")
-            println("Do you like this meal? (like - dislike): ")
+            viewer.show("Suggested Meal: ${meal.name} (${meal.nutrition.calories} calories)")
+            viewer.show("Do you like this meal? (like - dislike): ")
             when (readlnOrNull()?.lowercase()) {
                 "like" -> {
                     showMealDetails(meal)
@@ -41,29 +43,29 @@ class SuggestMealWithHighCalorieUI(
                 }
 
                 "dislike" -> {
-                    println("Okay, let me suggest another meal.\n")
+                    viewer.show("Okay, let me suggest another meal.\n")
                 }
 
                 else -> {
-                    println("Invalid input. Please type 'like', or 'dislike'")
+                    viewer.show("Invalid input. Please type 'like', or 'dislike'")
                 }
             }
         }
     }
 
     private fun greetUser() {
-        println("Welcome! Let's suggest a high calorie meal.")
-        println("Type one of the following:")
-        println("- like: to see more details")
-        println("- dislike: to get another suggestion")
+        viewer.show("Welcome! Let's suggest a high calorie meal.")
+        viewer.show("Type one of the following:")
+        viewer.show("- like: to see more details")
+        viewer.show("- dislike: to get another suggestion")
     }
 
     private fun showMealDetails(meal: Meal) {
-        println("Here are the full details of the meal:")
-        println("Name: ${meal.name}")
-        println("Description: ${meal.description ?: "No description available"}")
-        println("Calories: ${meal.nutrition.calories}")
-        println("Preparation Time: ${meal.minutes} minutes")
+        viewer.show("Here are the full details of the meal:")
+        viewer.show("Name: ${meal.name}")
+        viewer.show("Description: ${meal.description ?: "No description available"}")
+        viewer.show("Calories: ${meal.nutrition.calories}")
+        viewer.show("Preparation Time: ${meal.minutes} minutes")
     }
 
 }
