@@ -36,8 +36,8 @@ class GetAllSeafoodMealsUseCaseTest() {
 
         // Then
         Truth.assertThat(result).containsExactly(
-            SeafoodMeal("tuna salad",1.0),
-            SeafoodMeal("fish dish",1.0),
+            SeafoodMeal("tuna salad",10.0),
+            SeafoodMeal("fish dish",10.0),
         )
     }
     @Test
