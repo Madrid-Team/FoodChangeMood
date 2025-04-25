@@ -10,7 +10,7 @@ class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepo
 
         val resultMeals : List<Meal> = mealsRepository.getAllMeals().filter { meal -> isItalianForLargeGroups(meal) }
         if (resultMeals.isEmpty())
-            throw Exception("No italian meals for large groups found ")
+            throw NoSuchElementException("No italian meals for large groups found ")
         else return resultMeals
 
     }
