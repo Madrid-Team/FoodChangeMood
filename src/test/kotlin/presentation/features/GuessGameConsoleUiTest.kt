@@ -102,4 +102,28 @@ class GuessGameConsoleUiTest {
         }
     }
 
+    @Test
+    fun `should show success message when guess is correct in second attempt`() {
+        // Given
+        every { startGuessGameUseCase.startGuessGame() } returns Pair("Pizza", 20)
+        every { reader.getUserInput() } returnsMany listOf("50", "20")
+
+        // When
+        ui.start()
+
+        // Then
+        verifySequence {
+            startGuessGameUseCase.startGuessGame()
+            viewer.show("Guess the preparation time for: Pizza")
+            viewer.show("You have 3 attempts.")
+
+            viewer.show("Attempt 1: Enter your guess in minutes: ")
+            viewer.show("Too high! Try a lower number.")
+
+            viewer.show("Attempt 2: Enter your guess in minutes: ")
+            viewer.show("Correct! The preparation time is 20 minutes.")
+        }
+    }
+
+
 }
