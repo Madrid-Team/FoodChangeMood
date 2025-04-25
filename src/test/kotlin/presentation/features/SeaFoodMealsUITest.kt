@@ -7,21 +7,21 @@ import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GetAllSeafoodMealsUseCase
 import org.junit.jupiter.api.BeforeEach
+import presentation.common.Viewer
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import kotlin.test.Test
 
 class SeaFoodMealsUITest {
-    private lateinit var getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase
+    private val getAllSeafoodMealsUseCase: GetAllSeafoodMealsUseCase = mockk(relaxed = true)
     private lateinit var seaFoodMealsUI: SeaFoodMealsUI
     private val outputStreamCaptor = ByteArrayOutputStream()
+    private val viewer: Viewer = mockk(relaxed = true)
 
     @BeforeEach
     fun setUp() {
-        getAllSeafoodMealsUseCase = mockk(relaxed = true)
-        seaFoodMealsUI = SeaFoodMealsUI(getAllSeafoodMealsUseCase)
+        seaFoodMealsUI = SeaFoodMealsUI(getAllSeafoodMealsUseCase, viewer)
         System.setOut(PrintStream(outputStreamCaptor))
-
     }
 
     @Test

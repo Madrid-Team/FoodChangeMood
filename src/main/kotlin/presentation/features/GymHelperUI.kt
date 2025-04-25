@@ -18,9 +18,9 @@ class GymHelperUI(
 
     override fun start() {
         println("Input the amount of calories you want")
-        val calories = reader.getUserInput()?.toDouble()
+        val calories = reader.readDouble()
         println("Input the amount of protein you want")
-        val protein = reader.getUserInput()?.toDouble()
+        val protein = reader.readDouble()
 
         if (calories != null && protein != null) {
             try {
@@ -31,7 +31,7 @@ class GymHelperUI(
                 e.message?.let { viewer.show(it) }
             }
         } else {
-            viewer.show("Invalid input. Please enter valid numbers for both calories and protein.")
+            viewer.show("Invalid input")
         }
 
     }
