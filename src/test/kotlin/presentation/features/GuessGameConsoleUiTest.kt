@@ -6,8 +6,6 @@ import io.mockk.mockk
 import io.mockk.verifySequence
 import logic.usecase.StartGuessGameUseCase
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.CsvSource
 import presentation.common.Reader
 import presentation.common.Viewer
 import kotlin.test.Test
@@ -81,6 +79,25 @@ class GuessGameConsoleUiTest {
             viewer.show("Too low! Try a higher number.")
 
             viewer.show("Attempt 2: Enter your guess in minutes: ")
+            viewer.show("Correct! The preparation time is 20 minutes.")
+        }
+    }
+    @Test
+    fun `should finish game with success message when guess is correct from first attempt`() {
+        // Given
+        every { startGuessGameUseCase.startGuessGame() } returns Pair("Pizza", 20)
+        every { reader.getUserInput() } returns "20"
+
+        // When
+        ui.start()
+
+        // Then
+        verifySequence {
+            startGuessGameUseCase.startGuessGame()
+            viewer.show("Guess the preparation time for: Pizza")
+            viewer.show("You have 3 attempts.")
+
+            viewer.show("Attempt 1: Enter your guess in minutes: ")
             viewer.show("Correct! The preparation time is 20 minutes.")
         }
     }
