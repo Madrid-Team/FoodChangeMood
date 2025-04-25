@@ -3,6 +3,7 @@ package presentation.features
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import io.mockk.verifySequence
 import logic.usecase.GetHealthyMealsUseCase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,8 +20,8 @@ class GetHealthyMealsUITest {
     @BeforeEach
     fun setUp() {
         healthyMealsUseCase = mockk(relaxed = true)
-        healthyMealsUI = GetHealthyMealsUI(healthyMealsUseCase)
         reader = mockk(relaxed = true)
+        healthyMealsUI = GetHealthyMealsUI(healthyMealsUseCase,reader)
     }
 
     @Test
@@ -32,11 +33,14 @@ class GetHealthyMealsUITest {
         healthyMealsUI.start()
 
         // Then
-        verify { println("Please enter a positive number.\n") }
+        verifySequence {
+            println("Enter your maximum count of healthy meals you want to proceed: ")
+            println("Please enter a positive number.\n")
+        }
     }
 
     @ParameterizedTest
-    @CsvSource("0","-5","c")
+    @CsvSource("0", "-5", "c")
     fun `Should show Please enter a positive number When input is less than or equal to 0`(input: String) {
         // Given
         every { reader.getUserInput() } returns input
@@ -45,7 +49,10 @@ class GetHealthyMealsUITest {
         healthyMealsUI.start()
 
         // Then
-        verify { println("Please enter a positive number.\n") }
+        verifySequence {
+            println("Enter your maximum count of healthy meals you want to proceed: ")
+            println("Please enter a positive number.\n")
+        }
     }
 
     @Test
