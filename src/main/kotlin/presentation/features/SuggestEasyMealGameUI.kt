@@ -2,6 +2,7 @@ package presentation.features
 
 import logic.usecase.SuggestEasyMealUseCase
 import presentation.common.BaseUIController
+import utils.displayMeals
 
 class SuggestEasyMealGameUI(
     private val suggestEasyMealUseCase: SuggestEasyMealUseCase
@@ -14,9 +15,7 @@ class SuggestEasyMealGameUI(
 
     override fun start() {
         try {
-            suggestEasyMealUseCase.execute(10).forEach {
-                println(it)
-            }
+            suggestEasyMealUseCase.execute(10).displayMeals()
         } catch (exception: Exception) {
             println(exception.message)
         }

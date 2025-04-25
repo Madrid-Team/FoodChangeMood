@@ -2,6 +2,7 @@ package presentation.features
 
 import logic.usecase.GetHealthyMealsUseCase
 import presentation.common.BaseUIController
+import utils.displayMeals
 
 class GetHealthyMealsUI(
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase
@@ -15,9 +16,9 @@ class GetHealthyMealsUI(
         try {
             println("Enter your maximum count of healthy meals you want to proceed: ")
             val countOfHealthyMeals = readlnOrNull()?.toIntOrNull() ?: 0
-            getHealthyMealsUseCase.execute(countOfHealthyMeals).forEach {
-                println(it)
-            }
+
+            getHealthyMealsUseCase.execute(countOfHealthyMeals).displayMeals()
+
         } catch (exception: Exception) {
             println(exception.message)
         }

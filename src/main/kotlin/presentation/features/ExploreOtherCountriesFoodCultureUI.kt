@@ -3,6 +3,7 @@ package presentation.features
 import logic.usecase.ExploreOtherCountriesFoodUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
+import utils.displayMeals
 
 class ExploreOtherCountriesFoodCultureUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
@@ -15,9 +16,9 @@ class ExploreOtherCountriesFoodCultureUI(
         println("Enter country name you want to search about")
         reader.getUserInput().toString().let { countryName ->
             try {
-                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
-                    println(it)
-                }
+
+                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).displayMeals()
+
             } catch (exception: Exception) {
                 println("$countryName not found")
             }

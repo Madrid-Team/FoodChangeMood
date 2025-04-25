@@ -3,6 +3,7 @@ package presentation.features
 import logic.usecase.MealSearchingByNameUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
+import utils.displayMeals
 
 class SearchMealByNameUI(
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
@@ -15,9 +16,7 @@ class SearchMealByNameUI(
         println("Enter meal name")
         reader.getUserInput().toString().let { mealName ->
             try {
-                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
-                    println(it)
-                }
+                mealSearchingByNameUseCase.searchAboutMealByName(mealName).displayMeals()
             } catch (exception: Exception) {
                 println("$mealName not found")
             }
