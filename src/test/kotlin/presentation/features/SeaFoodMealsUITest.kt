@@ -19,7 +19,7 @@ class SeaFoodMealsUITest {
     @BeforeEach
     fun setUp() {
         getAllSeafoodMealsUseCase = mockk(relaxed = true)
-        seaFoodMealsUI = SeaFoodMealsUI(getAllSeafoodMealsUseCase)
+        seaFoodMealsUI = SeaFoodMealsUI(getAllSeafoodMealsUseCase, mockk())
         System.setOut(PrintStream(outputStreamCaptor))
 
     }

@@ -14,12 +14,9 @@ class SeaFoodMealsUI(
             "from highest to lowest."
 
     override fun start() {
-        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEachIndexed() { index, seafoodMeal ->
-            displaySeaFoodMeal(rank = index+1, meal = seafoodMeal)
+        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEach {
+            println(it)
         }
     }
 
-    private fun displaySeaFoodMeal(rank:Int , meal:SeafoodMeal){
-        viewer.show("Rank: $rank,Name: ${meal.name} ,Protein: ${meal.protein}")
-    }
 }

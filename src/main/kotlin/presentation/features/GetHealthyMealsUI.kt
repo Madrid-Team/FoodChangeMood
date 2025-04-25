@@ -21,7 +21,9 @@ class GetHealthyMealsUI(
             viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
             val countOfHealthyMeals = reader.getUserInput()?.toIntOrNull() ?: 0
 
-            getHealthyMealsUseCase.execute(countOfHealthyMeals).displayMeals()
+            getHealthyMealsUseCase.execute(countOfHealthyMeals).forEach {
+                println(it)
+            }
 
         } catch (exception: Exception) {
             exception.message?.let { viewer.show(it) }

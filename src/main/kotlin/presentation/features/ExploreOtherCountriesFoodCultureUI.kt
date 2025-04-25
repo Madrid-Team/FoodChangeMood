@@ -19,7 +19,9 @@ class ExploreOtherCountriesFoodCultureUI(
         reader.getUserInput().toString().let { countryName ->
             try {
 
-                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).displayMeals()
+                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
+                    println(it)
+                }
 
             } catch (exception: Exception) {
                 viewer.show("$countryName not found")

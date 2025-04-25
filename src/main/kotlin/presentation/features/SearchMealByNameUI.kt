@@ -18,7 +18,9 @@ class SearchMealByNameUI(
         viewer.show("Enter meal name")
         reader.getUserInput().toString().let { mealName ->
             try {
-                mealSearchingByNameUseCase.searchAboutMealByName(mealName).displayMeals()
+                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
+                    println(it)
+                }
             } catch (exception: Exception) {
                 viewer.show("$mealName not found")
             }

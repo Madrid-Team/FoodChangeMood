@@ -12,6 +12,8 @@ class ILovePotatoUI(
         "$id- You will get random list of 10 meals that include potatoes in their ingredients."
 
     override fun start() {
-        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().displayMeals()
+        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
+            println(it)
+        }
     }
 }
