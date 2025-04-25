@@ -36,10 +36,14 @@ class FoodChangeMoodConsoleUITest {
         foodChangeMoodUI = FoodChangeMoodConsoleUI(controllers, reader, viewer)
     }
 
-
+    @Test
+    fun `Should initialize with id 0 and welcome message When start program`() {
+        assertEquals(0, foodChangeMoodUI.id)
+        assertEquals("---Welcome to food change mood app---", foodChangeMoodUI.message)
+    }
 
     @Test
-    fun `Should display welcome message when start`() {
+    fun `Should display welcome message and feature list When started`() {
         // Given
         every { reader.getUserInput() } returns "0"
 
@@ -47,7 +51,7 @@ class FoodChangeMoodConsoleUITest {
         foodChangeMoodUI.start()
 
         // Then
-        verify { viewer.show("---Welcome to food change mood app---")}
+        verify { viewer.show("---Welcome to food change mood app---") }
         verify { viewer.show("Choose feature between 1 to 15 .. press zero if you want to exit") }
         verify { viewer.show("Feature 1") }
         verify { viewer.show("Feature 2") }
@@ -55,7 +59,7 @@ class FoodChangeMoodConsoleUITest {
     }
 
     @Test
-    fun `Should display exit message when exit`() {
+    fun `Should display exit message and feature list When exited`() {
         // Given
         every { reader.getUserInput() } returns "0"
 
@@ -66,16 +70,11 @@ class FoodChangeMoodConsoleUITest {
         verify { viewer.show("Exiting from the program") }
     }
 
-    @Test
-    fun `Should check for default value for id and message When start`() {
-        assertEquals(0,foodChangeMoodUI.id)
-        assertEquals("---Welcome to food change mood app---",foodChangeMoodUI.message)
-    }
 
     @Test
-    fun `Should choose correct number`() {
+    fun `Should input valid number When choose number of features`() {
         // Given
-        every { reader.getUserInput() } returnsMany listOf("3","0")
+        every { reader.getUserInput() } returnsMany listOf("3", "0")
 
         // When
         foodChangeMoodUI.start()
@@ -85,9 +84,9 @@ class FoodChangeMoodConsoleUITest {
     }
 
     @Test
-    fun `Should let user try again When choose incorrect number`() {
+    fun `Should let user try again When choose invalid number of features`() {
         // Given
-        every { reader.getUserInput() } returnsMany listOf("4","77","asd","0")
+        every { reader.getUserInput() } returnsMany listOf("4", "77", "asd", "0")
 
         // When
         foodChangeMoodUI.start()
@@ -97,13 +96,13 @@ class FoodChangeMoodConsoleUITest {
             viewer.show("You have entered invalid input \n")
             viewer.show("If you want to continue press 1 if you want to end the program press 0")
         }
-        verify(exactly = 2)  { viewer.show("Invalid Input") }
+        verify(exactly = 2) { viewer.show("Invalid Input") }
     }
 
     @Test
-    fun `Should break When choose zero to end the program`() {
+    fun `should exit program when user enters zero`() {
         // Given
-        every { reader.getUserInput() } returnsMany listOf("4","0")
+        every { reader.getUserInput() } returnsMany listOf("4", "0")
 
         // When
         foodChangeMoodUI.start()
@@ -114,9 +113,9 @@ class FoodChangeMoodConsoleUITest {
     }
 
     @Test
-    fun `Should continue When choose one to end the program`() {
+    fun `should continue program when user selects feature 1`() {
         // Given
-        every { reader.getUserInput() } returnsMany listOf("4","1","0")
+        every { reader.getUserInput() } returnsMany listOf("4", "1", "0")
 
         // When
         foodChangeMoodUI.start()
@@ -124,7 +123,7 @@ class FoodChangeMoodConsoleUITest {
         // Then
         verify { viewer.show("You have entered invalid input \n") }
         verify { viewer.show("If you want to continue press 1 if you want to end the program press 0") }
-        verify { viewer.show("---Welcome to food change mood app---")}
+        verify { viewer.show("---Welcome to food change mood app---") }
         verify { viewer.show("Choose feature between 1 to 15 .. press zero if you want to exit") }
         verify { viewer.show("Feature 1") }
         verify { viewer.show("Feature 2") }
