@@ -6,6 +6,8 @@ import io.mockk.verify
 import logic.usecase.GetHealthyMealsUseCase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.CsvSource
 import presentation.common.ConsoleReader
 
 class GetHealthyMealsUITest {
@@ -16,13 +18,13 @@ class GetHealthyMealsUITest {
 
     @BeforeEach
     fun setUp() {
-        healthyMealsUseCase = mockk()
+        healthyMealsUseCase = mockk(relaxed = true)
         healthyMealsUI = GetHealthyMealsUI(healthyMealsUseCase)
-        reader = mockk()
+        reader = mockk(relaxed = true)
     }
 
     @Test
-    fun `Should show Please enter a positive number if input is null`() {
+    fun `Should show Please enter a positive number When input is null`() {
         // Given
         every { reader.getUserInput() } returns null
 
@@ -32,4 +34,30 @@ class GetHealthyMealsUITest {
         // Then
         verify { println("Please enter a positive number.\n") }
     }
+
+    @ParameterizedTest
+    @CsvSource("0","-5","c")
+    fun `Should show Please enter a positive number When input is less than or equal to 0`(input: String) {
+        // Given
+        every { reader.getUserInput() } returns input
+
+        // When
+        healthyMealsUI.start()
+
+        // Then
+        verify { println("Please enter a positive number.\n") }
+    }
+
+    @Test
+    fun `Should execute healthy meals use case When input is positive number`() {
+        // Given
+        every { reader.getUserInput() } returns "2"
+
+        // When
+        healthyMealsUI.start()
+
+        // Then
+        verify { healthyMealsUseCase.execute(2) }
+    }
+
 }
