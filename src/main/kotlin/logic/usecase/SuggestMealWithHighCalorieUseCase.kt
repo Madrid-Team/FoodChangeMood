@@ -19,5 +19,7 @@ class SuggestMealWithHighCalorieUseCase(private val mealsRepository: MealsReposi
         return meal.nutrition.calories > HIGH_CALORIES && meal.description != null
     }
 
-
+    companion object{
+        const val HIGH_CALORIES = 700
+    }
 }
