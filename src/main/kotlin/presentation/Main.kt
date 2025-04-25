@@ -1,21 +1,16 @@
 package presentation
 
 import dependencies.appModule
+import dependencies.uiModule
 import dependencies.useCaseModule
 import org.koin.core.context.startKoin
 import org.koin.java.KoinJavaComponent.getKoin
 
 
 fun main() {
-
-
     startKoin {
-        modules(appModule, useCaseModule)
+        modules(appModule, useCaseModule, uiModule)
     }
-
-    val guessGameConsolUi: GuessGameConsoleUi = getKoin().get()
-    guessGameConsolUi.startGame()
-
 
     val startTime = System.currentTimeMillis()
     val consoleUi: FoodChangeMoodConsoleUI = getKoin().get()
