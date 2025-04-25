@@ -6,11 +6,22 @@ import logic.Repository.MealsRepository
 class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepository) {
 
     fun getItalianFoodForLargeGroups(): List<Meal> {
-        return mealsRepository.getAllMeals().filter { meal -> isItalian(meal) && isForLargeGroups(meal) }
+        if (mealsRepository.getAllMeals().isEmpty()) throw Exception("the Meal list is empty")
+
+        val resultMeals : List<Meal> = mealsRepository.getAllMeals().filter { meal -> isItalianForLargeGroups(meal) }
+        if (resultMeals.isEmpty())
+            throw NoSuchElementException("No italian meals for large groups found ")
+        else return resultMeals
+
     }
 
+    fun isItalianForLargeGroups(meal: Meal) : Boolean{
+        return isItalian(meal) && isForLargeGroups(meal)
+    }
+
+
     fun isForLargeGroups(meal: Meal): Boolean {
-        return meal.tags.contains("for-large-groups")
+        return meal.tags.any { it.equals(FOR_LARGE_GROUPS , ignoreCase = true) }
     }
 
 
@@ -23,6 +34,7 @@ class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepo
 
     companion object {
         const val ITALIAN_KEYWORD = "italian"
+        const val FOR_LARGE_GROUPS = "for-large-groups"
 
     }
 
