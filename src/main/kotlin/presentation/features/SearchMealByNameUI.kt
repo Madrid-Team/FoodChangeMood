@@ -4,6 +4,7 @@ import logic.usecase.MealSearchingByNameUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
 import presentation.common.Viewer
+import utils.displayMeals
 
 class SearchMealByNameUI(
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,

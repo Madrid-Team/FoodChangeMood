@@ -3,6 +3,7 @@ package presentation.features
 import logic.usecase.SuggestEasyMealUseCase
 import presentation.common.BaseUIController
 import presentation.common.Viewer
+import utils.displayMeals
 
 class SuggestEasyMealGameUI(
     private val suggestEasyMealUseCase: SuggestEasyMealUseCase,
