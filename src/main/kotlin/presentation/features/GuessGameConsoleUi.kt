@@ -2,11 +2,13 @@ package presentation.features
 
 import logic.usecase.StartGuessGameUseCase
 import presentation.common.BaseUIController
+import presentation.common.Reader
 import presentation.common.Viewer
 
 class GuessGameConsoleUi(
     private val startGuessGameUseCase: StartGuessGameUseCase,
-    private val viewer: Viewer
+    private val viewer: Viewer,
+    private val reader: Reader
 ) : BaseUIController {
 
     override val id: Int = 5
@@ -23,7 +25,7 @@ class GuessGameConsoleUi(
 
         (1..3).forEach { attempt ->
             viewer.show("Attempt ${attempt}: Enter your guess in minutes: ")
-            val guess = readlnOrNull()?.toIntOrNull() ?: 0
+            val guess = reader.getUserInput()?.toIntOrNull() ?: 0
 
             when {
                 guess == correctTime -> {
