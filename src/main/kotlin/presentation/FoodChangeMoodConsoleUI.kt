@@ -138,15 +138,19 @@ class FoodChangeMoodConsoleUI(
     }
 
     private fun getEasySuggestedMeals() {
-
+        getEasyFoodSuggestionUseCase.execute(10).forEach {
+            println(it)
+        }
     }
 
     private fun getHealthyMeals() {
-       
-    }
-
-    private fun getHealthyMeals() {
-
+        try {
+            getHealthyMealsUseCase.execute(10).forEach {
+                println(it)
+            }
+        } catch (exception: Exception) {
+            println(exception.message)
+        }
     }
 
     private fun searchMealByName() {
