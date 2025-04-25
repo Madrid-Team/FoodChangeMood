@@ -4,6 +4,8 @@ import logic.usecase.ExploreOtherCountriesFoodUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
 import presentation.common.Viewer
+import utils.displayMeals
+import presentation.common.Viewer
 
 class ExploreOtherCountriesFoodCultureUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
@@ -11,15 +13,13 @@ class ExploreOtherCountriesFoodCultureUI(
     private val consoleViewer: Viewer
 ) : BaseUIController {
     override val id: Int = 10
-    override val message: String = "10- Enter a country name and you will get up to 20 meals related to this country."
+    override val message: String = "$id- Enter a country name and you will get up to 20 meals related to this country."
 
     override fun start() {
-        println("Enter country name you want to search about")
+        viewer.show("Enter country name you want to search about")
         reader.getUserInput().toString().let { countryName ->
             try {
-                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).forEach {
-                    println(it)
-                }
+                exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).displayMeals()
             } catch (exception: Exception) {
                 consoleViewer.show(exception.message.toString())
             }

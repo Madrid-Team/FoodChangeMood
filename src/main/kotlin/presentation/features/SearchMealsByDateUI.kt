@@ -4,22 +4,26 @@ import data.models.Meal
 import data.utilities.MealsExceptions
 import logic.usecase.GetFoodByAddDateUseCase
 import presentation.common.BaseUIController
+import presentation.common.Reader
+import presentation.common.Viewer
 
 class SearchMealsByDateUI(
-    private val getFoodByAddDateUseCase: GetFoodByAddDateUseCase
+    private val getFoodByAddDateUseCase: GetFoodByAddDateUseCase,
+    private val viewer: Viewer,
+    private val reader: Reader
 ) : BaseUIController {
     override val id: Int = 8
     override val message: String =
-        "8- Add a date and get list of meals added on this date.\n" +
+        "$id- Add a date and get list of meals added on this date.\n" +
                 "- Enter the Id of any meal and you will get more details about it."
 
     override fun start() {
-        println("===== Search Meals by Date =====")
+        viewer.show("===== Search Meals by Date =====")
 
         while (true) {
             try {
-                println("\nEnter date (yyyy-MM-dd) or 'exit' to quit:")
-                val inputDate = readlnOrNull()?.trim() ?: ""
+                viewer.show("\nEnter date (yyyy-MM-dd) or 'exit' to quit:")
+                val inputDate = reader.getUserInput()?.trim() ?: ""
 
                 if (inputDate.equals("exit", ignoreCase = true)) {
                     break
@@ -28,8 +32,8 @@ class SearchMealsByDateUI(
                 val meals = getFoodByAddDateUseCase(inputDate)
                 displayMealsList(meals)
 
-                println("\nEnter a meal ID to view details or 'back' to search another date:")
-                val idInput = readlnOrNull()?.trim() ?: ""
+                viewer.show("\nEnter a meal ID to view details or 'back' to search another date:")
+                val idInput = reader.getUserInput()?.trim() ?: ""
 
                 if (idInput.equals("back", ignoreCase = true)) {
                     continue
@@ -41,59 +45,59 @@ class SearchMealsByDateUI(
                         ?: throw MealsExceptions.MealNotFoundException("Meal with ID $mealId not found")
                     displayMealDetails(meal)
                 } catch (e: NumberFormatException) {
-                    println("Invalid ID format. Please enter a number.")
+                    viewer.show("Invalid ID format. Please enter a number.")
                 } catch (e: MealsExceptions.MealNotFoundException) {
-                    println(e.message)
+                    viewer.show(e.message)
                 }
 
             } catch (e: MealsExceptions.InvalidDateFormatException) {
-                println("Error: ${e.message}")
+                viewer.show("Error: ${e.message}")
             } catch (e: MealsExceptions.DateParseException) {
-                println("Error: ${e.message}")
+                viewer.show("Error: ${e.message}")
             } catch (e: MealsExceptions.MealNotFoundException) {
-                println("No meals were found for the given date.")
+                viewer.show("No meals were found for the given date.")
             } catch (e: Exception) {
-                println("An unexpected error occurred: ${e.message}")
+                viewer.show("An unexpected error occurred: ${e.message}")
             }
         }
 
-        println("Exiting meal search...")
+        viewer.show("Exiting meal search...")
     }
 
     private fun displayMealsList(meals: List<Meal>) {
-        println("\n=== Meals found: ${meals.size} ===")
-        println("ID\t| Name")
-        println("-".repeat(50))
+        viewer.show("\n=== Meals found: ${meals.size} ===")
+        viewer.show("ID\t| Name")
+        viewer.show("-".repeat(50))
 
         meals.forEach { meal ->
-            println("${meal.id}\t| ${meal.name}")
+            viewer.show("${meal.id}\t| ${meal.name}")
         }
     }
 
     private fun displayMealDetails(meal: Meal) {
-        println("\n===== Meal Details =====")
-        println("ID: ${meal.id}")
-        println("Name: ${meal.name}")
-        println("Description: ${meal.description ?: "No description available"}")
-        println("Minutes to prepare: ${meal.minutes}")
-        println("Submitted on: ${meal.submitted}")
+        viewer.show("\n===== Meal Details =====")
+        viewer.show("ID: ${meal.id}")
+        viewer.show("Name: ${meal.name}")
+        viewer.show("Description: ${meal.description ?: "No description available"}")
+        viewer.show("Minutes to prepare: ${meal.minutes}")
+        viewer.show("Submitted on: ${meal.submitted}")
 
-        println("\nTags: ${meal.tags.joinToString(", ")}")
+        viewer.show("\nTags: ${meal.tags.joinToString(", ")}")
 
-        println("\nNutrition Information:")
-        println("Calories: ${meal.nutrition.calories}")
-        println("Protein: ${meal.nutrition.protein}g")
-        println("Fat: ${meal.nutrition.totalFat}g")
-        println("SaturatedFat Fat: ${meal.nutrition.saturatedFat}g")
-        println("Sodium: ${meal.nutrition.sodium}mg")
-        println("\nIngredients:")
+        viewer.show("\nNutrition Information:")
+        viewer.show("Calories: ${meal.nutrition.calories}")
+        viewer.show("Protein: ${meal.nutrition.protein}g")
+        viewer.show("Fat: ${meal.nutrition.totalFat}g")
+        viewer.show("SaturatedFat Fat: ${meal.nutrition.saturatedFat}g")
+        viewer.show("Sodium: ${meal.nutrition.sodium}mg")
+        viewer.show("\nIngredients:")
         meal.ingredients.ingredients.forEachIndexed { index, ingredient ->
-            println("${index + 1}. $ingredient")
+            viewer.show("${index + 1}. $ingredient")
         }
 
-        println("\nSteps:")
+        viewer.show("\nSteps:")
         meal.steps.steps.forEachIndexed { index, step ->
-            println("${index + 1}. $step")
+            viewer.show("${index + 1}. $step")
         }
     }
 }

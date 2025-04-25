@@ -18,13 +18,13 @@ val uiModule = module {
     single { GetHealthyMealsUI(get(), get(), get()) } bind BaseUIController::class
     single { GetIraqMealUI(get()) } bind BaseUIController::class
     single { GymHelperUI(get(), get(), get()) } bind BaseUIController::class
-    single { ILovePotatoUI(get(), get()) } bind BaseUIController::class
+    single { ILovePotatoUI(get()) } bind BaseUIController::class
     single { KetoDietMealHelperUI(get()) } bind BaseUIController::class
     single { LargeItaliansMealsUI(get(), get()) } bind BaseUIController::class
-    single { SeaFoodMealsUI(get()) } bind BaseUIController::class
-    single { SearchMealByNameUI(get(), get(), get()) } bind BaseUIController::class
-    single { SweetWithNoEggsUI(get(), get()) } bind BaseUIController::class
-    single { SuggestMealWithHighCalorieUI(get(), get(), get()) } bind BaseUIController::class
+    single { SeaFoodMealsUI(get(), get()) } bind BaseUIController::class
+    single { SearchMealByNameUI(get(), get(),get()) } bind BaseUIController::class
+    single { SweetWithNoEggsUI(get(), get(), get()) } bind BaseUIController::class
+    single { SuggestMealWithHighCalorieUI(get(), get()) } bind BaseUIController::class
 
     single {
         FoodChangeMoodConsoleUI(

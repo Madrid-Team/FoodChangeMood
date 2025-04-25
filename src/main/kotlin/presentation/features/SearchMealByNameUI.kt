@@ -4,6 +4,8 @@ import logic.usecase.MealSearchingByNameUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
 import presentation.common.Viewer
+import presentation.common.Viewer
+import utils.displayMeals
 
 class SearchMealByNameUI(
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
@@ -11,15 +13,13 @@ class SearchMealByNameUI(
     private val viewer: Viewer
 ) : BaseUIController {
     override val id: Int = 2
-    override val message: String = "2- Enter any meal's name to search about it"
+    override val message: String = "$id- Enter any meal's name to search about it"
 
     override fun start() {
-        println("Enter meal name")
+        viewer.show("Enter meal name")
         reader.getUserInput().toString().let { mealName ->
             try {
-                mealSearchingByNameUseCase.searchAboutMealByName(mealName).forEach {
-                    println(it)
-                }
+                mealSearchingByNameUseCase.searchAboutMealByName(mealName).displayMeals()
             } catch (exception: Exception) {
                 viewer.show(exception.message.toString())
             }

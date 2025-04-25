@@ -10,13 +10,11 @@ class ILovePotatoUI(
 ) : BaseUIController {
     override val id: Int = 12
     override val message: String =
-        "12- You will get random list of 10 meals that include potatoes in their ingredients."
+        "$id- You will get random list of 10 meals that include potatoes in their ingredients."
 
     override fun start() {
         try {
-            showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
-                println(it)
-            }
+            showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().displayMeals()
         } catch (exception: Exception) {
             viewer.show(exception.message.toString())
         }
