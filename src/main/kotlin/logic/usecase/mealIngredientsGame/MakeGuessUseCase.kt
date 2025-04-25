@@ -1,5 +1,6 @@
 package logic.usecase.mealIngredientsGame
 
+import data.utilities.MealsExceptions
 import logic.Repository.MealsRepository
 
 class MakeGuessUseCase(private val repository: MealsRepository) {
