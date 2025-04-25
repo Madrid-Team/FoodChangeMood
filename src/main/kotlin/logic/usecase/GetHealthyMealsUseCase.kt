@@ -6,7 +6,6 @@ import logic.Repository.MealsRepository
 class GetHealthyMealsUseCase(private val mealsRepository: MealsRepository) {
 
     fun execute(count: Int): List<Meal> {
-        if (mealsRepository.getAllMeals().isEmpty()) throw Exception("Meal list is empty")
         return mealsRepository.getAllMeals()
             .filter(::isHealthyMeal)
             .sortedBy(::nutrientsSum)
