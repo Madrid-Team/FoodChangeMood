@@ -3,11 +3,9 @@ package presentation.features
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import presentation.common.BaseUIController
 import utils.displayMeals
-import presentation.common.Viewer
 
 class ILovePotatoUI(
-    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
-    private val viewer: Viewer
+    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase
 ) : BaseUIController {
     override val id: Int = 12
     override val message: String =
