@@ -2,33 +2,27 @@ package presentation.features
 
 import logic.usecase.GetHealthyMealsUseCase
 import presentation.common.BaseUIController
-import presentation.common.ConsoleReader
-import presentation.common.ConsoleViewer
+import utils.displayMeals
+import presentation.common.Viewer
 
 class GetHealthyMealsUI(
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
-    private val reader: ConsoleReader,
-    private val viewer: ConsoleViewer,
+    private val viewer: Viewer
 ) : BaseUIController {
     override val id: Int = 1
     override val message: String = "" +
-            "1- Get a list of healthy fast food meals that can be prepared in 15 minutes or less, \n" +
+            "$id- Get a list of healthy fast food meals that can be prepared in 15 minutes or less, \n" +
             "with very low total fat, saturated fat, and carbohydrate."
 
     override fun start() {
         try {
             viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
-            reader.getUserInput()?.toIntOrNull().let { input ->
-                if (input == null || input <= 0) {
-                    viewer.show("Please enter a positive number.\n")
-                } else {
-                    getHealthyMealsUseCase.execute(input).forEach {
-                        viewer.show(it.toString())
-                    }
-                }
-            }
+            val countOfHealthyMeals = readlnOrNull()?.toIntOrNull() ?: 0
+
+            getHealthyMealsUseCase.execute(countOfHealthyMeals).displayMeals()
+
         } catch (exception: Exception) {
-            println(exception.message)
+            exception.message?.let { viewer.show(it) }
         }
     }
 }
