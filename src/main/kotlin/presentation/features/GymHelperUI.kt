@@ -28,7 +28,7 @@ class GymHelperUI(
                     viewer.show(meal.name)
                 }
             } catch (e: NoSuchElementException) {
-                e.message?.let { viewer.show(it) }
+                viewer.show(e.message.toString())
             }
         } else {
             viewer.show("Invalid input")
