@@ -7,14 +7,18 @@ class SuggestEasyMealGameUI(
     private val suggestEasyMealUseCase: SuggestEasyMealUseCase
 ) : BaseUIController {
     override val id: Int = 4
-    override val message: String =
-        "4- Play a fun game ..\n" +
-                "- Get 10 get a list of healthy fast food meals that can be prepared in 15 minutes or less, " +
-                "with very low total fat, saturated fat, and carbohydrate."
+    override val message: String = "" +
+            "4- Play a fun game ..\n" +
+            "- Get 10 random meals that are easy to prepared in 30 minutes or less, \n" +
+            "has 5 ingredients or fewer and can be prepared in 6 steps or fewer."
 
     override fun start() {
-        suggestEasyMealUseCase.execute(10).forEach {
-            println(it)
+        try {
+            suggestEasyMealUseCase.execute(10).forEach {
+                println(it)
+            }
+        } catch (exception: Exception) {
+            println(exception.message)
         }
     }
 }

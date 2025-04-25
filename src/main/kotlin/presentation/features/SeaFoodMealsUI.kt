@@ -11,6 +11,8 @@ class SeaFoodMealsUI(
             "from highest to lowest."
 
     override fun start() {
-        println("Test Test .. Add your feature here")
+        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEach {
+            println(it)
+        }
     }
 }
