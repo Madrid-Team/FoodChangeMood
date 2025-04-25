@@ -31,5 +31,32 @@ class GuessGameConsoleUiTest {
         assertThat(ui.message).contains("you have 3 attempts")
     }
 
+    @Test
+    fun `should continue for 3 attempts and show final message when all guesses are incorrect`() {
+        // Given
+        every { startGuessGameUseCase.startGuessGame() } returns Pair("Pizza", 20)
+        every { reader.getUserInput() } returnsMany listOf("10", "15", "90")
 
+        // When
+        ui.start()
+
+        // Then
+        verifySequence {
+            startGuessGameUseCase.startGuessGame()
+            viewer.show("Guess the preparation time for: Pizza")
+            viewer.show("You have 3 attempts.")
+
+            viewer.show("Attempt 1: Enter your guess in minutes: ")
+            viewer.show("Too low! Try a higher number.")
+
+            viewer.show("Attempt 2: Enter your guess in minutes: ")
+            viewer.show("Too low! Try a higher number.")
+
+            viewer.show("Attempt 3: Enter your guess in minutes: ")
+            viewer.show("Too high! Try a lower number.")
+
+            viewer.show("Sorry, you've used all your attempts.")
+            viewer.show("The correct preparation time for Pizza is 20 minutes.")
+        }
+    }
 }
