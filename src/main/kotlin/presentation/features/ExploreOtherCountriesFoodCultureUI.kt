@@ -3,10 +3,12 @@ package presentation.features
 import logic.usecase.ExploreOtherCountriesFoodUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
+import presentation.common.Viewer
 
 class ExploreOtherCountriesFoodCultureUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
-    private val reader: Reader
+    private val reader: Reader,
+    private val consoleViewer: Viewer
 ) : BaseUIController {
     override val id: Int = 10
     override val message: String = "10- Enter a country name and you will get up to 20 meals related to this country."
@@ -19,7 +21,7 @@ class ExploreOtherCountriesFoodCultureUI(
                     println(it)
                 }
             } catch (exception: Exception) {
-                println(exception.message)
+                consoleViewer.show(exception.message.toString())
             }
         }
     }

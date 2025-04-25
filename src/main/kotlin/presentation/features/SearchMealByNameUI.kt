@@ -3,10 +3,12 @@ package presentation.features
 import logic.usecase.MealSearchingByNameUseCase
 import presentation.common.BaseUIController
 import presentation.common.Reader
+import presentation.common.Viewer
 
 class SearchMealByNameUI(
     private val mealSearchingByNameUseCase: MealSearchingByNameUseCase,
-    private val reader: Reader
+    private val reader: Reader,
+    private val viewer: Viewer
 ) : BaseUIController {
     override val id: Int = 2
     override val message: String = "2- Enter any meal's name to search about it"
@@ -19,7 +21,7 @@ class SearchMealByNameUI(
                     println(it)
                 }
             } catch (exception: Exception) {
-                println("$mealName not found")
+                viewer.show(exception.message.toString())
             }
         }
     }

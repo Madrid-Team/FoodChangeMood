@@ -35,14 +35,14 @@ class ILovePotatoUITest {
     @Test
     fun `ui should throw exception when list is empty`() {
         //give
-        every { showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes() } throws Exception()
+        every { showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes() } throws NoSuchElementException()
 
         //when
         iLovePotatoUI.start()
 
         //then
         verify { showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes() }
-        verify { consoleViewer.show("Can't found meals include potatoes") }
+        verify { consoleViewer.show(NoSuchElementException().message.toString()) }
     }
 
 

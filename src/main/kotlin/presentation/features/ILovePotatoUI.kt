@@ -18,7 +18,7 @@ class ILovePotatoUI(
                 println(it)
             }
         } catch (exception: Exception) {
-            viewer.show("Can't found meals include potatoes")
+            viewer.show(exception.message.toString())
         }
 
     }
