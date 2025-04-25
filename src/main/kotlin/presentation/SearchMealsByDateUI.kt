@@ -11,61 +11,62 @@ class SearchMealsByDateUI : KoinComponent {
 
     fun start() {
         println("===== Search Meals by Date =====")
-        
+
         while (true) {
             try {
                 println("\nEnter date (yyyy-MM-dd) or 'exit' to quit:")
                 val inputDate = readlnOrNull()?.trim() ?: ""
-                
+
                 if (inputDate.equals("exit", ignoreCase = true)) {
                     break
                 }
-                
-                val meals = getFoodByAddDateUseCase(inputDate)
-                displayMealsList(meals)
-                
-                println("\nEnter a meal ID to view details or 'back' to search another date:")
-                val idInput = readlnOrNull()?.trim() ?: ""
-                
-                if (idInput.equals("back", ignoreCase = true)) {
-                    continue
-                }
-                
                 try {
+
+
+                    val meals = getFoodByAddDateUseCase(inputDate)
+                    displayMealsList(meals)
+
+                    println("\nEnter a meal ID to view details or 'back' to search another date:")
+                    val idInput = readlnOrNull()?.trim() ?: ""
+
+                    if (idInput.equals("back", ignoreCase = true)) {
+                        continue
+                    }
+
                     val mealId = idInput.toInt()
                     val meal = meals.find { it.id == mealId }
                         ?: throw MealsExceptions.MealNotFoundException("Meal with ID $mealId not found")
                     displayMealDetails(meal)
-                } catch (e: NumberFormatException) {
+                } catch (_: NumberFormatException) {
                     println("Invalid ID format. Please enter a number.")
                 } catch (e: MealsExceptions.MealNotFoundException) {
                     println(e.message)
                 }
-                
+
             } catch (e: MealsExceptions.InvalidDateFormatException) {
                 println("Error: ${e.message}")
             } catch (e: MealsExceptions.DateParseException) {
                 println("Error: ${e.message}")
-            } catch (e: MealsExceptions.MealNotFoundException) {
+            } catch (_: MealsExceptions.MealNotFoundException) {
                 println("No meals were found for the given date.")
             } catch (e: Exception) {
                 println("An unexpected error occurred: ${e.message}")
             }
         }
-        
+
         println("Exiting meal search...")
     }
-    
+
     private fun displayMealsList(meals: List<Meal>) {
         println("\n=== Meals found: ${meals.size} ===")
         println("ID\t| Name")
         println("-".repeat(50))
-        
+
         meals.forEach { meal ->
             println("${meal.id}\t| ${meal.name}")
         }
     }
-    
+
     private fun displayMealDetails(meal: Meal) {
         println("\n===== Meal Details =====")
         println("ID: ${meal.id}")
@@ -73,9 +74,9 @@ class SearchMealsByDateUI : KoinComponent {
         println("Description: ${meal.description ?: "No description available"}")
         println("Minutes to prepare: ${meal.minutes}")
         println("Submitted on: ${meal.submitted}")
-        
+
         println("\nTags: ${meal.tags.joinToString(", ")}")
-        
+
         println("\nNutrition Information:")
         println("Calories: ${meal.nutrition.calories}")
         println("Protein: ${meal.nutrition.protein}g")
@@ -86,7 +87,7 @@ class SearchMealsByDateUI : KoinComponent {
         meal.ingredients.ingredients.forEachIndexed { index, ingredient ->
             println("${index + 1}. $ingredient")
         }
-        
+
         println("\nSteps:")
         meal.steps.steps.forEachIndexed { index, step ->
             println("${index + 1}. $step")
