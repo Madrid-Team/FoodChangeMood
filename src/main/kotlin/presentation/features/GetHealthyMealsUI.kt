@@ -3,10 +3,12 @@ package presentation.features
 import logic.usecase.GetHealthyMealsUseCase
 import presentation.common.BaseUIController
 import presentation.common.ConsoleReader
+import presentation.common.ConsoleViewer
 
 class GetHealthyMealsUI(
     private val getHealthyMealsUseCase: GetHealthyMealsUseCase,
-    private val reader: ConsoleReader
+    private val reader: ConsoleReader,
+    private val viewer: ConsoleViewer,
 ) : BaseUIController {
     override val id: Int = 1
     override val message: String = "" +
@@ -15,13 +17,13 @@ class GetHealthyMealsUI(
 
     override fun start() {
         try {
-            println("Enter your maximum count of healthy meals you want to proceed: ")
+            viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
             reader.getUserInput()?.toIntOrNull().let { input ->
                 if (input == null || input <= 0) {
-                    println("Please enter a positive number.\n")
+                    viewer.show("Please enter a positive number.\n")
                 } else {
                     getHealthyMealsUseCase.execute(input).forEach {
-                        println(it)
+                        viewer.show(it.toString())
                     }
                 }
             }

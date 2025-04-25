@@ -10,18 +10,21 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import presentation.common.ConsoleReader
+import presentation.common.ConsoleViewer
 
 class GetHealthyMealsUITest {
 
     private lateinit var healthyMealsUseCase: GetHealthyMealsUseCase
     private lateinit var healthyMealsUI: GetHealthyMealsUI
     private lateinit var reader: ConsoleReader
+    private lateinit var viewer: ConsoleViewer
 
     @BeforeEach
     fun setUp() {
         healthyMealsUseCase = mockk(relaxed = true)
         reader = mockk(relaxed = true)
-        healthyMealsUI = GetHealthyMealsUI(healthyMealsUseCase,reader)
+        viewer = mockk(relaxed = true)
+        healthyMealsUI = GetHealthyMealsUI(healthyMealsUseCase, reader, viewer)
     }
 
     @Test
@@ -34,8 +37,8 @@ class GetHealthyMealsUITest {
 
         // Then
         verifySequence {
-            println("Enter your maximum count of healthy meals you want to proceed: ")
-            println("Please enter a positive number.\n")
+            viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
+            viewer.show("Please enter a positive number.\n")
         }
     }
 
@@ -50,8 +53,8 @@ class GetHealthyMealsUITest {
 
         // Then
         verifySequence {
-            println("Enter your maximum count of healthy meals you want to proceed: ")
-            println("Please enter a positive number.\n")
+            viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
+            viewer.show("Please enter a positive number.\n")
         }
     }
 

@@ -15,7 +15,7 @@ val uiModule = module {
     single { SearchMealsByDateUI(get()) } bind BaseUIController::class
     single { SuggestEasyMealGameUI(get()) } bind BaseUIController::class
     single { ExploreOtherCountriesFoodCultureUI(get(), get()) } bind BaseUIController::class
-    single { GetHealthyMealsUI(get(),get()) } bind BaseUIController::class
+    single { GetHealthyMealsUI(get(),get(),get()) } bind BaseUIController::class
     single { GetIraqMealUI(get()) } bind BaseUIController::class
     single { GymHelperUI(get(), get(), get()) } bind BaseUIController::class
     single { ILovePotatoUI(get()) } bind BaseUIController::class
