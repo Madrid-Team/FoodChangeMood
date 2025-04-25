@@ -7,15 +7,17 @@ import io.mockk.verify
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import presentation.common.Viewer
 import presentation.features.ILovePotatoUI
 
 class ILovePotatoUITest {
     private lateinit var iLovePotatoUI: ILovePotatoUI
     private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase = mockk(relaxed = true)
+    private val consoleViewer: Viewer = mockk(relaxed = true)
 
     @BeforeEach
     fun setup() {
-        iLovePotatoUI = ILovePotatoUI(showRandomMealsIncludePotatoesUseCase)
+        iLovePotatoUI = ILovePotatoUI(showRandomMealsIncludePotatoesUseCase, consoleViewer)
     }
 
     @Test
@@ -40,12 +42,8 @@ class ILovePotatoUITest {
 
         //then
         verify { showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes() }
-//        verify { display("Can't found meals include potatoes") } // using display
+        verify { consoleViewer.show("Can't found meals include potatoes") }
     }
-
-//    private fun display(input: String?) {
-//        println(input)
-//    }
 
 
     companion object {

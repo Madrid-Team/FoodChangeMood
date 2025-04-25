@@ -2,9 +2,11 @@ package presentation.features
 
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import presentation.common.BaseUIController
+import presentation.common.Viewer
 
 class ILovePotatoUI(
-    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase
+    private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,
+    private val viewer: Viewer
 ) : BaseUIController {
     override val id: Int = 12
     override val message: String =
@@ -16,7 +18,7 @@ class ILovePotatoUI(
                 println(it)
             }
         } catch (exception: Exception) {
-            println(exception.message)
+            viewer.show("Can't found meals include potatoes")
         }
 
     }
