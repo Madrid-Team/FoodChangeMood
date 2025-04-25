@@ -7,7 +7,12 @@ class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepo
 
     fun getItalianFoodForLargeGroups(): List<Meal> {
         if (mealsRepository.getAllMeals().isEmpty()) throw Exception("the Meal list is empty")
-        return mealsRepository.getAllMeals().filter { meal -> isItalianForLargeGroups(meal) }
+
+        val resultMeals : List<Meal> = mealsRepository.getAllMeals().filter { meal -> isItalianForLargeGroups(meal) }
+        if (resultMeals.isEmpty())
+            throw Exception("No italian meals for large groups found ")
+        else return resultMeals
+
     }
 
     fun isItalianForLargeGroups(meal: Meal) : Boolean{
