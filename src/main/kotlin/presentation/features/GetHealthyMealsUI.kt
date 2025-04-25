@@ -15,14 +15,20 @@ class GetHealthyMealsUI(
             "with very low total fat, saturated fat, and carbohydrate."
 
     override fun start() {
-        try {
-            viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
-            val countOfHealthyMeals = readlnOrNull()?.toIntOrNull() ?: 0
 
-            getHealthyMealsUseCase.execute(countOfHealthyMeals).displayMeals()
-
-        } catch (exception: Exception) {
-            exception.message?.let { viewer.show(it) }
+        viewer.show("Enter your maximum count of healthy meals you want to proceed: ")
+        reader.getUserInput()?.toIntOrNull().let { input ->
+            if (input == null || input <= 0) {
+                viewer.show("Please enter a positive number.\n")
+            } else {
+                try {
+                    getHealthyMealsUseCase.execute(input).forEach {
+                        viewer.show(it.toString())
+                    }
+                } catch (exception: NoSuchElementException) {
+                    viewer.show("There is no healthy meals")
+                }
+            }
         }
     }
 }
