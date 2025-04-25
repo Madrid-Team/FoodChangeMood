@@ -1,5 +1,6 @@
 package presentation.features
 
+import data.utilities.MealsExceptions
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
@@ -40,7 +41,7 @@ class MealIngredientsGameUI(
             val randomMeal = getRandomMealUseCase()
 
             viewer.show("\n===== Your Challenge =====")
-            viewer.show("The meal is: ${randomMeal.mealName}")
+            viewer.show("The meal is: ${randomMeal.meal.name}")
             viewer.show("\nPossible ingredients:")
             viewer.show("-".repeat(30))
 

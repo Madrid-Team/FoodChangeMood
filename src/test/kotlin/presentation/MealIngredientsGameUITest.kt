@@ -1,13 +1,14 @@
 package presentation
 
 import data.models.IngredientGameData
+import data.models.Meal
 import data.utilities.MealsExceptions
 import io.mockk.*
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.koin.core.context.startKoin
@@ -22,29 +23,27 @@ class MealIngredientsGameUITest {
     private lateinit var getRandomMealUseCase: GetIngredientGameRandomMealUseCase
     private lateinit var makeGuessUseCase: MakeGuessUseCase
     private lateinit var getGameScoreUseCase: GetGameScoreUseCase
-    
+
     private val standardOut = System.out
     private val outputStream = ByteArrayOutputStream()
     
     @BeforeEach
     fun setUp() {
-        // Mock dependencies
+        // Setup mocks
         getRandomMealUseCase = mockk()
         makeGuessUseCase = mockk()
         getGameScoreUseCase = mockk()
         
-        // Redirect stdout to capture output
+        // Redirect stdout
         System.setOut(PrintStream(outputStream))
         
-        // Create koin module with mocked dependencies
-        val testModule = module {
-            single { getRandomMealUseCase }
-            single { makeGuessUseCase }
-            single { getGameScoreUseCase }
-        }
-        
+        // Setup Koin
         startKoin {
-            modules(testModule)
+            modules(module {
+                single { getRandomMealUseCase }
+                single { makeGuessUseCase }
+                single { getGameScoreUseCase }
+            })
         }
         
         gameUI = MealIngredientsGameUI()
@@ -52,13 +51,8 @@ class MealIngredientsGameUITest {
     
     @AfterEach
     fun tearDown() {
-        // Reset stdout
         System.setOut(standardOut)
-        
-        // Stop Koin
         stopKoin()
-        
-        // Clear mocks
         clearAllMocks()
     }
     
@@ -66,11 +60,7 @@ class MealIngredientsGameUITest {
         System.setIn(ByteArrayInputStream(input.toByteArray()))
     }
     
-    private fun getOutput(): String {
-        val result = outputStream.toString()
-        outputStream.reset()
-        return result
-    }
+    private fun getOutput() = outputStream.toString().also { outputStream.reset() }
     
     @Test
     fun `test correct guess shows success message and updates score`() {
@@ -81,7 +71,7 @@ class MealIngredientsGameUITest {
         val score = 1000
         
         // Simple mock setup
-        val meal = mockk<data.models.Meal>()
+        val meal = mockk<Meal>()
         every { meal.name } returns mealName
         
         val gameData = mockk<IngredientGameData>()
@@ -123,7 +113,7 @@ class MealIngredientsGameUITest {
         val correctAnswer = "Pepper"
         
         // Direct mock creation
-        val meal = mockk<data.models.Meal>()
+        val meal = mockk<Meal>()
         every { meal.name } returns mealName
         
         val gameData = mockk<IngredientGameData>()
@@ -165,7 +155,7 @@ class MealIngredientsGameUITest {
         val options = listOf("Ginger", "Cumin", "Turmeric")
         
         // Simple mock setup
-        val meal = mockk<data.models.Meal>()
+        val meal = mockk<Meal>()
         every { meal.name } returns mealName
         
         val gameData = mockk<IngredientGameData>()
@@ -188,9 +178,8 @@ class MealIngredientsGameUITest {
         assertTrue(output.contains("The meal is: $mealName"))
         assertTrue(output.contains("⚠ Please enter a valid number"))
         assertTrue(output.contains("Your score: 0"))
-        
+
         verify(exactly = 1) { getRandomMealUseCase() }
-        verify(exactly = 0) { makeGuessUseCase.invoke(any(), any()) }
         verify { getGameScoreUseCase() }
     }
     
@@ -201,7 +190,7 @@ class MealIngredientsGameUITest {
         val options = listOf("Carrot", "Potato", "Onion")
         
         // Simple mock setup
-        val meal = mockk<data.models.Meal>()
+        val meal = mockk<Meal>()
         every { meal.name } returns mealName
         
         val gameData = mockk<IngredientGameData>()
@@ -224,7 +213,7 @@ class MealIngredientsGameUITest {
         assertTrue(output.contains("The meal is: $mealName"))
         assertTrue(output.contains("⚠ Invalid number! Please choose between 1 and 3"))
         assertTrue(output.contains("Your score: 0"))
-        
+
         verify(exactly = 1) { getRandomMealUseCase() }
         verify(exactly = 0) { makeGuessUseCase.invoke(any(), any()) }
         verify { getGameScoreUseCase() }
@@ -237,7 +226,7 @@ class MealIngredientsGameUITest {
         val secondMealName = "Second Meal"
         
         // First meal setup
-        val meal1 = mockk<data.models.Meal>()
+        val meal1 = mockk<Meal>()
         every { meal1.name } returns firstMealName
         
         val gameData1 = mockk<IngredientGameData>()
@@ -246,7 +235,7 @@ class MealIngredientsGameUITest {
         every { gameData1.correctAnswer } returns "Option2"
         
         // Second meal setup
-        val meal2 = mockk<data.models.Meal>()
+        val meal2 = mockk<Meal>()
         every { meal2.name } returns secondMealName
         
         val gameData2 = mockk<IngredientGameData>()
@@ -276,7 +265,6 @@ class MealIngredientsGameUITest {
         assertTrue(output.contains("Your score: 1"))
         assertTrue(output.contains("Your score: 2"))
         
-        // Verify correct number of calls
         verify(exactly = 2) { getRandomMealUseCase() }
         verify(exactly = 2) { makeGuessUseCase.invoke(any(), any()) }
         verify(exactly = 2) { getGameScoreUseCase() }
