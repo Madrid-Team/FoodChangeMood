@@ -3,6 +3,7 @@ package presentation.features
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import presentation.common.BaseUIController
 import presentation.common.Viewer
+import utils.displayMeals
 
 class ILovePotatoUI(
     private val showRandomMealsIncludePotatoesUseCase: ShowRandomMealsIncludePotatoesUseCase,

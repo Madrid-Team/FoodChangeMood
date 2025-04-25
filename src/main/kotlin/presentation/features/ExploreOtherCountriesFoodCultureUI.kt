@@ -5,12 +5,11 @@ import presentation.common.BaseUIController
 import presentation.common.Reader
 import presentation.common.Viewer
 import utils.displayMeals
-import presentation.common.Viewer
 
 class ExploreOtherCountriesFoodCultureUI(
     private val exploreOtherCountriesFoodUseCase: ExploreOtherCountriesFoodUseCase,
     private val reader: Reader,
-    private val consoleViewer: Viewer
+    private val viewer: Viewer
 ) : BaseUIController {
     override val id: Int = 10
     override val message: String = "$id- Enter a country name and you will get up to 20 meals related to this country."
@@ -21,7 +20,7 @@ class ExploreOtherCountriesFoodCultureUI(
             try {
                 exploreOtherCountriesFoodUseCase.getSearchedCountryMeals(countryName).displayMeals()
             } catch (exception: Exception) {
-                consoleViewer.show(exception.message.toString())
+                viewer.show(exception.message.toString())
             }
         }
     }
