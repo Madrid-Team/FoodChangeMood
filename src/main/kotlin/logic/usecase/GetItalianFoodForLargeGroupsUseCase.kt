@@ -6,6 +6,7 @@ import logic.Repository.MealsRepository
 class GetItalianFoodForLargeGroupsUseCase(private val mealsRepository: MealsRepository) {
 
     fun getItalianFoodForLargeGroups(): List<Meal> {
+        if (mealsRepository.getAllMeals().isEmpty()) throw Exception("the Meal list is empty")
         return mealsRepository.getAllMeals().filter { meal -> isItalianForLargeGroups(meal) }
     }
 
