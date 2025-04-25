@@ -2,6 +2,7 @@ package presentation.features
 
 import logic.usecase.ShowRandomMealsIncludePotatoesUseCase
 import presentation.common.BaseUIController
+import utils.displayMeals
 import presentation.common.Viewer
 
 class ILovePotatoUI(
@@ -13,8 +14,6 @@ class ILovePotatoUI(
         "$id- You will get random list of 10 meals that include potatoes in their ingredients."
 
     override fun start() {
-        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().forEach {
-            viewer.show(it.toString())
-        }
+        showRandomMealsIncludePotatoesUseCase.showRandomMealsIncludePotatoes().displayMeals()
     }
 }

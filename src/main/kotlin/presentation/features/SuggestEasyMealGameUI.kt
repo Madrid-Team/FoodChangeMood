@@ -16,9 +16,7 @@ class SuggestEasyMealGameUI(
 
     override fun start() {
         try {
-            suggestEasyMealUseCase.execute(10).forEach {
-                viewer.show(it.toString())
-            }
+            suggestEasyMealUseCase.execute(10).displayMeals()
         } catch (exception: Exception) {
             exception.message?.let { viewer.show(it) }
         }

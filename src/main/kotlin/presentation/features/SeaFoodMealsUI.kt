@@ -1,5 +1,6 @@
 package presentation.features
 
+import data.models.SeafoodMeal
 import logic.usecase.GetAllSeafoodMealsUseCase
 import presentation.common.BaseUIController
 import presentation.common.Viewer
@@ -13,8 +14,12 @@ class SeaFoodMealsUI(
             "from highest to lowest."
 
     override fun start() {
-        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEach {
-            viewer.show(it.toString())
+        getAllSeafoodMealsUseCase.getAllSeafoodMeals().forEachIndexed() { index, seafoodMeal ->
+            displaySeaFoodMeal(rank = index+1, meal = seafoodMeal)
         }
+    }
+
+    private fun displaySeaFoodMeal(rank:Int , meal:SeafoodMeal){
+        viewer.show("Rank: $rank,Name: ${meal.name} ,Protein: ${meal.protein}")
     }
 }
