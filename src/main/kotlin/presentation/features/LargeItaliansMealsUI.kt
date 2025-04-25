@@ -18,7 +18,8 @@ class LargeItaliansMealsUI(
                 viewer.show(meal.name)
             }
         } catch (e: Exception) {
-            e.message?.let { viewer.show(it) }
+//            e.message?.let { viewer.show(it) }
+            viewer.show("no element found")
         }
     }
 }
