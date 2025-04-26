@@ -3,13 +3,13 @@ package presentation.features
 import data.models.Meal
 import logic.usecase.SuggestNewKetoMealUseCase
 import presentation.common.BaseUIController
-import presentation.common.ConsoleReader
-import presentation.common.ConsoleViewer
+import presentation.common.Reader
+import presentation.common.Viewer
 
 class KetoDietMealHelperUI(
     private val suggestNewKetoMealUseCase: SuggestNewKetoMealUseCase,
-    private val reader: ConsoleReader,
-    private val viewer: ConsoleViewer,
+    private val reader: Reader,
+    private val viewer: Viewer,
 ) : BaseUIController {
     override val id: Int = 7
     override val message: String = "7- Get one keto-friendly meal.."

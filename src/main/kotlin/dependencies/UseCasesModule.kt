@@ -40,7 +40,6 @@ val useCaseModule = module {
         ExploreOtherCountriesFoodUseCase(get())
     }
     single { GetItalianFoodForLargeGroupsUseCase(get()) }
-    single { SuggestMealWithHighCalorieUseCase(get()) }
     single {
         GetIngredientGameRandomMealUseCase(get(), get())
     }
@@ -60,16 +59,7 @@ val useCaseModule = module {
     single {
         GetHealthyMealsUseCase(get())
     }
-    single {
-        GetSweetsWithNoEggsUseCase(get())
-    }
-    single { StartGuessGameUseCase(get()) }
-    single { GuessGameConsoleUi(get(), get(), get()) }
-    single { SuggestMealWithHighCalorieUseCase(get()) }
-    single { SuggestNewKetoMealUseCase(get()) }
 
-    single {
-        GetMealsSuitableForGymUseCase(get())
-    }
-    single { SuggestNewKetoMealUseCase(get()) }
+    single { GuessGameConsoleUi(get(), get(), get()) }
+
 }
