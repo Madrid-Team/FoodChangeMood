@@ -12,6 +12,7 @@ class MealsJsonConverter {
     private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
 
 
+
     fun saveToJsonFile(meals: List<Meal>, outputFile: File): Boolean {
         return try {
 

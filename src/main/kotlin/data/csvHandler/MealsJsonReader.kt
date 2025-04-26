@@ -12,6 +12,7 @@ class MealsJsonReader(
 ) {
     private val gson = Gson()
 
+
     fun readJsonFile(): List<Meal> {
         if (file.exists()) {
             val jsonContent = file.readText()

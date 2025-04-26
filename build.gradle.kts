@@ -13,6 +13,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation("io.insert-koin:koin-core:3.5.3")
     implementation("com.google.code.gson:gson:2.10.1")
+
 }
 
 tasks.test {
