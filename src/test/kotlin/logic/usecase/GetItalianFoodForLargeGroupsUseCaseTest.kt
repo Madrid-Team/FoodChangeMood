@@ -1,6 +1,7 @@
 package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
@@ -23,24 +24,24 @@ class GetItalianFoodForLargeGroupsUseCaseTest {
     fun `should return valid meals when the list has italian food for large groups`() {
         //Given
         every { mealRepository.getAllMeals() } returns listOf(
-            createMealItalianLargeGroups(
+            createMeal(
                 "pasta", 1,
                 tags = listOf("spicy", "for-large-groups"),
                 description = "ITALIAN food can be made in 10 minutes"
             ),
 
-            createMealItalianLargeGroups(
+            createMeal(
                 "koshari", 2,
                 tags = listOf("spicy", "for-large-groups"),
                 description = "egyptian food can be made in 10 minutes"
             ),
 
-            createMealItalianLargeGroups(
+            createMeal(
                 "pistatchini", 3,
                 tags = listOf("salsa", "for-small-groups"),
                 description = "italian food can be made in 10 minutes"
             ),
-            createMealItalianLargeGroups(
+            createMeal(
                 "pizza", 4,
                 tags = listOf("spicy", "FOR-LARGE-Groups"),
                 description = "italian food can be made in 10 minutes"
@@ -73,22 +74,22 @@ class GetItalianFoodForLargeGroupsUseCaseTest {
     fun `should throw exception when no italian meals for large groups found`() {
         //Given
         every { mealRepository.getAllMeals() } returns listOf(
-            createMealItalianLargeGroups(
+            createMeal(
                 "pasta", 1,
                 tags = listOf("spicy", "for-small-groups"),
                 description = "ITALIAN food can be made in 10 minutes"
             ),
-            createMealItalianLargeGroups(
+            createMeal(
                 "koshari", 2,
                 tags = listOf("spicy", "for-large-groups"),
                 description = "egyptian food can be made in 10 minutes"
             ),
-            createMealItalianLargeGroups(
+            createMeal(
                 "pistatchini", 3,
                 tags = listOf("salsa", "for-small-groups"),
                 description = "italian food can be made in 10 minutes"
             ),
-            createMealItalianLargeGroups(
+            createMeal(
                 "pizza", 4,
                 tags = listOf("spicy", "FOR-LARGE-Groups"),
                 description = "spanish food can be made in 10 minutes"
