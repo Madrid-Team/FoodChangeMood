@@ -1,5 +1,7 @@
 package dependencies
 
+import logic.KMPSearchAlgorithm
+import logic.SearchAlgorithm
 import logic.usecase.*
 import logic.usecase.mealIngredientsGame.GetGameScoreUseCase
 import logic.usecase.mealIngredientsGame.GetIngredientGameRandomMealUseCase
@@ -29,12 +31,12 @@ val useCaseModule = module {
     single {
         GetAllIraqiMealsUseCase(get())
     }
-
+    single<SearchAlgorithm> { KMPSearchAlgorithm() }
     single {
         GetMealsSuitableForGymUseCase(get())
     }
     single {
-        MealSearchingByNameUseCase(get())
+        MealSearchingByNameUseCase(get(),get())
     }
     single {
         ExploreOtherCountriesFoodUseCase(get())
