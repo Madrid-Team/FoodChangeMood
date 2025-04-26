@@ -1,11 +1,11 @@
 package presentation.features
 
 import com.google.common.truth.Truth.assertThat
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GetMealsSuitableForGymUseCase
-import logic.usecase.createMeal
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.common.ConsoleReader
@@ -103,10 +103,10 @@ class GymHelperUITest {
         private const val notValidProtein = 524.5
 
         private val meals = listOf(
-            createMeal(320.0, 25.0),
-            createMeal(38.0, 92.0),
-            createMeal(60.0, 30.0),
-            createMeal(150.0, 210.0)
+            createMeal(protein = 320.0, calories = 25.0),
+            createMeal(protein = 38.0, calories = 92.0),
+            createMeal(protein = 60.0, calories = 30.0),
+            createMeal(protein = 150.0, calories = 210.0)
         )
     }
 }
