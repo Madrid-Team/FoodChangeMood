@@ -24,20 +24,19 @@ class SuggestMealWithHighCalorieUITest {
     @Test
     fun `ui should show message when suggested meal equal null`() {
         //given
-        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal() } returns null
+        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(setOf()) } throws NoSuchElementException()
 
         //when
         suggestMealWithHighCalorieUI.start()
 
         //then
-        verify { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal() }
         verify { viewer.show("No more high calorie meals to suggest") }
     }
 
     @Test
     fun `should return meal and details if user likes it`() {
         //given
-        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal() } returns firstMeal
+        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(setOf()) } returns firstMeal
         every { reader.getUserInput() } returns "like"
 
         //when
@@ -55,7 +54,7 @@ class SuggestMealWithHighCalorieUITest {
     @Test
     fun `should return another meal if user dislike it`() {
         //given
-        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal() } returnsMany listOf(
+        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(any()) } returnsMany listOf(
             firstMeal,
             secondMeal
         )
@@ -73,7 +72,7 @@ class SuggestMealWithHighCalorieUITest {
     @Test
     fun `ui show message when user's input was not valid`() {
         //given
-        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal() } returns firstMeal
+        every { suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(setOf()) } returns firstMeal
         every { reader.getUserInput() } returnsMany listOf("maybe", "haha", "like")
 
         //when
