@@ -47,12 +47,12 @@ class GetHealthyMealsUseCaseTest {
     }
 
     @Test
-    fun `Should throw Exception when meals list is empty`() {
+    fun `Should throw NoSuchElementException when meals list is empty`() {
         // Given
         every { mealRepository.getAllMeals() } returns listOf()
 
         // When & Then
-        assertThrows<Exception> { getHealthyMealsUseCase.execute(2) }
+        assertThrows<NoSuchElementException> { getHealthyMealsUseCase.execute(2) }
     }
 
     @Test

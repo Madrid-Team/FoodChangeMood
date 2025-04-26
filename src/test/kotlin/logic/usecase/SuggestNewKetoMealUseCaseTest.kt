@@ -31,38 +31,10 @@ class SuggestNewKetoMealUseCaseTest {
     fun `Should return first valid meal When checking for keto meal conditions`() {
         // Given
         every { mealRepository.getAllMeals() } returns listOf(
-            createMeal(
-                name = "baked winter squash mexican style",
-                id = 1,
-                carbohydrates = 4.0,
-                protein = 2.0,
-                totalFat = 0.0,
-                sugar = 13.0
-            ), // low protein and total fat
-            createMeal(
-                name = "a bit different  breakfast pizza",
-                id = 2,
-                carbohydrates = 13.0,
-                protein = 22.0,
-                totalFat = 38.0,
-                sugar = 6.5
-            ), // high carbohydrates
-            createMeal(
-                name = "Cheesy Bacon Ranch Chicken",
-                id = 3,
-                carbohydrates = 8.0,
-                protein = 25.0,
-                totalFat = 33.5,
-                sugar = 6.0
-            ), // valid
-            createMeal(
-                name = "alouette  potatoes",
-                id = 4,
-                carbohydrates = 2.0,
-                protein = 25.0,
-                totalFat = 34.0,
-                sugar = 3.0
-            ), // low sugar
+            createMeal(carbohydrates = 4.0, protein = 2.0, totalFat = 0.0, sugar = 13.0), // low protein and total fat
+            createMeal(carbohydrates = 13.0, protein = 22.0, totalFat = 38.0, sugar = 6.5), // high carbohydrates
+            createMeal(carbohydrates = 8.0, protein = 25.0, totalFat = 33.5, sugar = 6.0), // valid
+            createMeal(carbohydrates = 2.0, protein = 25.0, totalFat = 34.0, sugar = 3.0), // low sugar
         )
 
         // When
@@ -76,38 +48,10 @@ class SuggestNewKetoMealUseCaseTest {
     fun `Should throw NoSuchElementException when no valid keto meal found`() {
         // Given
         every { mealRepository.getAllMeals() } returns listOf(
-            createMeal(
-                name = "baked winter squash mexican style",
-                id = 1,
-                carbohydrates = 4.0,
-                protein = 2.0,
-                totalFat = 0.0,
-                sugar = 13.0
-            ), // low protein and total fat
-            createMeal(
-                name = "a bit different  breakfast pizza",
-                id = 2,
-                carbohydrates = 13.0,
-                protein = 22.0,
-                totalFat = 38.0,
-                sugar = 6.5
-            ), // high carbohydrates
-            createMeal(
-                name = "apple a day  milk shake",
-                id = 3,
-                carbohydrates = 8.0,
-                protein = 25.0,
-                totalFat = 13.5,
-                sugar = 6.0
-            ), // low total fat
-            createMeal(
-                name = "alouette  potatoes",
-                id = 4,
-                carbohydrates = 2.0,
-                protein = 25.0,
-                totalFat = 34.0,
-                sugar = 3.0
-            ), // low sugar
+            createMeal(carbohydrates = 4.0, protein = 2.0, totalFat = 0.0, sugar = 13.0), // low protein and total fat
+            createMeal(carbohydrates = 13.0, protein = 22.0, totalFat = 38.0, sugar = 6.5), // high carbohydrates
+            createMeal(carbohydrates = 8.0, protein = 25.0, totalFat = 13.5, sugar = 6.0), // low total fat
+            createMeal(carbohydrates = 2.0, protein = 25.0, totalFat = 34.0, sugar = 3.0), // low sugar
         )
 
         // When & Then
@@ -127,38 +71,10 @@ class SuggestNewKetoMealUseCaseTest {
     fun `Should throw NoSuchElementException when no valid keto meals available`() {
         // Given
         every { mealRepository.getAllMeals() } returns listOf(
-            createMeal(
-                name = "baked winter squash mexican style",
-                id = 1,
-                carbohydrates = 4.0,
-                protein = 2.0,
-                totalFat = 0.0,
-                sugar = 13.0
-            ), // low protein and total fat
-            createMeal(
-                name = "a bit different  breakfast pizza",
-                id = 2,
-                carbohydrates = 13.0,
-                protein = 22.0,
-                totalFat = 38.0,
-                sugar = 6.5
-            ), // high carbohydrates
-            createMeal(
-                name = "Cheesy Bacon Ranch Chicken",
-                id = 3,
-                carbohydrates = 8.0,
-                protein = 25.0,
-                totalFat = 33.5,
-                sugar = 6.0
-            ), // valid but taken before
-            createMeal(
-                name = "alouette  potatoes",
-                id = 4,
-                carbohydrates = 2.0,
-                protein = 25.0,
-                totalFat = 34.0,
-                sugar = 3.0
-            ), // low sugar
+            createMeal(carbohydrates = 4.0, protein = 2.0, totalFat = 0.0, sugar = 13.0), // low protein and total fat
+            createMeal(carbohydrates = 13.0, protein = 22.0, totalFat = 38.0, sugar = 6.5), // high carbohydrates
+            createMeal(carbohydrates = 8.0, protein = 25.0, totalFat = 33.5, sugar = 6.0), // valid but taken before
+            createMeal(carbohydrates = 2.0, protein = 25.0, totalFat = 34.0, sugar = 3.0), // low sugar
         )
 
         // When & Then

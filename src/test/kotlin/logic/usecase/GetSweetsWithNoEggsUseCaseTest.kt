@@ -1,6 +1,10 @@
 package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
+import createMealsForIgnoreCaseTest
+import createMealsForSubstringTest
+import createMealsForSweetWithoutEggs
+import createMealsFreeOfSweetWithoutEggs
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository

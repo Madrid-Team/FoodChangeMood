@@ -1,6 +1,7 @@
 package logic.usecase
 
 import com.google.common.truth.Truth.assertThat
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
@@ -33,10 +34,10 @@ class GetMealsSuitableForGymUseCaseTest {
     ) {
         //Given
         every { mealsRepository.getAllMeals() } returns listOf(
-            createMeal(100.0, 39.0),
-            createMeal(40.0, 10.0),
-            createMeal(60.0, 30.0),
-            createMeal(150.0, 210.0)
+            createMeal(calories = 100.0, protein = 39.0),
+            createMeal(calories = 40.0, protein = 10.0),
+            createMeal(calories = 60.0, protein = 30.0),
+            createMeal(calories = 150.0, protein = 210.0)
         )
 
         // When
@@ -50,10 +51,10 @@ class GetMealsSuitableForGymUseCaseTest {
     fun `Should throw exception when calories and protein don't match the values in the lista`() {
         //Given
         every { mealsRepository.getAllMeals() } returns listOf(
-            createMeal(320.0, 25.0),
-            createMeal(38.0, 92.0),
-            createMeal(60.0, 30.0),
-            createMeal(150.0, 210.0)
+            createMeal(calories = 320.0, protein = 25.0),
+            createMeal(calories = 38.0, protein = 92.0),
+            createMeal(calories = 60.0, protein = 30.0),
+            createMeal(calories = 150.0, protein = 210.0)
         )
 
         // When && Then
