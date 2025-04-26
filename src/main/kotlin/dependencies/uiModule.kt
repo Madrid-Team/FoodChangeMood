@@ -29,7 +29,8 @@ val uiModule = module {
     single {
         FoodChangeMoodConsoleUI(
             controllers = getAll<BaseUIController>(),
-            reader = get()
+            reader = get(),
+            viewer = get(),
         )
     }
 }

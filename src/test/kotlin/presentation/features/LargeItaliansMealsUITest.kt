@@ -1,5 +1,6 @@
 package presentation.features
 
+import com.google.common.truth.Truth.assertThat
 import createMeal
 import io.mockk.every
 import io.mockk.mockk
@@ -22,7 +23,16 @@ class LargeItaliansMealsUITest {
     }
 
     @Test
-    fun `should show NoSuchElementException message when list is empty`() {
+    fun `ui class should have the correct properties value`() {
+        val classId = 15
+        val uiMessage = "15- You will get Italian meals suitable for large groups."
+
+        assertThat(largeItaliansMealsUI.id).isEqualTo(classId)
+        assertThat(largeItaliansMealsUI.message).isEqualTo(uiMessage)
+    }
+
+    @Test
+    fun `should show No italian food found for large groups message when list is empty`() {
         every { getMealsSuitableForGymUseCase.getItalianFoodForLargeGroups() } returns emptyList()
 
         largeItaliansMealsUI.start()
