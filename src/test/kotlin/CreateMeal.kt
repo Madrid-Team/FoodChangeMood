@@ -19,7 +19,7 @@ fun createMeal(
     stepsCount: Int = 3,
     steps: List<String> = listOf("STEP_1", "STEP_2", "STEP_3"),
     ingredientsCount: Int = 3,
-    description: String = "description",
+    description: String? = "description",
     submitted: Date = Date(),
     contributorId: Int = 0,
     ingredients: List<String> = listOf("INGREDIENTS_1", "INGREDIENTS_2", "INGREDIENTS_3"),

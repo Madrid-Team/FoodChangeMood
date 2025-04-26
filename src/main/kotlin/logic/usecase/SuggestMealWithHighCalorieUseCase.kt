@@ -1,6 +1,5 @@
 package logic.usecase
 
-import data.csvHandler.Tags.MealFilters.HIGH_CALORIES
 import data.models.Meal
 import logic.Repository.MealsRepository
 

@@ -3,11 +3,13 @@ package presentation.features
 import data.models.Meal
 import logic.usecase.SuggestMealWithHighCalorieUseCase
 import presentation.common.BaseUIController
+import presentation.common.Reader
 import presentation.common.Viewer
 
 class SuggestMealWithHighCalorieUI(
     private val suggestMealWithHighCalorieUseCase: SuggestMealWithHighCalorieUseCase,
-    private val viewer: Viewer
+    private val viewer: Viewer,
+    private val reader: Reader
 ) : BaseUIController {
 
     override val id: Int = 13
@@ -26,7 +28,7 @@ class SuggestMealWithHighCalorieUI(
         greetUser()
 
         while (true) {
-            val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal()
+            val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
 
             if (meal == null) {
                 viewer.show("No more high calorie meals to suggest")
@@ -36,7 +38,7 @@ class SuggestMealWithHighCalorieUI(
             alreadySuggested.add(meal.id)
             viewer.show("Suggested Meal: ${meal.name} (${meal.nutrition.calories} calories)")
             viewer.show("Do you like this meal? (like - dislike): ")
-            when (readlnOrNull()?.lowercase()) {
+            when (reader.getUserInput()?.lowercase()) {
                 "like" -> {
                     showMealDetails(meal)
                     break

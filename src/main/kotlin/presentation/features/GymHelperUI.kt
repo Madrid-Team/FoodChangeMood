@@ -12,15 +12,15 @@ class GymHelperUI(
 ) : BaseUIController {
     override val id: Int = 9
     override val message: String =
-        "9- Enter a desired amount of calories and protein,\n" +
+        "$id- Enter a desired amount of calories and protein,\n" +
                 "and return a list of meals that match or approximate those values."
 
 
     override fun start() {
         println("Input the amount of calories you want")
-        val calories = reader.getUserInput()?.toDouble()
+        val calories = reader.readDouble()
         println("Input the amount of protein you want")
-        val protein = reader.getUserInput()?.toDouble()
+        val protein = reader.readDouble()
 
         if (calories != null && protein != null) {
             try {
@@ -28,10 +28,10 @@ class GymHelperUI(
                     viewer.show(meal.name)
                 }
             } catch (e: NoSuchElementException) {
-                e.message?.let { viewer.show(it) }
+                viewer.show(e.message.toString())
             }
         } else {
-            viewer.show("Invalid input. Please enter valid numbers for both calories and protein.")
+            viewer.show("Invalid input")
         }
 
     }

@@ -13,12 +13,13 @@ class LargeItaliansMealsUI(
         "15- You will get Italian meals suitable for large groups."
 
     override fun start() {
-        try {
+        if (getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups().isNotEmpty()) {
             getItalianFoodForLargeGroupsUseCase.getItalianFoodForLargeGroups().forEach { meal ->
                 viewer.show(meal.name)
             }
-        } catch (e: Exception) {
-            e.message?.let { viewer.show(it) }
+        } else {
+            viewer.show("No italian food found for large groups")
         }
     }
+
 }
