@@ -28,9 +28,9 @@ class SuggestMealWithHighCalorieUI(
         greetUser()
 
         while (true) {
-            val meal = suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
-
-            if (meal == null) {
+            val meal = try {
+                suggestMealWithHighCalorieUseCase.suggestRandomHighCalorieMeal(alreadySuggested)
+            } catch (e: NoSuchElementException) {
                 viewer.show("No more high calorie meals to suggest")
                 break
             }
