@@ -7,6 +7,8 @@ import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import org.koin.dsl.module
 import presentation.features.GuessGameConsoleUi
+import utils.KMPSearchAlgorithm
+import utils.SearchAlgorithm
 
 
 val useCaseModule = module {
@@ -33,8 +35,9 @@ val useCaseModule = module {
     single {
         GetMealsSuitableForGymUseCase(get())
     }
+    single<SearchAlgorithm> { KMPSearchAlgorithm() }
     single {
-        MealSearchingByNameUseCase(get())
+        MealSearchingByNameUseCase(get(), get())
     }
     single {
         ExploreOtherCountriesFoodUseCase(get())
