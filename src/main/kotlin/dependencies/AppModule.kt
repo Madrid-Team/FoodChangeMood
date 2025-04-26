@@ -14,6 +14,7 @@ import java.io.File
 
 val appModule = module {
 
+
     single {
         File(Tags.FileConfig.FILE_NAME)
     }

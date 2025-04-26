@@ -17,4 +17,5 @@ class GetFoodByAddDateUseCase(private val mealRepository: MealsRepository) {
         }
         return meals
     }
+
 }

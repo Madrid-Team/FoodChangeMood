@@ -22,5 +22,6 @@ object ColumnIndex {
     const val CARBOHYDRATES = 5
     const val PROTEIN = 6
 
+
 }
 

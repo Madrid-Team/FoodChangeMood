@@ -19,4 +19,5 @@ class SuggestMealWithHighCalorieUseCase(private val mealsRepository: MealsReposi
     }
 
 
+
 }

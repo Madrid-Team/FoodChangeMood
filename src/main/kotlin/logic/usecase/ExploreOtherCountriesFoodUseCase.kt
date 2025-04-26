@@ -15,6 +15,7 @@ class ExploreOtherCountriesFoodUseCase(
             .take(COUNTRY_MEAL_COUNT)
     }
 
+
     private fun isMealRelatedToTheCountry(meal: Meal, lowerCountryName: String): Boolean {
         return meal.tags.any { it.lowercase().contains(lowerCountryName) }
                 || meal.description?.contains(lowerCountryName) == true

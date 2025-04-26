@@ -20,4 +20,5 @@ class GetMealsSuitableForGymUseCase(private val mealsRepository: MealsRepository
         return meal.nutrition.calories in calorieRange && meal.nutrition.protein in proteinRange
     }
 
+
 }

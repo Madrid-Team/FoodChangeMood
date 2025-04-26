@@ -14,4 +14,5 @@ class GetAllSeafoodMealsUseCase(
             it.nutrition.protein
         }.map { it.toSeafoodMeal() }
     }
+
 }

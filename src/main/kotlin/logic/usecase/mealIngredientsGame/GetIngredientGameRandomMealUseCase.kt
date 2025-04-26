@@ -9,6 +9,7 @@ class GetIngredientGameRandomMealUseCase(
     private val mealsRepository: MealsRepository
 ) {
 
+
     operator fun invoke(): IngredientGameData {
         val allMeals = mealsRepository.getAllMeals()
 

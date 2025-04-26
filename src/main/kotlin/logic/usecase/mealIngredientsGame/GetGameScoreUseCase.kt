@@ -9,4 +9,5 @@ class GetGameScoreUseCase(private val repository: MealsRepository) {
         return repository.getCorrectGuessedMealsNames().size * Tags.GameScore.CORRECT_GUESS_POINTS
     }
 
+
 }

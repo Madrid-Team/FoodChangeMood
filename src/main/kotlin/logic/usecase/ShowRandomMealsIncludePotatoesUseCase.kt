@@ -15,6 +15,7 @@ class ShowRandomMealsIncludePotatoesUseCase(
             .take(RANDOM_MEALS_INCLUDE_POTATO)
     }
 
+
     private fun isContainsPotato(meal: Meal): Boolean {
         return meal.ingredients.ingredients.any { it.contains(POTATO, ignoreCase = true) }
     }

@@ -28,4 +28,5 @@ class GetEasyFoodSuggestionUseCase(
                 meal.ingredients.ingredientsCount <= MAX_INGREDIENTS_COUNT
     }
 
+
 }

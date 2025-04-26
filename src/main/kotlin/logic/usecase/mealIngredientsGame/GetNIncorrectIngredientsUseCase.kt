@@ -5,6 +5,7 @@ import data.models.Meal
 
 class GetNIncorrectIngredientsUseCase {
 
+
     operator fun invoke(
         allMeals: List<Meal>,
         correctIngredient: String,

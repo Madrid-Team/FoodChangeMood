@@ -32,6 +32,7 @@ class GetHealthyFoodUseCase(
     }
 
 
+
     private fun nutrientsSum(meal: Meal) =
         meal.nutrition.totalFat + meal.nutrition.saturatedFat + meal.nutrition.carbohydrates
 

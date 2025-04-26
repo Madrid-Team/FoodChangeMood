@@ -33,6 +33,7 @@ class MealsCsvParser {
     }
 
 
+
     private fun String.toListOfStrings(): List<String> {
         return this.trim() // Remove outer spaces
             .removeSurroundingQuotes()

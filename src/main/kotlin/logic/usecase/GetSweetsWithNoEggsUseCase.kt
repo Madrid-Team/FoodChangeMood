@@ -26,4 +26,5 @@ class GetSweetsWithNoEggsUseCase(private val mealsRepository: MealsRepository) {
 
 
 
+
 }
