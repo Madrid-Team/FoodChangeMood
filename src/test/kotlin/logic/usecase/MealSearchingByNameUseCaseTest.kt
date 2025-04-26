@@ -10,15 +10,16 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 import createMeals
+import logic.KMPSearchAlgorithm
 
 class MealSearchingByNameUseCaseTest {
-    private lateinit var mealsRepository: MealsRepository
     private lateinit var mealSearchingByNameUseCase: MealSearchingByNameUseCase
+    private val mealsRepository: MealsRepository = mockk(relaxed = true)
+    private val kmpSearchAlgorithm: KMPSearchAlgorithm = mockk(relaxed = true)
 
     @BeforeEach
     fun setup() {
-        mealsRepository = mockk(relaxed = true)
-        mealSearchingByNameUseCase = MealSearchingByNameUseCase(mealsRepository)
+        mealSearchingByNameUseCase = MealSearchingByNameUseCase(mealsRepository, kmpSearchAlgorithm)
     }
 
     @Test
