@@ -4,7 +4,7 @@ import com.google.common.truth.Truth
 import io.mockk.every
 import io.mockk.mockk
 import logic.Repository.MealsRepository
-import logic.helper.createMeal
+import createMeal
 import org.junit.jupiter.api.BeforeEach
 import kotlin.test.Test
 
