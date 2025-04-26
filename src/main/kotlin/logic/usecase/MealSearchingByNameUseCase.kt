@@ -2,7 +2,7 @@ package logic.usecase
 
 import data.models.Meal
 import logic.Repository.MealsRepository
-import utils.SearchAlgorithm
+import logic.SearchAlgorithm
 
 class MealSearchingByNameUseCase(
     private val mealsRepository: MealsRepository,

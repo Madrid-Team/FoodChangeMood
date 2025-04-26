@@ -7,8 +7,8 @@ import logic.usecase.mealIngredientsGame.GetNIncorrectIngredientsUseCase
 import logic.usecase.mealIngredientsGame.MakeGuessUseCase
 import org.koin.dsl.module
 import presentation.features.GuessGameConsoleUi
-import utils.KMPSearchAlgorithm
-import utils.SearchAlgorithm
+import logic.KMPSearchAlgorithm
+import logic.SearchAlgorithm
 
 
 val useCaseModule = module {

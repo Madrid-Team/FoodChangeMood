@@ -1,4 +1,4 @@
-package utils
+package logic
 
 class KMPSearchAlgorithm : SearchAlgorithm {
     override fun search(fullText: String, pattern: String): Boolean {
