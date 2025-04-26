@@ -1,12 +1,11 @@
 package presentation.features
 
 import com.google.common.truth.Truth.assertThat
-import data.models.Ingredients
+import createMeal
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import logic.usecase.GetSweetsWithNoEggsUseCase
-import logic.usecase.createSweet
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import presentation.common.Reader
@@ -73,18 +72,12 @@ class SweetWithNoEggsUITest {
     }
 
     companion object {
-        val sweetWithNoEggs = createSweet(
-            name = "name", tags = listOf("tag1", "tag2"), ingredients = Ingredients(
-                ingredients = listOf("ingredient1"),
-                ingredientsCount = 1
-            )
+        val sweetWithNoEggs = createMeal(
+            name = "name", tags = listOf("tag1", "tag2")
         )
 
-        val anotherSweetWithNoEggs = createSweet(
-            name = "name1", tags = listOf("tag3", "tag4"), ingredients = Ingredients(
-                ingredients = listOf("ingredient2"),
-                ingredientsCount = 1
-            )
+        val anotherSweetWithNoEggs = createMeal(
+            name = "name1", tags = listOf("tag3", "tag4")
         )
 
     }
