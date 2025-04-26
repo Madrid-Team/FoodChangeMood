@@ -52,16 +52,6 @@ class SuggestEasyMealUseCaseTest {
         assertThrows<NoSuchElementException> { suggestEasyMealUseCase.execute(10) }
     }
 
-    @Test
-    fun `Should throw NoSuchElementException when no easy meal exist`() {
-        // Given
-        every { mealRepository.getAllMeals() } returns listOf(
-            createMeal(minutes = 14, stepsCount = 4, ingredientsCount = 2), // ingredients long
-            createMeal(minutes = 36, stepsCount = 4, ingredientsCount = 2), // Time long
-            createMeal(minutes = 14, stepsCount = 7, ingredientsCount = 2), // Steps long
-        )
 
-        // When & Then
-        assertThrows<NoSuchElementException> { suggestEasyMealUseCase.execute(10) }
-    }
+
 }

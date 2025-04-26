@@ -15,7 +15,7 @@ import logic.KMPSearchAlgorithm
 class MealSearchingByNameUseCaseTest {
     private lateinit var mealSearchingByNameUseCase: MealSearchingByNameUseCase
     private val mealsRepository: MealsRepository = mockk(relaxed = true)
-    private val kmpSearchAlgorithm: KMPSearchAlgorithm = mockk(relaxed = true)
+    private val kmpSearchAlgorithm: KMPSearchAlgorithm = KMPSearchAlgorithm()
 
     @BeforeEach
     fun setup() {

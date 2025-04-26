@@ -10,6 +10,8 @@ class GetIraqMealUI(
     override val id: Int = 3
     override val message: String = "$id- Get All Iraq meals "
     override fun start() {
-        getAllIraqiMealsUseCase.getAllIraqiMeals().displayMeals()
+        getAllIraqiMealsUseCase.getAllIraqiMeals().forEach {
+            println(it)
+        }
     }
 }
