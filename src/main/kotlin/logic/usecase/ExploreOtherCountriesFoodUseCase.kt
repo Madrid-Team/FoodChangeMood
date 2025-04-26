@@ -12,8 +12,18 @@ class ExploreOtherCountriesFoodUseCase(
             .filter { isMealRelatedToTheCountry(it, lowerCaseCountryName) }
             .shuffled()
             .take(20)
-        if (filteredMeals.isEmpty() || countryName.isBlank() || countryName.isEmpty()) throw NoSuchElementException("Can't find meals for this country")
+        if (shouldThrowException(
+                filteredMeals,
+                lowerCaseCountryName
+            )
+        ) throw NoSuchElementException("Can't find meals for this country")
         return filteredMeals
+    }
+
+    private fun shouldThrowException(filteredMeals: List<Meal>, countryName: String): Boolean {
+        return filteredMeals.isEmpty() ||
+                countryName.isBlank() ||
+                countryName.isEmpty()
     }
 
     private fun isMealRelatedToTheCountry(meal: Meal, lowerCountryName: String): Boolean {
